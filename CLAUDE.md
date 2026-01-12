@@ -26,6 +26,7 @@ git add -A && git commit -m "Update config" && git push
 ## Key Aliases Defined in zshrc
 
 - `cc` - claude --dangerously-skip-permissions (fast mode for trusted repos)
+- `ask` - ask-anthropic CLI for quick Claude queries (install: `go install github.com/dlangk/ask-anthropic@latest`)
 - `v` - nvim
 - `gs/ga/gc/gp/gd` - git status/add/commit/push/diff
 - `va/vd/venv` - Python venv activate/deactivate/create

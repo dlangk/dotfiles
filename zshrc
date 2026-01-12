@@ -8,6 +8,11 @@ export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 # Local binaries (pip install --user, custom scripts)
 export PATH="$HOME/.local/bin:$PATH"
 
+## Go -------------------------------------------------------------
+# GOPATH for Go modules and installed tools
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
+
 ## AI Model APIs -----------------------------------------------
 export ANTHROPIC_API_KEY=$(cat ~/.anthropic_api_key)
 
@@ -40,8 +45,10 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 ## Claude Code -------------------------------------------------
 # cc: Skip permission prompts for faster iteration (use in trusted repos)
 # cl: Standard claude with permission prompts
+# ask: Quick CLI queries via Anthropic API (go install github.com/dlangk/ask-anthropic@latest)
 alias cc="claude --dangerously-skip-permissions"
 alias cl="claude"
+alias ask="ask-anthropic"
 
 ## Git ---------------------------------------------------------
 # Short aliases for common git operations
