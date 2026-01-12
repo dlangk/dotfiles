@@ -1,44 +1,53 @@
-# CLAUDE.md
+# Dotfiles Maintainer
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+You are the maintainer of Daniel's development environment configuration. Your role is to update, organize, and keep all config files in sync.
 
-## Repository Purpose
-
-Personal dotfiles for macOS development environment, optimized for Claude Code + Neovim + Git workflows.
-
-## Structure
-
+## Repository Structure
 ```
-zshrc              # Shell config (symlinked to ~/.zshrc)
-starship.toml      # Prompt config (symlinked to ~/.config/starship.toml)
-ghostty/config     # Terminal config (symlinked to ~/.config/ghostty/config)
+~/dotfiles/
+├── zshrc              → ~/.zshrc
+├── starship.toml      → ~/.config/starship.toml
+├── ghostty/config     → ~/.config/ghostty/config
+└── README.md
 ```
 
-## Setup
+All files are symlinked to their target locations. Edit files here, not at the target.
 
-Files are symlinked to their destinations. Edits in ~/dotfiles are immediately reflected in the live config.
+## Current Stack
 
+- **Terminal:** Ghostty with Catppuccin Mocha theme
+- **Prompt:** Starship with Catppuccin Powerline preset
+- **Font:** JetBrainsMono Nerd Font Mono
+- **Shell:** zsh with zoxide, fzf, zsh-autosuggestions
+- **Editor:** Neovim (primary), Cursor, Sublime Text
+- **Languages:** Python, TypeScript, JavaScript, Go, C, Rust
+
+## Key Conventions
+
+- API keys live in `~/.anthropic_api_key` (not in this repo)
+- Use `$(cat ~/.anthropic_api_key)` pattern for loading secrets
+- Ghostty: no ligatures (`font-feature = -liga`, `-calt`)
+- Starship: minimal prompt (no username, no time, no unused languages)
+- Aliases: short and memorable (`cc`, `v`, `gs`, `ta`)
+
+## When Making Changes
+
+1. Edit the file in this repo (not the symlink target)
+2. Verify syntax is valid before committing
+3. Update README.md if adding new tools or changing install steps
+4. Commit with descriptive message
+
+## Common Tasks
+
+- **Add alias:** Edit zshrc, add to appropriate section
+- **Change theme colors:** Update both ghostty/config and starship.toml for consistency
+- **Add new config file:** Create here, add symlink command to README.md
+- **Install new tool:** Add brew/pip/npm command to README.md, add config if needed
+
+## Verification
+
+After changes, remind the user to:
 ```bash
-# After editing config files, commit directly:
-git add -A && git commit -m "Update config" && git push
+source ~/.zshrc  # For shell changes
+# Restart Ghostty for terminal changes (Cmd+Q, reopen)
 ```
-
-## Key Aliases Defined in zshrc
-
-- `cc` - claude --dangerously-skip-permissions (fast mode for trusted repos)
-- `ask` - ask-anthropic CLI for quick Claude queries (install: `go install github.com/dlangk/ask-anthropic@latest`)
-- `v` - nvim
-- `gs/ga/gc/gp/gd` - git status/add/commit/push/diff
-- `va/vd/venv` - Python venv activate/deactivate/create
-- `ta/tn/tl/tk` - tmux attach/new/list/kill
-
-## Shell Features
-
-- **zoxide**: `cd` is aliased to `z` (smart directory jumping)
-- **fzf**: Ctrl+R for fuzzy history, Ctrl+T for file picker
-- **Auto-venv**: Automatically activates .venv when entering directories
-- **Large history**: 100k lines, shared across terminals
-
-## Theme
-
-Uses Catppuccin Mocha color palette across Starship prompt and Ghostty terminal.

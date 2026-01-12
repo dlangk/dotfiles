@@ -1,3 +1,13 @@
+# About Me
+
+- **Name:** Daniel Langkilde
+- **Email:** daniel.langkilde@gmail.com
+- **GitHub:** dlangk
+- **Company:** Kognic
+- **Role:** CEO
+- **Location:** Gothenburg, Sweden
+- **Timezone:** Europe/Stockholm
+
 # Global Preferences
 
 ## Communication
