@@ -48,8 +48,13 @@ cd ~/dotfiles
 ├── zshrc               # Shell config → ~/.zshrc
 ├── gitconfig           # Git config → ~/.gitconfig
 ├── starship.toml       # Prompt config → ~/.config/starship.toml
-└── ghostty/
-    └── config          # Terminal config → ~/.config/ghostty/config
+├── ghostty/
+│   └── config          # Terminal config → ~/.config/ghostty/config
+└── nvim/               # Neovim config → ~/.config/nvim/
+    ├── init.lua
+    └── lua/
+        ├── config/     # Core settings
+        └── plugins/    # Plugin specs (lazy.nvim)
 ```
 
 ## Manual Steps
@@ -69,7 +74,13 @@ sudo tailscale up --ssh
 # Or install from App Store (easier)
 ```
 
-### 3. SSH Keys
+### 3. Symlink Neovim Config
+```bash
+ln -s ~/dotfiles/nvim ~/.config/nvim
+```
+First launch will auto-install lazy.nvim and all plugins.
+
+### 4. SSH Keys
 ```bash
 # Generate new key
 ssh-keygen -t ed25519 -C "daniel.langkilde@gmail.com"
