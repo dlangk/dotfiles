@@ -8,6 +8,9 @@ export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 # Local binaries (pip install --user, custom scripts)
 export PATH="$HOME/.local/bin:$PATH"
 
+## AI Model APIs -----------------------------------------------
+export ANTHROPIC_API_KEY=$(cat ~/.anthropic_api_key)
+
 ## Editor ------------------------------------------------------
 # Default editor for git commits, crontab, etc.
 # Claude Code also reads this for /memory and other edit commands
@@ -39,15 +42,6 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # cl: Standard claude with permission prompts
 alias cc="claude --dangerously-skip-permissions"
 alias cl="claude"
-
-## shell-gpt ---------------------------------------------------
-# Fast natural language to command translation
-# ai:  General questions ("ai explain kubernetes pods")
-# ais: Generate shell command ("ais find python files modified today")
-# aie: Generate code snippet ("aie python function to parse json")
-alias ai="sgpt"
-alias ais="sgpt --shell"
-alias aie="sgpt --code"
 
 ## Git ---------------------------------------------------------
 # Short aliases for common git operations
