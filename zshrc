@@ -69,6 +69,7 @@ alias gwl="git worktree list"
 # c:  Open in Cursor for AI-assisted editing and code browsing
 # s:  Open in Sublime for lightweight visual editing (copy-paste friendly)
 # s.: Open current directory in Sublime
+alias vi="nvim"
 alias vim="nvim"
 alias v="nvim"
 alias c="cursor"
