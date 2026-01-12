@@ -38,4 +38,3 @@ keybind = ctrl+k=goto_split:top
 keybind = ctrl+l=goto_split:right
 keybind = cmd+d=new_split:right
 keybind = cmd+shift+d=new_split:down
-EOF

@@ -9,7 +9,7 @@ $directory\
 $git_branch\
 $git_status\
 [ ](fg:lavender)\
-$line_break\
+$newline
 $character"""
 
 right_format = """
