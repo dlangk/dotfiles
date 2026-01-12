@@ -33,7 +33,6 @@ cd ~/dotfiles
 | zoxide | Smart cd | `brew install zoxide` |
 | fzf | Fuzzy finder (Ctrl+R) | `brew install fzf` |
 | zsh-autosuggestions | Ghost text suggestions | `brew install zsh-autosuggestions` |
-| shell-gpt | Natural language → commands | `pip3 install shell-gpt` |
 
 ### Dev Tools
 | Tool | Purpose | Install |
@@ -61,14 +60,7 @@ claude
 # Follow browser auth flow
 ```
 
-### 2. Configure shell-gpt
-```bash
-# First run will prompt for API key
-sgpt "hello"
-# Or set: export OPENAI_API_KEY=xxx in a local .env
-```
-
-### 3. Set up Tailscale (for mobile access)
+### 2. Set up Tailscale (for mobile access)
 ```bash
 # If using Homebrew install:
 sudo brew services start tailscale
@@ -77,7 +69,7 @@ sudo tailscale up --ssh
 # Or install from App Store (easier)
 ```
 
-### 4. SSH Keys
+### 3. SSH Keys
 ```bash
 # Generate new key
 ssh-keygen -t ed25519 -C "daniel.langkilde@gmail.com"
