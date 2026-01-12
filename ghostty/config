@@ -1,0 +1,41 @@
+# Font
+font-family = JetBrainsMono Nerd Font Mono
+font-size = 14
+font-feature = -liga
+font-feature = -calt
+
+# Theme
+theme = Catppuccin Mocha
+
+# Window
+macos-titlebar-style = tabs
+window-padding-x = 15
+window-padding-y = 15
+window-save-state = always
+
+# Scrollback (large for Claude Code sessions)
+scrollback-limit = 100000
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+# Mouse
+copy-on-select = clipboard
+mouse-hide-while-typing = true
+
+# Performance
+bold-is-bright = false
+
+# Quick actions
+confirm-close-surface = false
+
+# Pane navigation (Miessler setup)
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+EOF
