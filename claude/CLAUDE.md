@@ -22,6 +22,13 @@
 - Rust: cargo fmt
 - Always run tests after changes if they exist
 
+## Python Tooling
+- Use `uv` instead of pip/pipx/venv (10-100x faster)
+- `uv venv` to create virtualenvs
+- `uv pip install` to install packages
+- `uv tool install` for CLI tools (replaces pipx)
+- Never install packages globally - always use venvs
+
 ## Verification
 After making code changes:
 1. Run the linter/formatter for that language

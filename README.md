@@ -52,13 +52,13 @@ cd ~/dotfiles
 | Tool | Purpose |
 |------|---------|
 | python@3.13 | Default Python |
-| pipx | Install CLI tools in isolation |
+| uv | Fast package/venv/tool manager (replaces pip, venv, pipx) |
 | jupyterlab | Notebooks |
 | ipython | Interactive shell |
 
 **Best practices:**
-- Never `pip install` globally - use venvs for projects
-- Use `pipx install` for CLI tools (e.g., `pipx install black`)
+- Use `uv venv` + `uv pip install` for projects (10-100x faster than pip)
+- Use `uv tool install` for CLI tools (e.g., `uv tool install ruff`)
 - Use `va` alias to activate `.venv` in project directories
 
 ### Shell Enhancements

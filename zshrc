@@ -5,7 +5,7 @@
 ## PATH --------------------------------------------------------
 # Homebrew binaries take precedence over system binaries
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-# Local binaries (pip install --user, custom scripts)
+# Local binaries (uv tools, custom scripts)
 export PATH="$HOME/.local/bin:$PATH"
 
 ## Go -------------------------------------------------------------
@@ -93,15 +93,15 @@ alias tn="tmux new -s"
 alias tl="tmux ls"
 alias tk="tmux kill-session -t"
 
-## Python venv -------------------------------------------------
-# Lightweight venv workflow without conda/pyenv complexity
+## Python (uv) -------------------------------------------------
+# uv replaces pip, venv, pipx - 10-100x faster
 # venv: Create .venv in current directory
 # va:   Activate the local .venv
 # vd:   Deactivate current venv
-alias venv="python3 -m venv .venv"
+alias venv="uv venv"
 alias va="source .venv/bin/activate"
 alias vd="deactivate"
-alias pip="pip3"
+alias pip="uv pip"
 alias python="python3"
 
 # Auto-activate: When you cd into a directory with .venv, activate it
