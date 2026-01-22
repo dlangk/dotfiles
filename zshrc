@@ -66,13 +66,13 @@ alias gwl="git worktree list"
 
 ## Editors -----------------------------------------------------
 # v:  Quick terminal edits with neovim
-# c:  Open in Cursor for AI-assisted editing and code browsing
+# c:  Open in VS Code
 # s:  Open in Sublime for lightweight visual editing (copy-paste friendly)
 # s.: Open current directory in Sublime
 alias vi="nvim"
 alias vim="nvim"
 alias v="nvim"
-alias c="cursor"
+alias c="code"
 alias s="subl"
 alias s.="subl ."
 

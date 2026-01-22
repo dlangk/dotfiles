@@ -20,7 +20,7 @@ All files are symlinked to their target locations. Edit files here, not at the t
 - **Prompt:** Starship with Catppuccin Powerline preset
 - **Font:** JetBrainsMono Nerd Font Mono
 - **Shell:** zsh with zoxide, fzf, zsh-autosuggestions
-- **Editor:** Neovim (primary), Cursor, Sublime Text
+- **Editor:** Neovim (primary), VS Code, Sublime Text
 - **Languages:** Python, TypeScript, JavaScript, Go, C, Rust
 
 ## Key Conventions

@@ -31,5 +31,5 @@ After making code changes:
 ## Context
 - Main machine: MacBook (Apple Silicon)
 - Terminal: Ghostty
-- Editor: Neovim, Cursor
+- Editor: Neovim, VS Code
 - Dotfiles: ~/dotfiles (symlinked configs)

@@ -22,7 +22,7 @@ cd ~/dotfiles
 |------|---------|---------|
 | Claude Code | AI coding agent | `npm install -g @anthropic-ai/claude-code` |
 | Neovim | Terminal editor | `brew install neovim` |
-| Cursor | Visual editor + AI | Download from cursor.com |
+| VS Code | Visual editor | `brew install --cask visual-studio-code` |
 | Sublime Text | Lightweight editor | `brew install --cask sublime-text` |
 | Ghostty | Terminal emulator | `brew install --cask ghostty` |
 
@@ -96,7 +96,7 @@ cat ~/.ssh/id_ed25519.pub | pbcopy
 |-------|---------|-------|
 | `cc` | `claude --dangerously-skip-permissions` | Fast mode |
 | `v` | `nvim` | Quick edits |
-| `c` | `cursor` | Visual editor |
+| `c` | `code` | VS Code |
 | `s` | `subl` | Lightweight edits |
 | `va` | `source .venv/bin/activate` | Python venv |
 | `gs` | `git status` | |

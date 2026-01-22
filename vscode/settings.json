@@ -1,0 +1,56 @@
+{
+  // === Editor Core ===
+  "editor.fontFamily": "JetBrains Mono",
+  "editor.fontLigatures": true,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.hover.delay": 300,
+
+  // === IntelliJ-style Code Intelligence ===
+  "editor.parameterHints.enabled": true,
+  "editor.inlayHints.enabled": "onUnlessPressed",
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.acceptSuggestionOnCommitCharacter": true,
+
+  // === Brackets & Structure ===
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.stickyScroll.enabled": true,
+  "breadcrumbs.enabled": true,
+
+  // === Save Behavior ===
+  "files.autoSave": "afterDelay",
+  "editor.formatOnSave": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+
+  // === Explorer (PyCharm-like) ===
+  "workbench.tree.indent": 20,
+  "workbench.tree.renderIndentGuides": "always",
+  "explorer.compactFolders": false,
+  "workbench.iconTheme": "material-icon-theme",
+  "material-icon-theme.folders.theme": "specific",
+  "material-icon-theme.hidesExplorerArrows": false,
+
+  // === Tabs & Git ===
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.tabSizing": "shrink",
+  "scm.diffDecorationsGutterWidth": 3,
+
+  // === Copilot ===
+  "github.copilot.nextEditSuggestions.enabled": true,
+
+  // === Claude Code ===
+  "claudeCode.preferredLocation": "panel",
+
+  // === Window ===
+  "window.newWindowProfile": "Default",
+
+  // === Language-specific ===
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "terminal.integrated.sendKeybindingsToShell": true
+}

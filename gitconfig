@@ -1,0 +1,35 @@
+[user]
+    name = Daniel Langkilde
+    email = daniel.langkilde@gmail.com
+
+[init]
+    defaultBranch = main
+
+[core]
+    editor = nvim
+    excludesfile = ~/.gitignore_global
+
+[pull]
+    rebase = true
+
+[push]
+    autoSetupRemote = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
+[alias]
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    lg = log --oneline --graph --decorate -20
+    unstage = reset HEAD --
+    last = log -1 HEAD
+    amend = commit --amend --no-edit
+
+[rerere]
+    enabled = true
