@@ -42,6 +42,7 @@ These must be installed from the App Store (not Homebrew):
 ## Hardware Setup
 
 - [ ] **Logitech Options+** - Pair mouse, camera, light
+- [ ] **EVO Control** - Download from [Audient](https://audient.com/products/audio-interfaces/evo/evo-control/) for audio interface
 
 ## Verification
 

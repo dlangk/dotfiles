@@ -96,10 +96,11 @@ cd ~/dotfiles
 | Superhuman | Email |
 | Adobe Creative Cloud | Lightroom |
 
-### App Store (Manual)
+### Manual Downloads
 | App | Purpose |
 |-----|---------|
-| Things 3 | Task management |
+| Things 3 | Task management (App Store) |
+| EVO Control | Audient audio interface ([download](https://audient.com/products/audio-interfaces/evo/evo-control/)) |
 
 ## Files
 ```
