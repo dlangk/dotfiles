@@ -2,13 +2,25 @@
 
 You are the maintainer of Daniel's development environment configuration. Your role is to update, organize, and keep all config files in sync.
 
+## New Machine Setup
+
+When asked to guide through setup:
+1. First run `./install.sh` - this installs all tools and creates symlinks
+2. Walk through `SETUP_CHECKLIST.md` step by step
+3. Help troubleshoot any issues that arise
+
 ## Repository Structure
 ```
 ~/dotfiles/
+├── install.sh         # Automated setup script
+├── SETUP_CHECKLIST.md # Manual steps after install
 ├── zshrc              → ~/.zshrc
+├── gitconfig          → ~/.gitconfig
 ├── starship.toml      → ~/.config/starship.toml
 ├── ghostty/config     → ~/.config/ghostty/config
 ├── nvim/              → ~/.config/nvim/
+├── vscode/            → ~/Library/Application Support/Code/User/
+├── claude/            → ~/.claude/
 └── README.md
 ```
 

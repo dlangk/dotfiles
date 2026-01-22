@@ -14,7 +14,11 @@ export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
 ## AI Model APIs -----------------------------------------------
-export ANTHROPIC_API_KEY=$(cat ~/.anthropic_api_key)
+if [[ -f ~/.anthropic_api_key ]]; then
+    _api_key=$(cat ~/.anthropic_api_key)
+    [[ "$_api_key" != "skipped" ]] && export ANTHROPIC_API_KEY="$_api_key"
+    unset _api_key
+fi
 
 ## Editor ------------------------------------------------------
 # Default editor for git commits, crontab, etc.

@@ -4,90 +4,102 @@ Personal development environment for macOS, optimized for Claude Code + Neovim +
 
 ## Quick Start (New Machine)
 ```bash
-# 1. Install Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# 1. Clone dotfiles (will prompt to install Xcode CLT)
+git clone https://github.com/dlangk/dotfiles.git ~/dotfiles
 
-# 2. Clone dotfiles
-git clone git@github.com:dlangk/dotfiles.git ~/dotfiles
-
-# 3. Run setup
+# 2. Run setup
 cd ~/dotfiles
 ./install.sh
+
+# 3. Complete manual steps
+# Open SETUP_CHECKLIST.md or ask Claude: "guide me through the setup of my computer"
 ```
 
 ## What Gets Installed
 
-### Core Tools
-| Tool | Purpose | Install |
-|------|---------|---------|
-| Claude Code | AI coding agent | `npm install -g @anthropic-ai/claude-code` |
-| Neovim | Terminal editor | `brew install neovim` |
-| VS Code | Visual editor | `brew install --cask visual-studio-code` |
-| Sublime Text | Lightweight editor | `brew install --cask sublime-text` |
-| Ghostty | Terminal emulator | `brew install --cask ghostty` |
-
-### Shell Enhancements
-| Tool | Purpose | Install |
-|------|---------|---------|
-| Starship | Minimal prompt | `brew install starship` |
-| zoxide | Smart cd | `brew install zoxide` |
-| fzf | Fuzzy finder (Ctrl+R) | `brew install fzf` |
-| zsh-autosuggestions | Ghost text suggestions | `brew install zsh-autosuggestions` |
+### Languages & Runtimes
+| Tool | Purpose |
+|------|---------|
+| Python | Scripting, tools |
+| Node.js | npm packages, Claude Code |
+| Go | CLI tools |
 
 ### Dev Tools
-| Tool | Purpose | Install |
-|------|---------|---------|
-| tmux | Session persistence | `brew install tmux` |
-| Tailscale | Remote access from phone | `brew install tailscale` |
+| Tool | Purpose |
+|------|---------|
+| Claude Code | AI coding agent |
+| Neovim | Terminal editor |
+| VS Code | Visual editor |
+| Sublime Text | Lightweight editor |
+| Ghostty | Terminal emulator |
+| Docker | Containers |
+| tmux | Session persistence |
+| gh | GitHub CLI |
+| git-lfs | Large file storage |
+| tree | Directory visualization |
+| nginx | Web server |
+| certbot | SSL certificates |
+| Postman | API testing |
+
+### Media & Documents
+| Tool | Purpose |
+|------|---------|
+| ffmpeg | Video/audio processing |
+| graphviz | Diagram generation |
+| basictex | LaTeX |
+
+### Python
+| Tool | Purpose |
+|------|---------|
+| jupyterlab | Notebooks |
+| ipython | Interactive shell |
+
+### Shell Enhancements
+| Tool | Purpose |
+|------|---------|
+| Starship | Minimal prompt |
+| zoxide | Smart cd |
+| fzf | Fuzzy finder (Ctrl+R) |
+| zsh-autosuggestions | Ghost text suggestions |
+
+### Applications
+| App | Purpose |
+|-----|---------|
+| Claude Desktop | AI chat |
+| Chrome | Browser |
+| Slack | Work chat |
+| Notion | Notes |
+| WhatsApp | Messaging |
+| Signal | Messaging |
+| Spotify | Music |
+| Zoom | Video calls |
+| 1Password | Password manager |
+| Mullvad VPN | Privacy |
+| Google Drive | Cloud storage |
+| Xnapper | Screenshots |
+| Stats | System monitor |
+| Grammarly | Writing assistant |
+| Logi Options+ | Logitech hardware |
+
+### App Store (Manual)
+| App | Purpose |
+|-----|---------|
+| Things 3 | Task management |
 
 ## Files
 ```
 ~/dotfiles/
-├── README.md           # This file
 ├── install.sh          # Automated setup script
-├── zshrc               # Shell config → ~/.zshrc
-├── gitconfig           # Git config → ~/.gitconfig
-├── starship.toml       # Prompt config → ~/.config/starship.toml
-├── ghostty/
-│   └── config          # Terminal config → ~/.config/ghostty/config
-└── nvim/               # Neovim config → ~/.config/nvim/
-    ├── init.lua
-    └── lua/
-        ├── config/     # Core settings
-        └── plugins/    # Plugin specs (lazy.nvim)
-```
-
-## Manual Steps
-
-### 1. Authenticate Claude Code
-```bash
-claude
-# Follow browser auth flow
-```
-
-### 2. Set up Tailscale (for mobile access)
-```bash
-# If using Homebrew install:
-sudo brew services start tailscale
-sudo tailscale up --ssh
-
-# Or install from App Store (easier)
-```
-
-### 3. Symlink Neovim Config
-```bash
-ln -s ~/dotfiles/nvim ~/.config/nvim
-```
-First launch will auto-install lazy.nvim and all plugins.
-
-### 4. SSH Keys
-```bash
-# Generate new key
-ssh-keygen -t ed25519 -C "daniel.langkilde@gmail.com"
-
-# Add to GitHub
-cat ~/.ssh/id_ed25519.pub | pbcopy
-# Paste at github.com/settings/keys
+├── SETUP_CHECKLIST.md  # Manual steps after install
+├── README.md           # This file
+├── CLAUDE.md           # Instructions for Claude
+├── zshrc               → ~/.zshrc
+├── gitconfig           → ~/.gitconfig
+├── starship.toml       → ~/.config/starship.toml
+├── ghostty/config      → ~/.config/ghostty/config
+├── nvim/               → ~/.config/nvim/
+├── vscode/             → ~/Library/Application Support/Code/User/
+└── claude/             → ~/.claude/
 ```
 
 ## Key Aliases
@@ -115,4 +127,10 @@ cat ~/.ssh/id_ed25519.pub | pbcopy
 cd ~/dotfiles
 # Edit files directly (they're symlinked)
 git add -A && git commit -m "Update config" && git push
+```
+
+## Updating Apps
+```bash
+brew upgrade        # CLI tools
+brew upgrade --cask # GUI apps
 ```
