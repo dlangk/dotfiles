@@ -25,12 +25,16 @@ else
 fi
 
 # Install Homebrew packages
-echo "Installing Homebrew packages..."
-brew install python node go gh git-lfs tree ffmpeg graphviz jupyterlab ipython nginx certbot neovim starship zoxide fzf zsh-autosuggestions tmux tailscale
+echo "Installing CLI tools..."
+brew install python@3.13 pipx node go gh git-lfs tree ffmpeg graphviz jupyterlab ipython nginx certbot neovim starship zoxide fzf zsh-autosuggestions tmux tailscale
 
-# Install casks (--adopt takes over existing installs for update management)
+# Pin python3 to 3.13 (jupyterlab may install newer Python as dependency)
+ln -sf /opt/homebrew/opt/python@3.13/bin/python3.13 /opt/homebrew/bin/python3
+ln -sf /opt/homebrew/opt/python@3.13/bin/pip3.13 /opt/homebrew/bin/pip3
+
+# Install applications
 echo "Installing applications..."
-brew install --cask --adopt \
+brew install --cask \
     ghostty \
     sublime-text \
     visual-studio-code \

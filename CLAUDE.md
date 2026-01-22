@@ -55,8 +55,8 @@ All files are symlinked to their target locations. Edit files here, not at the t
 - **Add alias:** Edit zshrc, add to appropriate section
 - **Change theme colors:** Update ghostty/config, starship.toml, and nvim colorscheme for consistency
 - **Add nvim plugin:** Create new file in nvim/lua/plugins/ returning plugin spec
-- **Add new config file:** Create here, add symlink command to README.md
-- **Install new tool:** Add brew/pip/npm command to README.md, add config if needed
+- **Add new config file:** Create here, add symlink to install.sh
+- **Install new tool:** Add to install.sh, update README.md if needed
 
 ## Verification
 

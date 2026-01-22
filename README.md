@@ -20,7 +20,7 @@ cd ~/dotfiles
 ### Languages & Runtimes
 | Tool | Purpose |
 |------|---------|
-| Python | Scripting, tools |
+| Python 3.13 | Scripting, tools |
 | Node.js | npm packages, Claude Code |
 | Go | CLI tools |
 
@@ -51,8 +51,15 @@ cd ~/dotfiles
 ### Python
 | Tool | Purpose |
 |------|---------|
+| python@3.13 | Default Python |
+| pipx | Install CLI tools in isolation |
 | jupyterlab | Notebooks |
 | ipython | Interactive shell |
+
+**Best practices:**
+- Never `pip install` globally - use venvs for projects
+- Use `pipx install` for CLI tools (e.g., `pipx install black`)
+- Use `va` alias to activate `.venv` in project directories
 
 ### Shell Enhancements
 | Tool | Purpose |
