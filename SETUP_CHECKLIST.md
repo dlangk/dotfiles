@@ -28,7 +28,6 @@ Run `./install.sh` first, then complete these manual steps.
 These must be installed from the App Store (not Homebrew):
 
 - [ ] **Things 3** - Install from App Store (requires purchase)
-- [ ] **Amphetamine** - Install from App Store (free)
 
 ## System Setup
 

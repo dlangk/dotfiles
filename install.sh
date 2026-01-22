@@ -62,6 +62,7 @@ brew install --cask \
     tex-live-utility \
     microsoft-teams \
     hazeover \
+    keepingyouawake \
     lm-studio \
     ollama \
     superhuman \

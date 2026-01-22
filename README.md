@@ -90,6 +90,7 @@ cd ~/dotfiles
 | Grammarly | Writing assistant |
 | Logi Options+ | Logitech hardware |
 | HazeOver | Focus dimming |
+| KeepingYouAwake | Prevent sleep |
 | LM Studio | Local AI |
 | Ollama | Local AI |
 | Superhuman | Email |
@@ -99,7 +100,6 @@ cd ~/dotfiles
 | App | Purpose |
 |-----|---------|
 | Things 3 | Task management |
-| Amphetamine | Prevent sleep |
 
 ## Files
 ```
