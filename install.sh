@@ -67,6 +67,7 @@ brew install --cask \
     ollama \
     superhuman \
     tella \
+    vlc \
     webex \
     adobe-creative-cloud
 

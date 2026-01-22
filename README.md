@@ -96,6 +96,7 @@ cd ~/dotfiles
 | Stockfish | Chess engine (CLI) |
 | Superhuman | Email |
 | Tella | Screen recording |
+| VLC | Media player |
 | Webex | Video calls |
 | Adobe Creative Cloud | Lightroom |
 
