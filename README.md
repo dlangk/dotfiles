@@ -116,6 +116,8 @@ cd ~/dotfiles
 ```
 ~/dotfiles/
 ├── install.sh          # Automated setup script
+├── check.sh            # Verify system state
+├── update.sh           # Update everything
 ├── SETUP_CHECKLIST.md  # Manual steps after install
 ├── README.md           # This file
 ├── CLAUDE.md           # Instructions for Claude
@@ -155,8 +157,16 @@ cd ~/dotfiles
 git add -A && git commit -m "Update config" && git push
 ```
 
-## Updating Apps
+## Updating
 ```bash
-brew upgrade        # CLI tools
-brew upgrade --cask # GUI apps
+./update.sh         # Update everything (recommended)
+./check.sh          # Verify system state
 ```
+
+The update script handles:
+- Homebrew formulae and casks
+- Claude Code
+- Google Cloud SDK
+- Neovim plugins
+- Docker cleanup
+- Cache cleanup (npm, uv)
