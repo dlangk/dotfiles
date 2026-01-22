@@ -89,7 +89,6 @@ cd ~/dotfiles
 | Stats | System monitor |
 | Grammarly | Writing assistant |
 | Logi Options+ | Logitech hardware |
-| HazeOver | Focus dimming |
 | KeepingYouAwake | Prevent sleep |
 | LM Studio | Local AI |
 | Ollama | Local AI |

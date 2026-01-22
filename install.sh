@@ -62,7 +62,6 @@ brew install --cask \
     basictex \
     tex-live-utility \
     microsoft-teams \
-    hazeover \
     keepingyouawake \
     lm-studio \
     ollama \
