@@ -68,13 +68,9 @@ else
     fail "uv not installed - run 'brew install uv'"
 fi
 
-# Check for global pip packages (should be minimal)
+# Note: Global pip packages are brew-managed (PEP 668 prevents manual installs)
 PIP_PACKAGES=$(pip3 list 2>/dev/null | wc -l | tr -d ' ')
-if [[ $PIP_PACKAGES -lt 10 ]]; then
-    ok "Global pip packages clean ($PIP_PACKAGES packages)"
-else
-    warn "Many global pip packages ($PIP_PACKAGES) - consider cleanup"
-fi
+ok "Global pip packages: $PIP_PACKAGES (brew-managed)"
 
 echo ""
 
