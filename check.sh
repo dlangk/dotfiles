@@ -163,10 +163,8 @@ echo ""
 
 # --- Unwanted Apps ---
 echo "Checking for unwanted apps..."
+# Apps to warn about if found (bloatware, redundant tools)
 UNWANTED_APPS=(
-    "/Applications/iStat Menus.app"
-    "/Applications/Spark.app"
-    "/Applications/Microsoft OneNote.app"
     "/Applications/OneDrive.app"
     "/Applications/Microsoft Word.app"
     "/Applications/Microsoft Excel.app"
@@ -176,7 +174,6 @@ UNWANTED_APPS=(
     "/Applications/PyCharm.app"
     "/Applications/WebStorm.app"
     "/Applications/CLion.app"
-    "/Applications/JetBrains Gateway.app"
 )
 
 FOUND_UNWANTED=0
