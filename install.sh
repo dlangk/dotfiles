@@ -54,7 +54,12 @@ brew install --cask --adopt \
     google-cloud-sdk \
     docker \
     basictex \
-    tex-live-utility
+    tex-live-utility \
+    microsoft-teams \
+    hazeover \
+    lm-studio \
+    ollama \
+    superhuman
 
 # Install Claude Code
 echo "Installing Claude Code..."
@@ -75,6 +80,11 @@ else
     fi
     chmod 600 ~/.anthropic_api_key
 fi
+
+# macOS preferences
+echo "Setting macOS preferences..."
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Create config directories
 mkdir -p ~/.config

@@ -15,16 +15,19 @@ Run `./install.sh` first, then complete these manual steps.
 - [ ] **Grammarly** - Sign in with account
 - [ ] **Signal** - Link to phone
 - [ ] **Zoom** - Sign in with account
+- [ ] **Microsoft Teams** - Sign in with work account
 - [ ] **Mullvad VPN** - Enter account number
 - [ ] **Google Drive** - Sign in with Google account
 - [ ] **Postman** - Sign in with account
 - [ ] **Google Cloud** - `gcloud auth login`
+- [ ] **Superhuman** - Sign in with email account
 
 ## App Store Apps
 
 These must be installed from the App Store (not Homebrew):
 
 - [ ] **Things 3** - Install from App Store (requires purchase)
+- [ ] **Amphetamine** - Install from App Store (free)
 
 ## System Setup
 

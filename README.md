@@ -73,6 +73,7 @@ cd ~/dotfiles
 | Signal | Messaging |
 | Spotify | Music |
 | Zoom | Video calls |
+| Microsoft Teams | Work chat/video |
 | 1Password | Password manager |
 | Mullvad VPN | Privacy |
 | Google Drive | Cloud storage |
@@ -80,11 +81,16 @@ cd ~/dotfiles
 | Stats | System monitor |
 | Grammarly | Writing assistant |
 | Logi Options+ | Logitech hardware |
+| HazeOver | Focus dimming |
+| LM Studio | Local AI |
+| Ollama | Local AI |
+| Superhuman | Email |
 
 ### App Store (Manual)
 | App | Purpose |
 |-----|---------|
 | Things 3 | Task management |
+| Amphetamine | Prevent sleep |
 
 ## Files
 ```
