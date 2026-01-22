@@ -93,14 +93,23 @@ cd ~/dotfiles
 | LM Studio | Local AI |
 | Ollama | Local AI |
 | Raycast | Launcher & productivity |
+| Stockfish | Chess engine (CLI) |
 | Superhuman | Email |
+| Tella | Screen recording |
+| Webex | Video calls |
 | Adobe Creative Cloud | Lightroom |
 
-### Manual Downloads
+### Manual Downloads / App Store
 | App | Purpose |
 |-----|---------|
 | Things 3 | Task management (App Store) |
-| EVO Control | Audient audio interface ([download](https://audient.com/products/audio-interfaces/evo/evo-control/)) |
+| Amazon Kindle | E-reader (App Store) |
+| Headspace | Meditation (App Store) |
+| iA Writer | Writing app (App Store) |
+| X (Twitter) | Social media (App Store) |
+| EVO Control | Audient audio interface ([Audient](https://audient.com/products/audio-interfaces/evo/evo-control/)) |
+| FUJIFILM X Acquire | Camera tethering ([Fujifilm](https://fujifilm-x.com/global/support/download/software/)) |
+| FUJIFILM X Webcam 2 | Webcam mode ([Fujifilm](https://fujifilm-x.com/global/support/download/software/)) |
 
 ## Files
 ```

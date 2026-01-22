@@ -27,7 +27,11 @@ Run `./install.sh` first, then complete these manual steps.
 
 These must be installed from the App Store (not Homebrew):
 
-- [ ] **Things 3** - Install from App Store (requires purchase)
+- [ ] **Things 3** - Task management (requires purchase)
+- [ ] **Amazon Kindle** - E-reader
+- [ ] **Headspace** - Meditation
+- [ ] **iA Writer** - Writing app
+- [ ] **X (Twitter)** - Social media
 
 ## System Setup
 
@@ -43,6 +47,8 @@ These must be installed from the App Store (not Homebrew):
 
 - [ ] **Logitech Options+** - Pair mouse, camera, light
 - [ ] **EVO Control** - Download from [Audient](https://audient.com/products/audio-interfaces/evo/evo-control/) for audio interface
+- [ ] **FUJIFILM X Acquire** - Download from [Fujifilm](https://fujifilm-x.com/global/support/download/software/) for camera tethering
+- [ ] **FUJIFILM X Webcam 2** - Download from [Fujifilm](https://fujifilm-x.com/global/support/download/software/) for webcam mode
 
 ## Verification
 
