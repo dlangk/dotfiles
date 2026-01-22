@@ -63,7 +63,8 @@ brew install --cask \
     hazeover \
     lm-studio \
     ollama \
-    superhuman
+    superhuman \
+    adobe-creative-cloud
 
 # Install Claude Code
 echo "Installing Claude Code..."

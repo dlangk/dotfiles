@@ -92,6 +92,7 @@ cd ~/dotfiles
 | LM Studio | Local AI |
 | Ollama | Local AI |
 | Superhuman | Email |
+| Adobe Creative Cloud | Lightroom |
 
 ### App Store (Manual)
 | App | Purpose |

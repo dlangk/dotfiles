@@ -21,6 +21,7 @@ Run `./install.sh` first, then complete these manual steps.
 - [ ] **Postman** - Sign in with account
 - [ ] **Google Cloud** - `gcloud auth login`
 - [ ] **Superhuman** - Sign in with email account
+- [ ] **Adobe Creative Cloud** - Sign in, then install Lightroom
 
 ## App Store Apps
 
