@@ -93,6 +93,7 @@ cd ~/dotfiles
 | KeepingYouAwake | Prevent sleep |
 | LM Studio | Local AI |
 | Ollama | Local AI |
+| Raycast | Launcher & productivity |
 | Superhuman | Email |
 | Adobe Creative Cloud | Lightroom |
 

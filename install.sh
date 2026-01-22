@@ -52,6 +52,7 @@ brew install --cask \
     stats \
     grammarly-desktop \
     postman \
+    raycast \
     zoom \
     signal \
     mullvad-vpn \
