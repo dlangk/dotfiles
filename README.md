@@ -74,6 +74,7 @@ cd ~/dotfiles
 |-----|---------|
 | Claude Desktop | AI chat |
 | Chrome | Browser |
+| Clocker | Menu bar timezone tracker |
 | Slack | Work chat |
 | Notion | Notes |
 | WhatsApp | Messaging |

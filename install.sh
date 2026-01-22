@@ -40,6 +40,7 @@ brew install --cask \
     visual-studio-code \
     font-jetbrains-mono-nerd-font \
     claude \
+    clocker \
     notion \
     whatsapp \
     slack \
