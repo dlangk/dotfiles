@@ -1,7 +1,17 @@
 #!/bin/bash
 # Update script - keeps everything up to date
+# Usage: ./update.sh [--check]
 
 set -e
+
+DOTFILES="$(cd "$(dirname "$0")" && pwd)"
+RUN_CHECK=false
+
+for arg in "$@"; do
+    case $arg in
+        --check) RUN_CHECK=true ;;
+    esac
+done
 
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -57,3 +67,9 @@ echo -e "${GREEN}✓${NC} Caches cleaned"
 echo ""
 
 echo "=== Update Complete ==="
+
+# Run check if requested
+if $RUN_CHECK; then
+    echo ""
+    "$DOTFILES/check.sh"
+fi

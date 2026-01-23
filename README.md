@@ -159,8 +159,9 @@ git add -A && git commit -m "Update config" && git push
 
 ## Updating
 ```bash
-./update.sh         # Update everything (recommended)
-./check.sh          # Verify system state
+./update.sh --check # Update everything and verify (recommended)
+./update.sh         # Update only
+./check.sh          # Verify system state only
 ```
 
 The update script handles:
