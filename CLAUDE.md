@@ -57,6 +57,7 @@ All files are symlinked to their target locations. Edit files here, not at the t
 - **Add nvim plugin:** Create new file in nvim/lua/plugins/ returning plugin spec
 - **Add new config file:** Create here, add symlink to install.sh
 - **Install new tool:** Add to install.sh, update README.md if needed
+- **Update tools:** Run `./update.sh --check` to see available updates (always use `--check` first)
 
 ## Verification
 
