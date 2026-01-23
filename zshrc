@@ -103,6 +103,9 @@ alias va="source .venv/bin/activate"
 alias vd="deactivate"
 alias pip="uv pip"
 alias python="python3"
+# Ruff: Fast Python linter and formatter
+alias lint="ruff check ."
+alias fmt="ruff format ."
 
 # Auto-activate: When you cd into a directory with .venv, activate it
 # No more forgetting to activate before running scripts

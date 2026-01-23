@@ -75,6 +75,10 @@ brew install --cask \
 echo "Installing Claude Code..."
 npm install -g @anthropic-ai/claude-code
 
+# Install Python CLI tools
+echo "Installing Python CLI tools..."
+uv tool install ruff
+
 # Set up Anthropic API key
 if [[ -f ~/.anthropic_api_key ]]; then
     echo "Anthropic API key already configured"
