@@ -69,7 +69,8 @@ brew install --cask \
     tella \
     vlc \
     webex \
-    adobe-creative-cloud
+    adobe-creative-cloud \
+    qlmarkdown
 
 # Install Claude Code
 echo "Installing Claude Code..."
@@ -78,6 +79,15 @@ npm install -g @anthropic-ai/claude-code
 # Install Python CLI tools
 echo "Installing Python CLI tools..."
 uv tool install ruff
+
+# Install Rust
+if command -v rustc &> /dev/null; then
+    echo "Rust already installed, updating..."
+    rustup update
+else
+    echo "Installing Rust..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+fi
 
 # Set up Anthropic API key
 if [[ -f ~/.anthropic_api_key ]]; then
@@ -93,6 +103,22 @@ else
         echo "API key saved to ~/.anthropic_api_key"
     fi
     chmod 600 ~/.anthropic_api_key
+fi
+
+# Set up Hugging Face token
+if [[ -f ~/.huggingface_token ]]; then
+    echo "Hugging Face token already configured"
+else
+    echo ""
+    read -p "Enter your Hugging Face token (or press Enter to skip): " hf_token
+    if [[ -z "$hf_token" ]]; then
+        echo "skipped" > ~/.huggingface_token
+        echo "Skipped - you can add your token later to ~/.huggingface_token"
+    else
+        echo "$hf_token" > ~/.huggingface_token
+        echo "Token saved to ~/.huggingface_token"
+    fi
+    chmod 600 ~/.huggingface_token
 fi
 
 # macOS preferences

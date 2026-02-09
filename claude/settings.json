@@ -1,5 +1,4 @@
 {
-  "model": "claude-opus-4-5-20251101",
   "permissions": {
     "allow": [
       "Bash(git:*)",
@@ -17,13 +16,21 @@
       "Bash(make:*)"
     ]
   },
+  "model": "claude-opus-4-6",
   "hooks": {
-    "Stop": [{
-      "matcher": "",
-      "hooks": [{
-        "type": "command",
-        "command": "curl -d 'Claude finished' ntfy.sh/langkilde-dlmacbook"
-      }]
-    }]
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "curl -d 'Claude finished' ntfy.sh/langkilde-dlmacbook"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "clangd-lsp@claude-plugins-official": true
   }
 }

@@ -23,6 +23,7 @@ cd ~/dotfiles
 | Python 3.13 | Scripting, tools |
 | Node.js | npm packages, Claude Code |
 | Go | CLI tools |
+| Rust | Systems programming, CLI tools |
 
 ### Dev Tools
 | Tool | Purpose |
@@ -92,6 +93,7 @@ cd ~/dotfiles
 | KeepingYouAwake | Prevent sleep |
 | LM Studio | Local AI |
 | Ollama | Local AI |
+| qlmarkdown | Quick Look markdown preview |
 | Raycast | Launcher & productivity |
 | Stockfish | Chess engine (CLI) |
 | Superhuman | Email |

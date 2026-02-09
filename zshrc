@@ -13,11 +13,21 @@ export PATH="$HOME/.local/bin:$PATH"
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
+## Rust -----------------------------------------------------------
+# Cargo binaries (rustc, cargo, rustfmt, clippy)
+export PATH="$HOME/.cargo/bin:$PATH"
+
 ## AI Model APIs -----------------------------------------------
 if [[ -f ~/.anthropic_api_key ]]; then
     _api_key=$(cat ~/.anthropic_api_key)
     [[ "$_api_key" != "skipped" ]] && export ANTHROPIC_API_KEY="$_api_key"
     unset _api_key
+fi
+
+if [[ -f ~/.huggingface_token ]]; then
+    _hf_token=$(cat ~/.huggingface_token)
+    [[ "$_hf_token" != "skipped" ]] && export HF_TOKEN="$_hf_token"
+    unset _hf_token
 fi
 
 ## Editor ------------------------------------------------------

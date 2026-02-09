@@ -37,7 +37,7 @@ All files are symlinked to their target locations. Edit files here, not at the t
 
 ## Key Conventions
 
-- API keys live in `~/.anthropic_api_key` (not in this repo)
+- API keys live in `~/.anthropic_api_key`, `~/.huggingface_token` (not in this repo)
 - Use `$(cat ~/.anthropic_api_key)` pattern for loading secrets
 - Ghostty: no ligatures (`font-feature = -liga`, `-calt`)
 - Starship: minimal prompt (no username, no time, no unused languages)
