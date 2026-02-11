@@ -23,7 +23,7 @@
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit"
+    "source.organizeImports": "explicit",
   },
 
   // === Explorer (PyCharm-like) ===
@@ -50,7 +50,8 @@
 
   // === Language-specific ===
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
-  "terminal.integrated.sendKeybindingsToShell": true
+  "terminal.integrated.sendKeybindingsToShell": true,
+  "markdown-preview-enhanced.previewTheme": "atom-dark.css",
 }

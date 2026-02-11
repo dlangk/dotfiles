@@ -70,7 +70,8 @@ brew install --cask \
     vlc \
     webex \
     adobe-creative-cloud \
-    qlmarkdown
+    qlmarkdown \
+    karabiner-elements
 
 # Install Claude Code
 echo "Installing Claude Code..."
@@ -139,6 +140,8 @@ ln -sf "$DOTFILES/nvim" ~/.config/nvim
 ln -sf "$DOTFILES/claude" ~/.claude
 mkdir -p "$HOME/Library/Application Support/Code/User"
 ln -sf "$DOTFILES/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+mkdir -p ~/.config/karabiner
+ln -sf "$DOTFILES/karabiner/karabiner.json" ~/.config/karabiner/karabiner.json
 
 # Set up fzf keybindings
 if [[ -f "$(brew --prefix)/opt/fzf/install" ]]; then

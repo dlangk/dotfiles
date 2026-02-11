@@ -1,0 +1,40 @@
+{
+    "profiles": [
+        {
+            "name": "Default profile",
+            "selected": true,
+            "simple_modifications": [
+                {
+                    "from": {
+                        "key_code": "non_us_backslash"
+                    },
+                    "to": [
+                        {
+                            "key_code": "f18"
+                        }
+                    ]
+                },
+                {
+                    "from": {
+                        "key_code": "caps_lock"
+                    },
+                    "to": [
+                        {
+                            "key_code": "escape"
+                        }
+                    ]
+                }
+            ],
+            "complex_modifications": {
+                "rules": []
+            },
+            "devices": [],
+            "virtual_hid_keyboard": {
+                "keyboard_type_v2": "ansi"
+            }
+        }
+    ],
+    "global": {
+        "show_in_menu_bar": true
+    }
+}

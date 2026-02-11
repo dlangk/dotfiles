@@ -94,6 +94,7 @@ cd ~/dotfiles
 | LM Studio | Local AI |
 | Ollama | Local AI |
 | qlmarkdown | Quick Look markdown preview |
+| Karabiner-Elements | Keyboard customization (§ → F18) |
 | Raycast | Launcher & productivity |
 | Stockfish | Chess engine (CLI) |
 | Superhuman | Email |
@@ -129,6 +130,7 @@ cd ~/dotfiles
 ├── ghostty/config      → ~/.config/ghostty/config
 ├── nvim/               → ~/.config/nvim/
 ├── vscode/             → ~/Library/Application Support/Code/User/
+├── karabiner/          → ~/.config/karabiner/
 └── claude/             → ~/.claude/
 ```
 

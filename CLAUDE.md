@@ -20,6 +20,7 @@ When asked to guide through setup:
 ├── ghostty/config     → ~/.config/ghostty/config
 ├── nvim/              → ~/.config/nvim/
 ├── vscode/            → ~/Library/Application Support/Code/User/
+├── karabiner/         → ~/.config/karabiner/
 ├── claude/            → ~/.claude/
 └── README.md
 ```
