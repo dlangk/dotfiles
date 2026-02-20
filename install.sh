@@ -26,7 +26,7 @@ fi
 
 # Install Homebrew packages
 echo "Installing CLI tools..."
-brew install python@3.13 uv node go gh git-lfs tree cmake make ffmpeg graphviz imagemagick slackdump jupyterlab ipython nginx certbot neovim starship zoxide fzf zsh-autosuggestions tmux tailscale stockfish
+brew install python@3.13 uv node go gh git-lfs tree cmake make ffmpeg graphviz imagemagick slackdump jupyterlab ipython nginx certbot neovim starship zoxide fzf zsh-autosuggestions tmux tailscale stockfish btop
 
 # Pin python3 to 3.13 (jupyterlab may install newer Python as dependency)
 ln -sf /opt/homebrew/opt/python@3.13/bin/python3.13 /opt/homebrew/bin/python3

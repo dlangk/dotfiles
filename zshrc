@@ -30,6 +30,10 @@ if [[ -f ~/.huggingface_token ]]; then
     unset _hf_token
 fi
 
+if [[ -f ~/.linkedin_dma_access_token ]]; then
+    export LINKEDIN_DMA_ACCESS_TOKEN="$(cat ~/.linkedin_dma_access_token)"
+fi
+
 ## Editor ------------------------------------------------------
 # Default editor for git commits, crontab, etc.
 # Claude Code also reads this for /memory and other edit commands
@@ -153,6 +157,7 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse'
 # Ctrl+F or right arrow: Accept suggestion
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+ZSH_AUTOSUGGEST_ASYNC_PTY=1
 bindkey '^f' autosuggest-accept
 
 ## Starship prompt ---------------------------------------------
