@@ -137,7 +137,11 @@ ln -sf "$DOTFILES/gitconfig" ~/.gitconfig
 ln -sf "$DOTFILES/starship.toml" ~/.config/starship.toml
 ln -sf "$DOTFILES/ghostty" ~/.config/ghostty
 ln -sf "$DOTFILES/nvim" ~/.config/nvim
-ln -sf "$DOTFILES/claude" ~/.claude
+mkdir -p ~/.claude
+ln -sf "$DOTFILES/claude/CLAUDE.md" ~/.claude/CLAUDE.md
+ln -sf "$DOTFILES/claude/settings.json" ~/.claude/settings.json
+ln -sf "$DOTFILES/claude/commands" ~/.claude/commands
+ln -sf "$DOTFILES/claude/notify.py" ~/.claude/notify.py
 mkdir -p "$HOME/Library/Application Support/Code/User"
 ln -sf "$DOTFILES/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
 mkdir -p ~/.config/karabiner

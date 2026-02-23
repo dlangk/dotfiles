@@ -141,8 +141,10 @@ alias ...="cd ../.."
 # "cd proj" jumps to ~/code/my-project if you go there often
 # cdi: Interactive fuzzy picker for directories
 eval "$(zoxide init zsh)"
-alias cd="z"
-alias cdi="zi"
+if [[ $- == *i* ]]; then
+    alias cd="z"
+    alias cdi="zi"
+fi
 
 ## fzf ---------------------------------------------------------
 # Fuzzy finder - transforms shell history and file navigation

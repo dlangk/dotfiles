@@ -18,13 +18,13 @@
   },
   "model": "claude-opus-4-6",
   "hooks": {
-    "Stop": [
+    "Notification": [
       {
         "matcher": "",
         "hooks": [
           {
             "type": "command",
-            "command": "curl -d 'Claude finished' ntfy.sh/langkilde-dlmacbook"
+            "command": "python3 ~/.claude/notify.py"
           }
         ]
       }
