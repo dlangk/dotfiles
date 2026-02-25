@@ -71,11 +71,8 @@ brew install --cask \
     webex \
     adobe-creative-cloud \
     qlmarkdown \
-    karabiner-elements
-
-# Install Claude Code
-echo "Installing Claude Code..."
-npm install -g @anthropic-ai/claude-code
+    karabiner-elements \
+    claude-code
 
 # Install Python CLI tools
 echo "Installing Python CLI tools..."

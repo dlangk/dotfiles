@@ -44,6 +44,6 @@ subprocess.run([
     '-H', f'Priority: {priority}',
     '-H', f'Tags: {tags}',
     '-H', 'Markdown: yes',
-    '-H', f'Click: vscode://file{cwd}',  # tapping notification opens project in VS Code
+    '-H', 'Click: blinkshell://run',  # tapping notification opens Blink Shell
     f'ntfy.sh/{topic}'
 ])
