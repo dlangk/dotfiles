@@ -24,9 +24,8 @@ elif any(w in message.lower() for w in ['complete', 'finished', 'done', 'success
     tags     = 'white_check_mark'
     title    = f'Claude finished: {project}'
 else:
-    priority = 'low'
-    tags     = 'speech_balloon'
-    title    = f'Claude update: {project}'
+    # Low-priority: silenced to reduce noise
+    sys.exit(0)
 
 # Rich body
 lines = [message]
