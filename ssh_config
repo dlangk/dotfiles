@@ -1,0 +1,15 @@
+Host dl-content-host
+    HostName REDACTED
+    User daniel.langkilde
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+
+Host dl-cloud-coder
+    HostName REDACTED
+    User daniel
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+
+Host *
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/id_ed25519

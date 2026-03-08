@@ -26,7 +26,7 @@ fi
 
 # Install Homebrew packages
 echo "Installing CLI tools..."
-brew install python@3.13 uv node go gh git-lfs tree cmake make ffmpeg graphviz imagemagick slackdump jupyterlab ipython nginx certbot neovim starship zoxide fzf zsh-autosuggestions tmux tailscale stockfish btop
+brew install python@3.13 uv node go gh git-lfs tree cmake make ffmpeg graphviz imagemagick slackdump jupyterlab ipython nginx certbot neovim starship zoxide fzf zsh-autosuggestions tmux tailscale stockfish btop just
 
 # Pin python3 to 3.13 (jupyterlab may install newer Python as dependency)
 ln -sf /opt/homebrew/opt/python@3.13/bin/python3.13 /opt/homebrew/bin/python3
@@ -71,7 +71,6 @@ brew install --cask \
     webex \
     adobe-creative-cloud \
     qlmarkdown \
-    karabiner-elements \
     claude-code
 
 # Install Python CLI tools
@@ -134,6 +133,9 @@ ln -sf "$DOTFILES/gitconfig" ~/.gitconfig
 ln -sf "$DOTFILES/starship.toml" ~/.config/starship.toml
 ln -sf "$DOTFILES/ghostty" ~/.config/ghostty
 ln -sf "$DOTFILES/nvim" ~/.config/nvim
+mkdir -p ~/.ssh
+ln -sf "$DOTFILES/ssh_config" ~/.ssh/config
+chmod 600 ~/.ssh/config
 mkdir -p ~/.claude
 ln -sf "$DOTFILES/claude/CLAUDE.md" ~/.claude/CLAUDE.md
 ln -sf "$DOTFILES/claude/settings.json" ~/.claude/settings.json
@@ -141,8 +143,6 @@ ln -sf "$DOTFILES/claude/commands" ~/.claude/commands
 ln -sf "$DOTFILES/claude/notify.py" ~/.claude/notify.py
 mkdir -p "$HOME/Library/Application Support/Code/User"
 ln -sf "$DOTFILES/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
-mkdir -p ~/.config/karabiner
-ln -sf "$DOTFILES/karabiner/karabiner.json" ~/.config/karabiner/karabiner.json
 
 # Set up fzf keybindings
 if [[ -f "$(brew --prefix)/opt/fzf/install" ]]; then

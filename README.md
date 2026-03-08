@@ -131,7 +131,18 @@ cd ~/dotfiles
 ├── nvim/               → ~/.config/nvim/
 ├── vscode/             → ~/Library/Application Support/Code/User/
 ├── karabiner/          → ~/.config/karabiner/
-└── claude/             → ~/.claude/
+├── claude/             → ~/.claude/
+├── ssh_config          → ~/.ssh/config
+├── SERVERS.md          # Remote server documentation
+└── servers/
+    ├── dl-content-host/
+    │   ├── setup.sh                  # Idempotent server setup
+    │   ├── nginx.conf                # Nginx config for langkilde.se
+    │   ├── entrypoint.sh             # Nginx Docker entrypoint
+    │   ├── docker-compose.nginx.yml  # Nginx + Certbot
+    │   └── docker-compose.yatzy.yml  # Yatzy frontend + backend
+    └── dl-cloud-coder/
+        └── setup.sh                  # Idempotent server setup
 ```
 
 ## Key Aliases
