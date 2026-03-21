@@ -21,6 +21,10 @@ cursor-style = block
 cursor-style-blink = false
 shell-integration-features = no-cursor
 
+# Clipboard
+clipboard-read = allow
+clipboard-write = allow
+
 # Mouse
 copy-on-select = clipboard
 mouse-hide-while-typing = true
@@ -39,3 +43,4 @@ keybind = ctrl+l=goto_split:right
 keybind = cmd+d=new_split:right
 keybind = cmd+shift+d=new_split:down
 keybind = cmd+shift+b=new_split:right
+term = xterm-256color

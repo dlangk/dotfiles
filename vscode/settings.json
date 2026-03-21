@@ -55,4 +55,12 @@
   "terminal.integrated.sendKeybindingsToShell": true,
   "markdown-preview-enhanced.previewTheme": "atom-dark.css",
   "python.analysis.typeCheckingMode": "standard",
+  "grammarly.files.include": ["**/*.md", "**/*.mdx", "**/*.txt"],
+  "editor.minimap.enabled": false,
+  "workbench.statusBar.visible": false,
+  "workbench.sideBar.location": "right",
+  "[mdx]": {
+    "editor.defaultFormatter": "unifiedjs.vscode-mdx",
+    "editor.wordWrap": "on",
+  },
 }
