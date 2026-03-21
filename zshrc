@@ -3,6 +3,8 @@
 # Maintained in: https://github.com/dlangk/dotfiles
 
 ## PATH --------------------------------------------------------
+# GNU coreutils (from Homebrew) take precedence over macOS BSD versions
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 # Homebrew binaries take precedence over system binaries
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 # Local binaries (uv tools, custom scripts)
@@ -131,11 +133,20 @@ auto_activate_venv() {
 chpwd_functions+=(auto_activate_venv)
 
 ## General -----------------------------------------------------
-# ls with colored output - directories in bold blue
-export LSCOLORS='Exfxcxdxbxegedabagacad'  # Bold blue dirs (Ex), rest default
-alias ls="ls -G"
-alias ll="ls -la"
+# GNU ls with LS_COLORS - directories bold blue, symlinks bold cyan
+export LS_COLORS='di=1;34:ln=1;36:*.py=35:*.rs=36:*.md=33:*.go=32:*.json=33:*.yml=33:*.yaml=33'
+alias ls="ls --color=auto"
+alias ll="ls -lah"
 alias la="ls -A"
+
+# eza - modern ls replacement with git integration and tree view
+# l:  ls replacement with colors and git status
+# ll: long format with all files
+# lt: tree view
+alias l="eza --icons --git"
+alias ll="eza --icons --git -lah"
+alias lt="eza --icons --git --tree"
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias mosh-coder="mosh daniel@REDACTED -- tmux attach -t main"

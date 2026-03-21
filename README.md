@@ -42,6 +42,12 @@ cd ~/dotfiles
 | certbot | SSL certificates |
 | Postman | API testing |
 
+### CLI Tools
+| Tool | Purpose |
+|------|---------|
+| GNU coreutils | Modern ls with extended colors, script compatibility |
+| eza | Modern ls replacement with git integration & tree view |
+
 ### Media & Documents
 | Tool | Purpose |
 |------|---------|
