@@ -4,7 +4,7 @@ Host dl-content-host
     IdentityFile ~/.ssh/id_ed25519
     IdentitiesOnly yes
 
-Host dl-cloud-coder
+Host dl-coder
     HostName REDACTED
     User daniel
     IdentityFile ~/.ssh/id_ed25519

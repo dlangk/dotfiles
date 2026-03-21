@@ -1,4 +1,4 @@
-Check and maintain machines. Argument: machine name (`mac`, `dl-content-host`, `dl-cloud-coder`, or `all`). If no argument given, check all three.
+Check and maintain machines. Argument: machine name (`mac`, `dl-content-host`, `dl-coder`, or `all`). If no argument given, check all three.
 
 Reference `~/dotfiles/SERVERS.md` for remote server details.
 

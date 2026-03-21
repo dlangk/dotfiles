@@ -52,7 +52,7 @@ Hosts langkilde.se — personal website and side projects.
 
 ---
 
-## dl-cloud-coder (Hetzner Cloud)
+## dl-coder (Hetzner Cloud)
 
 | Property | Value |
 |----------|-------|
@@ -63,15 +63,15 @@ Hosts langkilde.se — personal website and side projects.
 | **Disk** | 226 GB root (3% used) + 100 GB mounted at /mnt/data |
 | **Public IP** | REDACTED |
 | **IPv6** | REDACTED |
-| **SSH** | `ssh dl-cloud-coder` |
+| **SSH** | `ssh dl-coder` |
 | **User** | daniel (zsh + oh-my-zsh) |
 
 ### Purpose
 Development / coding server — powerful machine for remote work.
 
 ### What's running
-- Tailscale (connected to dlmacbook, iphone-15-pro-max)
 - Minimal services (SSH, cron, systemd basics)
+- tmux `main` session (auto-starts on boot)
 
 ### Installed tools
 - Python 3.12.3, Rust 1.94.0
@@ -98,8 +98,7 @@ Development / coding server — powerful machine for remote work.
 ```
 
 ### Notes
-- Tailscale IP: 100.88.112.74
-- No firewall configured (ufw inactive)
+- Cloudflare WARP installed — **must be in proxy mode** (`warp-cli --accept-tos set-mode proxy`), tunnel mode breaks inbound SSH/mosh by hijacking reply routing
 - No swap
 - No Docker installed
-- Recently rebooted (8 min uptime as of 2026-03-08)
+- tmux `main` session auto-starts on boot (systemd user service)

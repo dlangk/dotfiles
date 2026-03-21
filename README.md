@@ -141,7 +141,7 @@ cd ~/dotfiles
     │   ├── entrypoint.sh             # Nginx Docker entrypoint
     │   ├── docker-compose.nginx.yml  # Nginx + Certbot
     │   └── docker-compose.yatzy.yml  # Yatzy frontend + backend
-    └── dl-cloud-coder/
+    └── dl-coder/
         └── setup.sh                  # Idempotent server setup
 ```
 
