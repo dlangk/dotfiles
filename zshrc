@@ -131,10 +131,14 @@ auto_activate_venv() {
 chpwd_functions+=(auto_activate_venv)
 
 ## General -----------------------------------------------------
+# ls with colored output - directories in bold blue
+export LSCOLORS='Exfxcxdxbxegedabagacad'  # Bold blue dirs (Ex), rest default
+alias ls="ls -G"
 alias ll="ls -la"
 alias la="ls -A"
 alias ..="cd .."
 alias ...="cd ../.."
+alias mosh-coder="mosh daniel@REDACTED -- tmux attach -t main"
 
 ## zoxide ------------------------------------------------------
 # Smart cd that learns your habits
@@ -167,3 +171,8 @@ bindkey '^f' autosuggest-accept
 # Shows git branch, python venv, exit codes - only when relevant
 # Config: ~/.config/starship.toml
 eval "$(starship init zsh)"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/langkilde/.cache/lm-studio/bin"
+# End of LM Studio CLI section
+
