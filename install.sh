@@ -40,7 +40,6 @@ brew install --cask \
     visual-studio-code \
     font-jetbrains-mono-nerd-font \
     claude \
-    clocker \
     notion \
     whatsapp \
     slack \
@@ -49,7 +48,6 @@ brew install --cask \
     1password \
     xnapper \
     logi-options-plus \
-    stats \
     grammarly-desktop \
     postman \
     raycast \
@@ -71,7 +69,8 @@ brew install --cask \
     webex \
     adobe-creative-cloud \
     qlmarkdown \
-    claude-code
+    claude-code \
+    godot
 
 # Install Python CLI tools
 echo "Installing Python CLI tools..."
