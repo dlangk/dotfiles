@@ -112,10 +112,22 @@ where the real speed was 850-920 Mbps. Never trust speedtest-cli for upload.
 
 | Config | Download | Upload | Ping | Method |
 |--------|----------|--------|------|--------|
+| WiFi (Orbi) → ZyXEL | 607 avg | 588 avg | 16 ms | curl (accurate) |
 | INC019 via ZyXEL | 823 avg | 541 avg | 9.4 ms | speedtest-cli (unreliable) |
 | INC019 direct to converter | 915 avg | 699 avg | 2.6 ms | speedtest-cli (unreliable) |
 | TB4 dock via ZyXEL | 921 avg | 857 avg | 8.2 ms | curl (accurate) |
 | TB4 dock direct to converter | 921 avg | 857 avg | 8.2 ms | curl (accurate) |
+
+### WiFi (Orbi AX6000) → ZyXEL (curl, 5 runs + warmup)
+
+| KPI | Min | Avg | Max |
+|-----|-----|-----|-----|
+| Download | 496 | 607 | 692 Mbit/s |
+| Upload | 538 | 588 | 611 Mbit/s |
+| Ping | 12.4 | 16.0 | 21.4 ms |
+
+WiFi is ~65% of wired speed with more variance. The extra hop through the
+Orbi mesh adds ~8ms latency on top of the ZyXEL's ~8ms.
 
 ### Final Baseline: TB4 Dock → ZyXEL (curl, 5 runs + warmup)
 
