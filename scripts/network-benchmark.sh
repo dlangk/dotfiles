@@ -2,10 +2,11 @@
 set -e
 
 # Network Benchmark Suite
-# Usage: ./network-benchmark.sh [all|internet|nas] [runs]
+# Usage: ./network-benchmark.sh [all|internet|nas|gcs] [runs]
 # Example: ./network-benchmark.sh all 5
 #          ./network-benchmark.sh internet 3
 #          ./network-benchmark.sh nas 5
+#          ./network-benchmark.sh gcs 3
 
 MODE="${1:-all}"
 RUNS="${2:-5}"
@@ -22,6 +23,11 @@ PING_COUNT=20
 NAS_MOUNT="/Volumes/camera"
 NAS_WRITE_MB=1024
 NAS_SMALL_FILES=1000
+
+# GCS test config
+GCS_BUCKET="gs://langkilde-backup"
+GCS_TEST_DIR="speedtest"
+GCS_FILE_SIZE_MB=20480  # 20GB — must be large to amortize gcloud overhead at 10G speeds
 
 # Colors
 GREEN='\033[0;32m'
@@ -222,6 +228,188 @@ run_nas() {
     trap - EXIT
 }
 
+# ─── GCS Benchmark ───
+#
+# Design notes (potential bottlenecks considered):
+#   1. File size: 20GB — large enough to amortize gcloud startup (~1-2s) at 10G speeds
+#   2. Random data: incompressible — prevents GCS/transport compression cheating
+#   3. Parallelism: tests both auto-tuned and aggressive (16p x 4t) to find optimum
+#   4. Multi-file test: simulates real workload (many video files, not one blob)
+#   5. TCP buffers: checks macOS defaults and warns if too small for 10G BDP
+#   6. Local SSD: M1 Max does 5-7 GB/s, not a bottleneck for 10G (~1.2 GB/s)
+
+run_gcs() {
+    if ! command -v gcloud &> /dev/null; then
+        warning "gcloud not installed — skipping GCS benchmark"
+        return
+    fi
+
+    header "GCS Benchmark"
+    local GCS_TEST_PATH="$GCS_BUCKET/$GCS_TEST_DIR"
+    local REGION=$(gcloud storage buckets describe "$GCS_BUCKET" --format="value(location)" 2>/dev/null)
+    echo "  Bucket: $GCS_BUCKET ($REGION)"
+    echo "  File size: ${GCS_FILE_SIZE_MB}MB"
+    echo "  Runs: $RUNS"
+
+    local TESTFILE="/tmp/gcs-benchmark-$$"
+    local TESTDIR="/tmp/gcs-benchmark-multi-$$"
+
+    # Tune macOS TCP buffers for 10G
+    # BDP (bandwidth-delay product) = 10 Gbps x 10ms RTT = 12.5 MB
+    # TCP buffers must be >= BDP to fill the pipe. macOS defaults are often too small.
+    # These reset on reboot — safe to set temporarily.
+    header "TCP Buffer Tuning (for 10G)"
+    local autorcv=$(sysctl -n net.inet.tcp.autorcvbufmax 2>/dev/null)
+    local autosnd=$(sysctl -n net.inet.tcp.autosndbufmax 2>/dev/null)
+    result "Current: send=${autosnd} recv=${autorcv} bytes"
+    if [[ "$autorcv" -lt 16777216 ]]; then
+        sudo sysctl -w net.inet.tcp.autorcvbufmax=16777216 >/dev/null 2>&1 \
+            && sudo sysctl -w net.inet.tcp.autosndbufmax=16777216 >/dev/null 2>&1 \
+            && result "Tuned: send=16MB recv=16MB (resets on reboot)" \
+            || warning "Could not tune TCP buffers (needs sudo). Results may be lower than possible."
+    else
+        result "Already tuned (>= 16MB)"
+    fi
+
+    # Generate single large test file (random = incompressible)
+    header "Generating ${GCS_FILE_SIZE_MB}MB random test file"
+    openssl rand -out "$TESTFILE" $((GCS_FILE_SIZE_MB * 1048576)) 2>/dev/null \
+        || dd if=/dev/urandom of="$TESTFILE" bs=1M count=$GCS_FILE_SIZE_MB 2>/dev/null
+    result "Done (${GCS_FILE_SIZE_MB}MB, incompressible)"
+
+    # Generate multi-file test set (simulates uploading video folder)
+    local MULTI_FILE_COUNT=20
+    local MULTI_FILE_SIZE_MB=$((GCS_FILE_SIZE_MB / MULTI_FILE_COUNT))
+    header "Generating multi-file test (${MULTI_FILE_COUNT} x ${MULTI_FILE_SIZE_MB}MB)"
+    mkdir -p "$TESTDIR"
+    for i in $(seq 1 $MULTI_FILE_COUNT); do
+        dd if=/dev/urandom of="$TESTDIR/video_$i.bin" bs=1M count=$MULTI_FILE_SIZE_MB 2>/dev/null
+    done
+    result "Done (${MULTI_FILE_COUNT} files, ${GCS_FILE_SIZE_MB}MB total)"
+
+    cleanup_gcs() {
+        rm -f "$TESTFILE" "$TESTFILE.down" 2>/dev/null
+        rm -rf "$TESTDIR" "$TESTDIR.down" 2>/dev/null
+        gcloud storage rm --recursive "$GCS_TEST_PATH/" 2>/dev/null || true
+    }
+    trap cleanup_gcs EXIT
+
+    # Test 1: Single file, gcloud auto-tuned parallelism
+    header "Test 1: Single File Upload — AUTO parallelism (${GCS_FILE_SIZE_MB}MB x $RUNS runs)"
+    result "(gcloud auto-tunes process/thread count)"
+    local ul_auto=()
+    for i in $(seq 1 $RUNS); do
+        local dest="$GCS_TEST_PATH/bench-auto-$i"
+        start=$(python3 -c "import time; print(time.time())")
+        gcloud storage cp \
+            --parallel-composite-upload-threshold=50M \
+            "$TESTFILE" "$dest" 2>/dev/null
+        end=$(python3 -c "import time; print(time.time())")
+        local speed=$(python3 -c "print(f'{$GCS_FILE_SIZE_MB / ($end - $start):.0f}')")
+        local mbps=$(python3 -c "print(f'{$GCS_FILE_SIZE_MB * 8 / ($end - $start):.0f}')")
+        ul_auto+=("$speed")
+        result "Run $i: ${speed} MB/s (${mbps} Mbit/s)"
+    done
+    python3 -c "
+r = [$(IFS=,; echo "${ul_auto[*]}")]
+print(f'\033[0;32m  -> Min={min(r):.0f}  Avg={sum(r)/len(r):.0f}  Max={max(r):.0f} MB/s\033[0m')
+"
+
+    # Test 2: Single file, aggressive parallelism (16 processes x 4 threads)
+    header "Test 2: Single File Upload — AGGRESSIVE (16p x 4t, ${GCS_FILE_SIZE_MB}MB x $RUNS runs)"
+    local ul_agg=()
+    for i in $(seq 1 $RUNS); do
+        local dest="$GCS_TEST_PATH/bench-agg-$i"
+        start=$(python3 -c "import time; print(time.time())")
+        gcloud storage cp \
+            --parallel-composite-upload-threshold=50M \
+            --process-count=16 \
+            --thread-count=4 \
+            "$TESTFILE" "$dest" 2>/dev/null
+        end=$(python3 -c "import time; print(time.time())")
+        local speed=$(python3 -c "print(f'{$GCS_FILE_SIZE_MB / ($end - $start):.0f}')")
+        local mbps=$(python3 -c "print(f'{$GCS_FILE_SIZE_MB * 8 / ($end - $start):.0f}')")
+        ul_agg+=("$speed")
+        result "Run $i: ${speed} MB/s (${mbps} Mbit/s)"
+    done
+    python3 -c "
+r = [$(IFS=,; echo "${ul_agg[*]}")]
+print(f'\033[0;32m  -> Min={min(r):.0f}  Avg={sum(r)/len(r):.0f}  Max={max(r):.0f} MB/s\033[0m')
+"
+
+    # Test 3: Multi-file upload (real workload: many files concurrently)
+    header "Test 3: Multi-File Upload — ${MULTI_FILE_COUNT} files (${GCS_FILE_SIZE_MB}MB total, $RUNS runs)"
+    result "(simulates uploading a folder of video files)"
+    local ul_multi=()
+    for i in $(seq 1 $RUNS); do
+        local dest="$GCS_TEST_PATH/bench-multi-$i/"
+        start=$(python3 -c "import time; print(time.time())")
+        gcloud storage cp --recursive \
+            --parallel-composite-upload-threshold=50M \
+            --process-count=16 \
+            --thread-count=4 \
+            "$TESTDIR/" "$dest" 2>/dev/null
+        end=$(python3 -c "import time; print(time.time())")
+        local speed=$(python3 -c "print(f'{$GCS_FILE_SIZE_MB / ($end - $start):.0f}')")
+        local mbps=$(python3 -c "print(f'{$GCS_FILE_SIZE_MB * 8 / ($end - $start):.0f}')")
+        ul_multi+=("$speed")
+        result "Run $i: ${speed} MB/s (${mbps} Mbit/s)"
+    done
+    python3 -c "
+r = [$(IFS=,; echo "${ul_multi[*]}")]
+print(f'\033[0;32m  -> Min={min(r):.0f}  Avg={sum(r)/len(r):.0f}  Max={max(r):.0f} MB/s\033[0m')
+"
+
+    # Test 4: Download (single large file)
+    header "Test 4: Single File Download (${GCS_FILE_SIZE_MB}MB x $RUNS runs)"
+    local dl_results=()
+    local src="$GCS_TEST_PATH/bench-auto-1"
+    for i in $(seq 1 $RUNS); do
+        rm -f "$TESTFILE.down" 2>/dev/null
+        start=$(python3 -c "import time; print(time.time())")
+        gcloud storage cp \
+            --process-count=16 \
+            --thread-count=4 \
+            "$src" "$TESTFILE.down" 2>/dev/null
+        end=$(python3 -c "import time; print(time.time())")
+        local speed=$(python3 -c "print(f'{$GCS_FILE_SIZE_MB / ($end - $start):.0f}')")
+        local mbps=$(python3 -c "print(f'{$GCS_FILE_SIZE_MB * 8 / ($end - $start):.0f}')")
+        dl_results+=("$speed")
+        result "Run $i: ${speed} MB/s (${mbps} Mbit/s)"
+        rm -f "$TESTFILE.down" 2>/dev/null
+    done
+
+    python3 -c "
+r = [$(IFS=,; echo "${dl_results[*]}")]
+print(f'\033[0;32m  -> Min={min(r):.0f}  Avg={sum(r)/len(r):.0f}  Max={max(r):.0f} MB/s\033[0m')
+"
+
+    # Summary
+    header "GCS Summary"
+    python3 -c "
+auto = [$(IFS=,; echo "${ul_auto[*]}")]
+agg = [$(IFS=,; echo "${ul_agg[*]}")]
+multi = [$(IFS=,; echo "${ul_multi[*]}")]
+dl = [$(IFS=,; echo "${dl_results[*]}")]
+print(f'\033[0;32m  Upload (auto):       {sum(auto)/len(auto):.0f} MB/s avg = {sum(auto)/len(auto)*8:.0f} Mbit/s\033[0m')
+print(f'\033[0;32m  Upload (aggressive): {sum(agg)/len(agg):.0f} MB/s avg = {sum(agg)/len(agg)*8:.0f} Mbit/s\033[0m')
+print(f'\033[0;32m  Upload (multi-file): {sum(multi)/len(multi):.0f} MB/s avg = {sum(multi)/len(multi)*8:.0f} Mbit/s\033[0m')
+print(f'\033[0;32m  Download:            {sum(dl)/len(dl):.0f} MB/s avg = {sum(dl)/len(dl)*8:.0f} Mbit/s\033[0m')
+print()
+best_ul = max(sum(auto)/len(auto), sum(agg)/len(agg), sum(multi)/len(multi))
+print(f'\033[0;32m  Best upload: {best_ul:.0f} MB/s ({best_ul*8:.0f} Mbit/s) = {best_ul*8/10000*100:.0f}% of 10G line\033[0m')
+print(f'\033[0;32m  Download:    {sum(dl)/len(dl):.0f} MB/s ({sum(dl)/len(dl)*8:.0f} Mbit/s) = {sum(dl)/len(dl)*8/10000*100:.0f}% of 10G line\033[0m')
+"
+
+    # Cleanup
+    header "Cleanup"
+    gcloud storage rm --recursive "$GCS_TEST_PATH/" 2>/dev/null
+    rm -f "$TESTFILE" "$TESTFILE.down" 2>/dev/null
+    rm -rf "$TESTDIR" "$TESTDIR.down" 2>/dev/null
+    trap - EXIT
+    result "Done"
+}
+
 # ─── Main ───
 
 print_header
@@ -230,8 +418,9 @@ echo ""
 case "$MODE" in
     internet) run_internet ;;
     nas)      run_nas ;;
-    all)      run_internet; run_nas ;;
-    *)        echo "Usage: $0 [all|internet|nas] [runs]"; exit 1 ;;
+    gcs)      run_gcs ;;
+    all)      run_internet; run_nas; run_gcs ;;
+    *)        echo "Usage: $0 [all|internet|nas|gcs] [runs]"; exit 1 ;;
 esac
 
 echo ""
