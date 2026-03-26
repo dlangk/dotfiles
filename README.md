@@ -98,7 +98,6 @@ cd ~/dotfiles
 | Logi Options+ | Logitech hardware |
 | KeepingYouAwake | Prevent sleep |
 | LM Studio | Local AI |
-| Ollama | Local AI |
 | qlmarkdown | Quick Look markdown preview |
 | Karabiner-Elements | Keyboard customization (§ → F18) |
 | Raycast | Launcher & productivity |

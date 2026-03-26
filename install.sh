@@ -62,7 +62,6 @@ brew install --cask \
     microsoft-teams \
     keepingyouawake \
     lm-studio \
-    ollama \
     superhuman \
     tella \
     vlc \
@@ -70,7 +69,9 @@ brew install --cask \
     adobe-creative-cloud \
     qlmarkdown \
     claude-code \
-    godot
+    godot \
+    wispr-flow \
+    openmtp
 
 # Install Python CLI tools
 echo "Installing Python CLI tools..."
