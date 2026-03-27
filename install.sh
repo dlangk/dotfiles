@@ -123,6 +123,25 @@ echo "Setting macOS preferences..."
 defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
+# macOS security hardening
+echo "Hardening macOS security..."
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on
+sudo launchctl bootout system /System/Library/LaunchDaemons/com.apple.smbd.plist 2>/dev/null || true
+sudo defaults write /Library/Preferences/com.apple.controlcenter.plist AirplayRecieverEnabled -bool false
+
+# Mullvad VPN configuration
+# Requires Mullvad to be installed and logged in first
+if command -v mullvad &> /dev/null; then
+    echo "Configuring Mullvad VPN..."
+    mullvad split-tunnel set on
+    mullvad split-tunnel app add /Applications/Ghostty.app
+    mullvad lan set allow
+    mullvad lockdown-mode set off
+else
+    echo "Mullvad not installed or not in PATH, skipping VPN configuration"
+fi
+
 # Create config directories
 mkdir -p ~/.config
 
