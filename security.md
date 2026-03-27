@@ -68,7 +68,7 @@ mullvad status
 ## Threat model
 
 ### Untrusted networks (hotel, train, cafe)
-- **Client isolation may be OFF** (confirmed on SJ train) — other devices visible at layer 2
+- **Client isolation may be OFF** — other devices may be visible at layer 2
 - **ARP spoofing** is theoretically possible — Mullvad's WireGuard tunnel eliminates this
 - **DNS hijacking** — Mullvad routes DNS through encrypted tunnel
 - **HTTPS traffic** — already encrypted, VPN adds defense-in-depth
@@ -77,23 +77,3 @@ mullvad status
 - Compromised HTTPS certificates (watch for browser warnings — never click through on untrusted networks)
 - Apps using plain HTTP internally
 - Traffic from apps in split tunneling (Ghostty/terminal)
-
-## Network observations
-
-### Scandic Haymarket (hotel) — 2026-03-27
-- Subnet: 10.93.0.0/19 (8k addresses)
-- Gateway: 10.93.0.1 — Apache + Java/Struts (`/tips/welcome.action`)
-- Vendor: **HPE Aruba Networks** (confirmed via copyright 2022 in page source)
-- Infrastructure: `guestwifi.scandichotels.com` — Scandic corporate-managed, not hotel-level
-- Client isolation: **ON** — no guest devices visible
-- TLS: GoDaddy cert, valid Apr 2025–Apr 2026
-- Risk: Aruba controller reachable from guest subnet; `/api/v1` returns 403; Apache version undisclosed
-
-### SJ X2000 train — 2026-03-27
-- Subnet: 10.101.0.0/21 (2k addresses)
-- Gateway: 10.101.0.1 — `CN=ombord.info, O=Icomera AB`
-- Vendor: **Icomera AB** (Gothenburg) — specialist train/bus WiFi, cellular bonding backhaul
-- DHCP lease: 20 min (high-turnover transit network)
-- Client isolation: **OFF** — 20 passenger devices visible in ARP table
-- Other devices: all using MAC randomization, all ports closed, no file sharing found
-- Infrastructure device: 10.101.4.1 (`00:00:5b:03:b3:09`) — non-randomized MAC, likely Icomera onboard unit
