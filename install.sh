@@ -138,6 +138,7 @@ if command -v mullvad &> /dev/null; then
     mullvad split-tunnel app add /Applications/Ghostty.app
     mullvad lan set allow
     mullvad lockdown-mode set off
+    mullvad dns set custom 1.1.1.1
 else
     echo "Mullvad not installed or not in PATH, skipping VPN configuration"
 fi

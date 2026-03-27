@@ -33,6 +33,7 @@ Use on all untrusted networks: hotels, trains, cafes. Leave off at home (full gi
 |---------|-------|-----|
 | Kill switch | On | Blocks traffic if VPN drops unexpectedly |
 | Lockdown mode | Off | Too aggressive — blocks internet when Mullvad is intentionally off |
+| DNS | Custom: 1.1.1.1 | Mullvad's default DNS breaks split-tunneled apps (Claude Code, gh CLI). 1.1.1.1 resolves correctly for all processes. |
 | Local network sharing | On | Required to reach NAS, printers, local dev servers |
 | DNS content blocking | Ads + trackers + malware | Free privacy/security improvement |
 | DAITA | Off | For high-threat users. Adds bandwidth overhead. |
@@ -61,6 +62,7 @@ mullvad split-tunnel set on
 mullvad split-tunnel app add /Applications/Ghostty.app
 mullvad lan set allow
 mullvad lockdown-mode set off
+mullvad dns set custom 1.1.1.1
 mullvad connect
 mullvad status
 ```
