@@ -1,11 +1,17 @@
+# Host IPs live in ~/.ssh/config.local (not in this repo)
+# Format:
+#   Host dl-content-host
+#       HostName <ip>
+#   Host dl-coder
+#       HostName <ip>
+Include ~/.ssh/config.local
+
 Host dl-content-host
-    HostName REDACTED
     User daniel.langkilde
     IdentityFile ~/.ssh/id_ed25519
     IdentitiesOnly yes
 
 Host dl-coder
-    HostName REDACTED
     User daniel
     IdentityFile ~/.ssh/id_ed25519
     IdentitiesOnly yes

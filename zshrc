@@ -149,7 +149,9 @@ alias lt="eza --icons --git --tree"
 
 alias ..="cd .."
 alias ...="cd ../.."
-alias mosh-coder="mosh daniel@REDACTED -- tmux attach -t main"
+# mosh-coder alias with IP lives in ~/.zshrc.local (not in this repo)
+# alias mosh-coder="mosh daniel@<dl-coder-ip> -- tmux attach -t main"
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 ## zoxide ------------------------------------------------------
 # Smart cd that learns your habits

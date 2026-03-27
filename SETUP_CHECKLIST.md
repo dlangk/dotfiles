@@ -44,6 +44,20 @@ These must be installed from the App Store (not Homebrew):
 - [ ] **Anthropic API Key** - Add to `~/.anthropic_api_key` (if skipped during install)
 - [ ] **Hugging Face Token** - Add to `~/.huggingface_token` (if skipped during install)
 
+## Local Overrides (not in repo)
+
+- [ ] **Server IPs** - Create `~/.ssh/config.local`:
+  ```
+  Host dl-content-host
+      HostName <ip>
+  Host dl-coder
+      HostName <ip>
+  ```
+- [ ] **mosh alias** - Create `~/.zshrc.local`:
+  ```bash
+  alias mosh-coder="mosh daniel@<dl-coder-ip> -- tmux attach -t main"
+  ```
+
 ## Hardware Setup
 
 - [ ] **Logitech Options+** - Pair mouse, camera, light

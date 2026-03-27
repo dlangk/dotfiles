@@ -11,7 +11,6 @@
 | **OS** | Debian 12 (bookworm) |
 | **Memory** | 1 GB |
 | **Disk** | 30 GB (56% used) |
-| **Public IP** | REDACTED |
 | **SSH** | `ssh dl-content-host` |
 | **User** | daniel.langkilde (sudo NOPASSWD) |
 | **Uptime** | 677 days (as of 2026-03-08) |
@@ -61,8 +60,6 @@ Hosts langkilde.se — personal website and side projects.
 | **OS** | Ubuntu 24.04.4 LTS (Noble) |
 | **Memory** | 30 GB |
 | **Disk** | 226 GB root (3% used) + 100 GB mounted at /mnt/data |
-| **Public IP** | REDACTED |
-| **IPv6** | REDACTED |
 | **SSH** | `ssh dl-coder` |
 | **User** | daniel (zsh + oh-my-zsh) |
 
