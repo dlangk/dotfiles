@@ -1,5 +1,76 @@
 # Daltorpsgatan Network
 
+## Upcoming Upgrade (arriving 2026-03-29, not yet active)
+
+### New Hardware
+- **Router:** ZyXEL EE5301-00 (replaces ZyXEL EX3600-T0 + Bahnhof media converter)
+- **Mac adapter:** Kalea USB-C 10G (TB3) — replaces Belkin INC006 TB4 dock ethernet
+- **ISP plan:** Bahnhof 10G/10G (replaces 1G/1G)
+
+### New Topology
+```
+Bahnhof fiber → SFP+ (WAN, Bahnhof-supplied module + cable)
+                ZyXEL EE5301-00
+                ├── 10GbE LAN → CAT6 → Kalea 10G USB-C adapter → MBP 14" right TB4 port (direct, not via dock)
+                ├── 1GbE LAN  → Orbi AX6000 (RBK852) — WiFi mesh
+                └── 1GbE LAN  → Synology DS223 (NAS)
+```
+
+### Desk Wiring
+```
+MacBook Pro 14" M1 Max
+├── [LEFT]  TB4 #1 ── Belkin INC006 Dock [⚡🖥 upstream → Mac] (96W charging)
+│                     ├── [⚡ downstream] ───── Apple Studio Display (27")
+│                     │                         └── USB-C ── Litra Beam (power)
+│                     ├── USB-A 3.1 ─────────── EVO Mic Amp → XLR → CL-1 Cloudlifter → XLR → Shure SM7B
+│                     ├── USB-A 3.1 ─────────── Logitech BRIO 4K Webcam
+│                     └── USB-A 2.0 ─────────── MX 3S receiver
+│
+└── [RIGHT] TB4 ───── Kalea 10G USB-C adapter → CAT6 → ZyXEL EE5301-00
+
+Bluetooth: Apple Wireless Keyboard, MX 3S (pick one)
+Free: USB-A 2.0 × 1, USB-C 3.1 × 1
+```
+
+### Verifying connections
+
+Check Thunderbolt topology (dock + display):
+```bash
+system_profiler SPThunderboltDataType
+```
+Expected: MacBook Pro → Belkin dock → Studio Display, all at 40 Gb/s.
+
+Check USB devices (all peripherals):
+```bash
+ioreg -p IOUSB -l -w 0 | grep "USB Product Name"
+```
+Expected devices:
+- `Logitech BRIO` — webcam (via dock)
+- `USB Receiver` (Logitech) — MX 3S (via dock)
+- `USB Audio` (Generic) — EVO mic amp (via dock)
+- `Litra Beam` (Logitech) — via Studio Display
+- `USB 10_100_1000 LAN` (Realtek) — dock's built-in ethernet (unused, Kalea preferred)
+- `USB Storage` (Generic) — dock's internal SD card reader, always present
+
+Check 10G network interface (once Kalea is connected):
+```bash
+ifconfig | grep -A 4 en
+```
+Look for an interface with `media: 10GbaseT` or similar.
+
+Why Kalea goes direct to Mac (not through dock): the dock's USB-C ports are USB 3.2 Gen 2
+(10 Gbps theoretical), which can't reliably saturate a 10GbE link after protocol overhead.
+Direct TB4 port has 40 Gbps headroom — no bottleneck.
+
+### Notes
+- EE5301-00 has WiFi 7 built-in — Orbi may become redundant, evaluate after install
+- ISP-locked firmware (Bahnhof controls updates via TR-069/USP)
+- Known issue: auto WiFi channel selection causes dropouts — set 2.4GHz to manual channel (1, 6, or 11)
+- NAS still 1GbE — NAS transfer speeds unchanged
+- Run network-benchmark.sh after install to establish 10G baseline (bump payload to 1GB+)
+
+---
+
 ## ISP
 - **Provider:** Bahnhof
 - **Plan:** 1000/1000 Mbps symmetric fiber
