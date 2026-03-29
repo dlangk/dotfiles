@@ -10,10 +10,9 @@
 | **Machine type** | e2-micro (1 core / 2 threads, Intel Xeon @ 2.20GHz) |
 | **OS** | Debian 12 (bookworm) |
 | **Memory** | 1 GB |
-| **Disk** | 30 GB (56% used) |
+| **Disk** | 30 GB (38% used) |
 | **SSH** | `ssh dl-content-host` |
 | **User** | daniel.langkilde (sudo NOPASSWD) |
-| **Uptime** | 677 days (as of 2026-03-08) |
 
 ### Purpose
 Hosts langkilde.se — personal website and side projects.
@@ -25,7 +24,6 @@ Hosts langkilde.se — personal website and side projects.
   - `yatzy-frontend` — web app
   - `yatzy-backend` — API server
 - **Crontab**: `git pull` every minute in `~/langkilde/`
-- **Exim4** — mail relay on localhost
 
 ### Installed tools
 - Python 3.11.2, Node v18.20.4
@@ -46,7 +44,8 @@ Hosts langkilde.se — personal website and side projects.
 
 ### Notes
 - Tailscale not installed
-- Firewall is open (iptables ACCEPT all, Docker manages its own rules)
+- UFW active: SSH (22), HTTP (80), HTTPS (443)
+- Fail2ban active on sshd
 - Three user accounts exist: daniel_langkilde, langkilde, daniel.langkilde
 
 ---
@@ -59,7 +58,7 @@ Hosts langkilde.se — personal website and side projects.
 | **Machine** | 4 cores / 8 threads (AMD EPYC Milan) |
 | **OS** | Ubuntu 24.04.4 LTS (Noble) |
 | **Memory** | 30 GB |
-| **Disk** | 226 GB root (3% used) + 100 GB mounted at /mnt/data |
+| **Disk** | 226 GB root (6% used) + 100 GB mounted at /mnt/data |
 | **SSH** | `ssh dl-coder` |
 | **User** | daniel (zsh + oh-my-zsh) |
 
@@ -78,7 +77,7 @@ Development / coding server — powerful machine for remote work.
 
 ### Disk layout
 ```
-/dev/sda1  226G  root (3% used)
+/dev/sda1  226G  root (6% used)
 /dev/sdb   100G  /mnt/data
 ```
 
@@ -95,7 +94,8 @@ Development / coding server — powerful machine for remote work.
 ```
 
 ### Notes
-- Cloudflare WARP installed — **must be in proxy mode** (`warp-cli --accept-tos set-mode proxy`), tunnel mode breaks inbound SSH/mosh by hijacking reply routing
+- UFW active: SSH (22), mosh (60000:61000/udp)
+- Fail2ban active on sshd
 - No swap
 - No Docker installed
 - tmux `main` session auto-starts on boot (systemd user service)

@@ -12,8 +12,12 @@ When asked to guide through setup:
 ## Repository Structure
 ```
 ~/dotfiles/
-├── install.sh         # Automated setup script
+├── install.sh         # Mac automated setup script
 ├── SETUP_CHECKLIST.md # Manual steps after install
+├── SERVERS.md         # Remote server documentation
+├── servers/           # Server install scripts (disaster recovery)
+│   ├── dl-coder/install.sh
+│   └── dl-content-host/install.sh
 ├── zshrc              → ~/.zshrc
 ├── gitconfig          → ~/.gitconfig
 ├── starship.toml      → ~/.config/starship.toml
@@ -58,7 +62,7 @@ All files are symlinked to their target locations. Edit files here, not at the t
 - **Add nvim plugin:** Create new file in nvim/lua/plugins/ returning plugin spec
 - **Add new config file:** Create here, add symlink to install.sh
 - **Install new tool:** Add to install.sh, update README.md if needed
-- **Update tools:** Run `./update.sh --check` to see available updates (always use `--check` first)
+- **Update tools:** Use `/maintain mac update` (or `all`, `cloud`, etc.)
 
 ## Verification
 
