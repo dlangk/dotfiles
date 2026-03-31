@@ -15,6 +15,8 @@ When asked to guide through setup:
 ├── install.sh         # Mac automated setup script
 ├── SETUP_CHECKLIST.md # Manual steps after install
 ├── SERVERS.md         # Remote server documentation
+├── M1_MAC.md          # MacBook quirks, security, VPN config
+├── NETWORK_HOME.md    # Home network topology, benchmarks, ISP
 ├── servers/           # Server install scripts (disaster recovery)
 │   ├── dl-coder/install.sh
 │   └── dl-content-host/install.sh

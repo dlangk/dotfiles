@@ -139,6 +139,8 @@ cd ~/dotfiles
 ├── claude/             → ~/.claude/
 ├── ssh_config          → ~/.ssh/config
 ├── SERVERS.md          # Remote server documentation
+├── M1_MAC.md           # MacBook quirks, security, VPN config
+├── NETWORK_HOME.md     # Home network topology, benchmarks, ISP
 └── servers/
     ├── dl-content-host/
     │   ├── setup.sh                  # Idempotent server setup

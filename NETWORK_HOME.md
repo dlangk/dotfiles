@@ -1,11 +1,25 @@
 # Daltorpsgatan Network
 
-## Upcoming Upgrade (arriving 2026-03-29, not yet active)
+## Wish List
+
+### ASUS ZenWiFi BQ16 Pro — Orbi replacement candidate
+- **WiFi:** WiFi 7, quad-band (2.4GHz + 5GHz + 6GHz×2), 16-stream, 320MHz, 4K-QAM, MLO
+- **Ports per node:** 2× 10GbE (WAN/LAN), 1× 1GbE WAN/LAN, 2× 1GbE LAN, 1× USB 3.0
+- **Coverage:** 4000 sqft (1-pack), 8000 sqft (2-pack)
+- **Price:** ~$700 (1-pack) / ~$1300 (2-pack) USD — check inet.se for SEK pricing
+- **Why:** Would replace Orbi RBR850 mesh + provide native 10G backhaul between nodes
+- **Consideration:** ZyXEL EE5301-00 (delayed in mail) has WiFi 7 built-in — evaluate
+  whether Orbi is still needed before buying
+- **Source:** [ASUS ZenWiFi BQ16 Pro](https://www.asus.com/networking-iot-servers/whole-home-mesh-wifi-system/zenwifi-wifi-systems/asus-zenwifi-bq16-pro/)
+
+---
+
+## Upcoming Upgrade (EE5301 delayed in mail)
 
 ### New Hardware
-- **Router:** ZyXEL EE5301-00 (replaces ZyXEL EX3600-T0 + Bahnhof media converter)
-- **Mac adapter:** Kalea USB-C 10G (TB3) — replaces Belkin INC006 TB4 dock ethernet
-- **ISP plan:** Bahnhof 10G/10G (replaces 1G/1G)
+- **Router:** ZyXEL EE5301-00 — delayed in mail (replaces ZyXEL EX3600-T0 + Bahnhof media converter)
+- **Mac adapter:** Kalea USB-C 10G (TB3) — **active** (en11, direct to Mac TB4, negotiating 1G against old router)
+- **ISP plan:** Bahnhof 10G/10G — **active** (ISP side switched, bottlenecked by old router until EE5301 arrives)
 
 ### New Topology
 ```
@@ -73,7 +87,7 @@ Direct TB4 port has 40 Gbps headroom — no bottleneck.
 
 ## ISP
 - **Provider:** Bahnhof
-- **Plan:** 1000/1000 Mbps symmetric fiber
+- **Plan:** 10G/10G symmetric fiber (upgraded from 1G/1G, 2026-03-29)
 
 ## Network Topology
 
@@ -177,17 +191,19 @@ where the real speed was 850-920 Mbps. Never trust speedtest-cli for upload.
 - Tested alternatives: Cloudflare (8ms), Quad9 (7ms), Google (12ms), OpenDNS (27ms)
 - Bahnhof DNS is 0ms (local to their network) — best option, don't change
 
-## Speed Test Results (2026-03-25/26)
+## Speed Test Results
 
 ### Summary Table
 
-| Config | Download | Upload | Ping | Method |
-|--------|----------|--------|------|--------|
-| WiFi (Orbi) → ZyXEL | 607 avg | 588 avg | 16 ms | curl (accurate) |
-| INC019 via ZyXEL | 823 avg | 541 avg | 9.4 ms | speedtest-cli (unreliable) |
-| INC019 direct to converter | 915 avg | 699 avg | 2.6 ms | speedtest-cli (unreliable) |
-| TB4 dock via ZyXEL | 921 avg | 857 avg | 8.2 ms | curl (accurate) |
-| TB4 dock direct to converter | 921 avg | 857 avg | 8.2 ms | curl (accurate) |
+| Config | Download | Upload | Ping | Method | Date |
+|--------|----------|--------|------|--------|------|
+| WiFi (Orbi) → ZyXEL | 607 avg | 588 avg | 16 ms | curl | 2026-03-25 |
+| INC019 via ZyXEL | 823 avg | 541 avg | 9.4 ms | speedtest-cli (unreliable) | 2026-03-25 |
+| INC019 direct to converter | 915 avg | 699 avg | 2.6 ms | speedtest-cli (unreliable) | 2026-03-25 |
+| TB4 dock via ZyXEL | 921 avg | 857 avg | 8.2 ms | curl | 2026-03-26 |
+| TB4 dock direct to converter | 921 avg | 857 avg | 8.2 ms | curl | 2026-03-26 |
+| USB 2.5G adapter via ZyXEL | 845 avg | 912 avg | 8.6 ms | curl | 2026-03-29 |
+| **Kalea 10G (direct TB4) via ZyXEL** | **904 avg** | **916 avg** | **8.2 ms** | **curl** | **2026-03-30** |
 
 ### WiFi (Orbi AX6000) → ZyXEL (curl, 5 runs + warmup)
 
@@ -274,9 +290,8 @@ due to Apple's NFS client implementation. AFP is deprecated. Stick with SMB v3.
 
 | Component | Max Speed | Notes |
 |-----------|-----------|-------|
-| Bahnhof fiber | 1000 Mbps | Plan limit |
-| Media converter | 1 Gbps out | Would need upgrade for faster plans |
-| ZyXEL EX3600-T0 | ~700-900 NAT | Adds 6ms latency, hurts upload |
+| Bahnhof fiber | 10 Gbps | Upgraded 2026-03-29 |
+| Media converter + EX3600-T0 | 1 Gbps | **Current bottleneck** — both replaced by EE5301 (delayed in mail, ships together) |
 | Orbi AX6000 | 2.5G WAN, 1G LAN | LAN ports cap at gigabit |
 | Belkin INC019 | 1 Gbps (shared PD) | Performs at line speed |
 | Belkin INC006 dock | 1 Gbps (USB NIC) | 914 Mbps upload confirmed |

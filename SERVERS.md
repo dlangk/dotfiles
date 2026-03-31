@@ -7,9 +7,9 @@
 | **Provider** | Google Cloud |
 | **Project** | daniel-langkilde-se |
 | **Zone** | europe-north1-a |
-| **Machine type** | e2-micro (1 core / 2 threads, Intel Xeon @ 2.20GHz) |
+| **Machine type** | e2-small (2 vCPU, 1/4 shared core) |
 | **OS** | Debian 12 (bookworm) |
-| **Memory** | 1 GB |
+| **Memory** | 2 GB |
 | **Disk** | 30 GB (38% used) |
 | **SSH** | `ssh dl-content-host` |
 | **User** | daniel.langkilde (sudo NOPASSWD) |

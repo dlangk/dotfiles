@@ -1,6 +1,45 @@
-# Security Configuration
+# MacBook Pro 14" M1 Max
 
-## Philosophy
+Machine-specific quirks, security config, and notes for Daniel's primary machine.
+
+- **Model:** MacBook Pro 14" (2021), M1 Max, 64GB RAM, 2TB SSD
+- **macOS:** Sequoia
+- **Terminal:** Ghostty
+- **Shell:** zsh
+
+---
+
+## Known Quirks
+
+### Little Snitch
+- Blocks traffic on **new/unknown networks** by default
+- iPhone Wi-Fi hotspot triggers this — must approve the network on first connect
+- Once approved, the hotspot network is remembered
+- CLI: `/Applications/Little Snitch.app/Contents/Components/littlesnitch` (profiles and prefs only, no rule management)
+
+### DNS
+- macOS DNS is **per-interface**, no global setting
+- All interfaces set to Cloudflare primary (`1.1.1.1`) + Bahnhof fallback (`213.80.101.3`)
+- Reason: Bahnhof DNS has DNSSEC validation issues with `.ai` TLD (SERVFAIL on claude.ai, 2026-03-31)
+- When EE5301 router arrives, set DNS there instead and revert interfaces to DHCP
+
+### Battery
+- **841 cycles, 77% max capacity, Service Recommended** (as of 2026-03-29)
+- Schedule battery replacement
+
+### Network Interfaces
+| Interface | Device | Notes |
+|-----------|--------|-------|
+| en0 | Wi-Fi | Also used for iPhone hotspot |
+| en11 | Kalea 10G USB-C (TB4) | Direct to right TB4 port, currently negotiates 1G |
+| en10 | Belkin INC006 dock ethernet | USB GbE NIC inside dock, unused for internet |
+| en22 | USB 2.5G adapter | Previous adapter, replaced by Kalea |
+
+---
+
+## Security
+
+### Philosophy
 
 Set once, works everywhere. No toggling between home and untrusted networks.
 All settings are permanent — they don't interfere with normal usage at home.

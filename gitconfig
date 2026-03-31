@@ -16,7 +16,7 @@
 
 [core]
     editor = nvim
-    excludesfile = ~/.gitignore_global
+	excludesfile = /Users/langkilde/.gitignore_global
 
 [pull]
     rebase = true

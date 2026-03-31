@@ -46,7 +46,6 @@ brew install --cask \
     google-chrome \
     spotify \
     1password \
-    xnapper \
     logi-options-plus \
     grammarly-desktop \
     postman \
@@ -54,6 +53,8 @@ brew install --cask \
     zoom \
     signal \
     mullvad-vpn \
+    little-snitch \
+    nordvpn \
     google-drive \
     google-cloud-sdk \
     docker \
@@ -65,7 +66,10 @@ brew install --cask \
     superhuman \
     tella \
     vlc \
-    webex \
+    audacity \
+    reaper \
+    wireshark-app \
+    typefully \
     adobe-creative-cloud \
     qlmarkdown \
     claude-code \
@@ -73,9 +77,23 @@ brew install --cask \
     wispr-flow \
     openmtp
 
+# Install manually (not available on Homebrew):
+# - Amazon Kindle        — https://www.amazon.com/kindle-dbs/fd/kcp
+# - Things 3             — Mac App Store
+# - Headspace            — Mac App Store
+# - X (Twitter)          — Mac App Store
+# - Stockfish            — Mac App Store
+# - ON1 Photo RAW        — https://www.on1.com
+# - EVO (audio interface) — https://evo.audio
+# - FUJIFILM X Acquire   — https://fujifilm-x.com
+# - FUJIFILM X RAW STUDIO — https://fujifilm-x.com
+# - FUJIFILM X Webcam 2  — https://fujifilm-x.com
+# - REAPER license       — https://www.reaper.fm (app via brew, license manual)
+
 # Install Python CLI tools
 echo "Installing Python CLI tools..."
 uv tool install ruff
+uv tool install huggingface_hub
 
 # Install Rust
 if command -v rustc &> /dev/null; then
