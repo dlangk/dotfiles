@@ -1,0 +1,4 @@
+# MAC OUI → friendly name (network devices)
+# Format: <mac-prefix> <friendly name>
+48:ed:e6 ZyXEL EX3600-T0
+88:c9:b3 Kalea 10G USB-C

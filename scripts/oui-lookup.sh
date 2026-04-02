@@ -9,7 +9,8 @@
 
 DOTFILES="${DOTFILES:-$HOME/dotfiles}"
 OUI_FILE="$HOME/.local/share/oui.txt"
-MAC_VENDORS_FILE="$DOTFILES/mac-vendors.txt"
+MAC_VENDORS_FILE="$DOTFILES/device-names.txt"
+USB_DEVICES_FILE="$DOTFILES/usb-devices.txt"
 
 # Ensure mac-vendors.txt exists
 [[ -f "$MAC_VENDORS_FILE" ]] || touch "$MAC_VENDORS_FILE"

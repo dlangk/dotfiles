@@ -68,20 +68,9 @@ detect_payload_size() {
 print_header() {
     local conn=$(detect_connection)
     local iface=$(echo "$conn" | cut -d'|' -f1)
-    local hwport=$(echo "$conn" | cut -d'|' -f2)
     local media=$(echo "$conn" | cut -d'|' -f3)
-
-    echo "╔══════════════════════════════════════════╗"
-    echo "║       Network Benchmark Suite            ║"
-    echo "╚══════════════════════════════════════════╝"
-    echo ""
-    echo "Date:      $(date)"
-    echo "Mode:      $MODE"
-    echo "Runs:      $RUNS"
-    echo "Interface: $iface ($hwport)"
-    echo "Media:     $media"
     local payload_bytes=$(detect_payload_size)
-    echo "Payload:   $((payload_bytes / 1000000))MB (auto-detected)"
+    echo "Network Benchmark | $iface ($media) | $((payload_bytes / 1000000))MB payload | $RUNS runs"
 }
 
 # ─── Internet Benchmark ───
@@ -103,69 +92,55 @@ run_internet() {
         WARMUP_MB=50
     fi
 
-    header "Internet Benchmark"
-    echo "  Server: $SPEEDTEST_SERVER"
-    echo "  Download: $((DOWNLOAD_SIZE/1000000))MB × $RUNS runs"
-    echo "  Upload: $((UPLOAD_SIZE/1000000))MB × $RUNS runs"
+    local DL_MB=$((DOWNLOAD_SIZE / 1000000))
+    local UL_MB=$((UPLOAD_SIZE / 1000000))
+
+    echo "Benchmarking: ${DL_MB}MB payload, $RUNS runs, server $SPEEDTEST_SERVER"
 
     # Latency
-    header "Latency ($PING_COUNT pings → $PING_TARGET)"
+    echo -n "Latency: "
     ping_result=$(ping -c $PING_COUNT -q $PING_TARGET 2>&1 | tail -1)
-    result "$ping_result"
+    echo "$ping_result"
 
     # Warmup (discard — avoids TCP slow start skewing first run)
-    header "Warmup"
+    echo -n "Warmup (${WARMUP_MB}MB)... "
     curl -o /dev/null -s "http://$SPEEDTEST_SERVER/download?size=$((WARMUP_MB * 1000000))" 2>/dev/null
     dd if=/dev/zero bs=1M count=$WARMUP_MB 2>/dev/null | \
         curl -X POST -H "Content-Type: application/octet-stream" \
         --data-binary @- -o /dev/null "http://$SPEEDTEST_SERVER/upload" 2>/dev/null
-    result "Done (${WARMUP_MB}MB down + ${WARMUP_MB}MB up)"
+    echo "done"
 
-    # Download via curl
-    local DL_MB=$((DOWNLOAD_SIZE / 1000000))
-    header "Download (${DL_MB}MB × $RUNS runs)"
+    # Download
     local dl_results=()
     for i in $(seq 1 $RUNS); do
+        echo -n "Download $i/$RUNS... "
         local bytes_sec=$(curl -o /dev/null -w "%{speed_download}" \
             "http://$SPEEDTEST_SERVER/download?size=$DOWNLOAD_SIZE" 2>/dev/null)
         local mbps=$(python3 -c "print(f'{$bytes_sec * 8 / 1_000_000:.0f}')")
         dl_results+=("$mbps")
-        result "Run $i: ${mbps} Mbit/s"
+        echo "${mbps} Mbit/s"
     done
 
-    # Download summary
-    python3 -c "
-r = [$(IFS=,; echo "${dl_results[*]}")]
-print(f'\033[0;32m  → Min={min(r):.0f}  Avg={sum(r)/len(r):.0f}  Max={max(r):.0f} Mbit/s\033[0m')
-"
-
-    # Upload via curl (generate payload with dd, pipe to curl)
-    local UL_MB=$((UPLOAD_SIZE / 1000000))
-    header "Upload (${UL_MB}MB × $RUNS runs)"
+    # Upload
     local ul_results=()
     for i in $(seq 1 $RUNS); do
+        echo -n "Upload $i/$RUNS... "
         local bytes_sec=$(dd if=/dev/zero bs=1M count=$UL_MB 2>/dev/null | \
             curl -X POST -H "Content-Type: application/octet-stream" \
             --data-binary @- -w "%{speed_upload}" \
             -o /dev/null "http://$SPEEDTEST_SERVER/upload" 2>/dev/null)
         local mbps=$(python3 -c "print(f'{$bytes_sec * 8 / 1_000_000:.0f}')")
         ul_results+=("$mbps")
-        result "Run $i: ${mbps} Mbit/s"
+        echo "${mbps} Mbit/s"
     done
 
-    # Upload summary
-    python3 -c "
-r = [$(IFS=,; echo "${ul_results[*]}")]
-print(f'\033[0;32m  → Min={min(r):.0f}  Avg={sum(r)/len(r):.0f}  Max={max(r):.0f} Mbit/s\033[0m')
-"
-
-    # Overall summary
-    header "Internet Summary"
+    # Machine-readable summary (last line, for skill to parse)
     python3 -c "
 dl = [$(IFS=,; echo "${dl_results[*]}")]
 ul = [$(IFS=,; echo "${ul_results[*]}")]
-print(f'\033[0;32m  Download: {sum(dl)/len(dl):.0f} Mbit/s avg ({min(dl):.0f}-{max(dl):.0f})\033[0m')
-print(f'\033[0;32m  Upload:   {sum(ul)/len(ul):.0f} Mbit/s avg ({min(ul):.0f}-{max(ul):.0f})\033[0m')
+ping = '${ping_result}'
+import re; m = re.search(r'[\d.]+/([\d.]+)/', ping); latency = m.group(1) if m else '?'
+print(f'RESULT|{sum(dl)/len(dl):.0f}|{min(dl):.0f}|{max(dl):.0f}|{sum(ul)/len(ul):.0f}|{min(ul):.0f}|{max(ul):.0f}|{latency}|${DL_MB}|${RUNS}')
 "
 }
 
@@ -459,7 +434,4 @@ case "$MODE" in
     *)        echo "Usage: $0 [all|internet|nas|gcs] [runs]"; exit 1 ;;
 esac
 
-echo ""
-echo "╔══════════════════════════════════════════╗"
-echo "║       Benchmark complete                 ║"
-echo "╚══════════════════════════════════════════╝"
+echo "Benchmark complete."
