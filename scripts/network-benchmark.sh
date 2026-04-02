@@ -14,8 +14,8 @@ TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
 
 # Internet test config
 SPEEDTEST_SERVER="gbg-shg-speedtest1.bahnhof.net:8080"
-DOWNLOAD_SIZE=100000000   # 100MB
-UPLOAD_SIZE=100000000     # 100MB
+DOWNLOAD_SIZE="${DOWNLOAD_SIZE:-auto}"
+UPLOAD_SIZE="${UPLOAD_SIZE:-auto}"
 PING_TARGET="8.8.8.8"
 PING_COUNT=20
 
@@ -47,6 +47,24 @@ detect_connection() {
     echo "$iface|$hwport|$media"
 }
 
+# Auto-detect payload size from link speed
+detect_payload_size() {
+    local media=$(ifconfig "$(route get $PING_TARGET 2>/dev/null | grep interface | awk '{print $2}')" 2>/dev/null | grep media | head -1)
+    if echo "$media" | grep -q "10GbaseT\|10Gbase"; then
+        echo "2000000000"  # 2GB for 10G
+    elif echo "$media" | grep -q "5000baseT"; then
+        echo "1000000000"  # 1GB for 5G
+    elif echo "$media" | grep -q "2500baseT"; then
+        echo "500000000"   # 500MB for 2.5G
+    elif echo "$media" | grep -q "1000baseT"; then
+        echo "100000000"   # 100MB for 1G
+    elif echo "$media" | grep -q "100baseT"; then
+        echo "10000000"    # 10MB for 100M
+    else
+        echo "100000000"   # 100MB fallback
+    fi
+}
+
 print_header() {
     local conn=$(detect_connection)
     local iface=$(echo "$conn" | cut -d'|' -f1)
@@ -62,11 +80,29 @@ print_header() {
     echo "Runs:      $RUNS"
     echo "Interface: $iface ($hwport)"
     echo "Media:     $media"
+    local payload_bytes=$(detect_payload_size)
+    echo "Payload:   $((payload_bytes / 1000000))MB (auto-detected)"
 }
 
 # ─── Internet Benchmark ───
 
 run_internet() {
+    # Resolve auto payload sizes
+    if [[ "$DOWNLOAD_SIZE" == "auto" ]]; then
+        DOWNLOAD_SIZE=$(detect_payload_size)
+    fi
+    if [[ "$UPLOAD_SIZE" == "auto" ]]; then
+        UPLOAD_SIZE=$(detect_payload_size)
+    fi
+
+    # Scale warmup to link speed
+    local WARMUP_MB=10
+    if [[ "$DOWNLOAD_SIZE" -ge 2000000000 ]]; then
+        WARMUP_MB=100
+    elif [[ "$DOWNLOAD_SIZE" -ge 500000000 ]]; then
+        WARMUP_MB=50
+    fi
+
     header "Internet Benchmark"
     echo "  Server: $SPEEDTEST_SERVER"
     echo "  Download: $((DOWNLOAD_SIZE/1000000))MB × $RUNS runs"
@@ -79,11 +115,11 @@ run_internet() {
 
     # Warmup (discard — avoids TCP slow start skewing first run)
     header "Warmup"
-    curl -o /dev/null -s "http://$SPEEDTEST_SERVER/download?size=10000000" 2>/dev/null
-    dd if=/dev/zero bs=1M count=10 2>/dev/null | \
+    curl -o /dev/null -s "http://$SPEEDTEST_SERVER/download?size=$((WARMUP_MB * 1000000))" 2>/dev/null
+    dd if=/dev/zero bs=1M count=$WARMUP_MB 2>/dev/null | \
         curl -X POST -H "Content-Type: application/octet-stream" \
         --data-binary @- -o /dev/null "http://$SPEEDTEST_SERVER/upload" 2>/dev/null
-    result "Done (10MB down + 10MB up)"
+    result "Done (${WARMUP_MB}MB down + ${WARMUP_MB}MB up)"
 
     # Download via curl
     local DL_MB=$((DOWNLOAD_SIZE / 1000000))
