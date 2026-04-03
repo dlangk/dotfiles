@@ -70,6 +70,10 @@ alias cc="claude --dangerously-skip-permissions"
 alias cl="claude"
 alias ask="ask-anthropic"
 
+## Aider (offline coding agent) --------------------------------
+# Connects to LM Studio's local API (must have model loaded)
+alias aid='OPENAI_API_BASE=http://localhost:1234/v1 OPENAI_API_KEY=dummy aider --model openai/qwen3.5-27b --edit-format diff --no-show-model-warnings --map-tokens 2048'
+
 ## Git ---------------------------------------------------------
 # Short aliases for common git operations
 # These match common conventions across the community
@@ -136,9 +140,6 @@ chpwd_functions+=(auto_activate_venv)
 # GNU ls with LS_COLORS - directories bold blue, symlinks bold cyan
 export LS_COLORS='di=1;34:ln=1;36:*.py=35:*.rs=36:*.md=33:*.go=32:*.json=33:*.yml=33:*.yaml=33'
 alias ls="ls --color=auto"
-alias ll="ls -lah"
-alias la="ls -A"
-
 # eza - modern ls replacement with git integration and tree view
 # l:  ls replacement with colors and git status
 # ll: long format with all files

@@ -114,13 +114,17 @@ check_symlink() {
     fi
 }
 
-check_symlink "$DOTFILES/zshrc" "$HOME/.zshrc"
-check_symlink "$DOTFILES/gitconfig" "$HOME/.gitconfig"
-check_symlink "$DOTFILES/starship.toml" "$HOME/.config/starship.toml"
-check_symlink "$DOTFILES/ghostty" "$HOME/.config/ghostty"
-check_symlink "$DOTFILES/nvim" "$HOME/.config/nvim"
-check_symlink "$DOTFILES/claude" "$HOME/.claude"
-check_symlink "$DOTFILES/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+check_symlink "$DOTFILES/configs/zshrc" "$HOME/.zshrc"
+check_symlink "$DOTFILES/configs/gitconfig" "$HOME/.gitconfig"
+check_symlink "$DOTFILES/configs/starship.toml" "$HOME/.config/starship.toml"
+check_symlink "$DOTFILES/configs/ghostty" "$HOME/.config/ghostty"
+check_symlink "$DOTFILES/configs/nvim" "$HOME/.config/nvim"
+check_symlink "$DOTFILES/configs/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+check_symlink "$DOTFILES/configs/claude/settings.json" "$HOME/.claude/settings.json"
+check_symlink "$DOTFILES/configs/claude/notify.py" "$HOME/.claude/notify.py"
+check_symlink "$DOTFILES/configs/ssh_config" "$HOME/.ssh/config"
+check_symlink "$DOTFILES/configs/karabiner" "$HOME/.config/karabiner"
+check_symlink "$DOTFILES/configs/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
 
 echo ""
 

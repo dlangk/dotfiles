@@ -62,7 +62,9 @@ sudo defaults read /Library/Preferences/com.apple.controlcenter.plist AirplayRec
 # Expected: "Firewall is enabled", "Firewall stealth mode is on", "0"
 ```
 
-## Mullvad VPN (automated via install.sh)
+## VPN
+
+### Mullvad (primary, automated via install.sh)
 
 Use on all untrusted networks: hotels, trains, cafes. Leave off at home (full gigabit speed).
 
@@ -118,3 +120,8 @@ mullvad status
 - Compromised HTTPS certificates (watch for browser warnings — never click through on untrusted networks)
 - Apps using plain HTTP internally
 - Traffic from apps in split tunneling (Ghostty/terminal)
+
+### NordVPN (backup for China travel)
+
+Mullvad is blocked in China. NordVPN has obfuscated servers that work behind the Great Firewall.
+Keep both installed — use Mullvad everywhere except China, use NordVPN in China.

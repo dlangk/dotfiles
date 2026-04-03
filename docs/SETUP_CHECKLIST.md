@@ -43,6 +43,7 @@ These must be installed from the App Store (not Homebrew):
 
 - [ ] **Anthropic API Key** - Add to `~/.anthropic_api_key` (if skipped during install)
 - [ ] **Hugging Face Token** - Add to `~/.huggingface_token` (if skipped during install)
+- [ ] **LinkedIn DMA Token** - Add to `~/.linkedin_dma_access_token` (if needed)
 
 ## Local Overrides (not in repo)
 

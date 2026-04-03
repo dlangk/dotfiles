@@ -1,2 +1,4 @@
 # Local Claude Code settings (machine-specific)
 .claude/
+.aider*
+.DS_Store

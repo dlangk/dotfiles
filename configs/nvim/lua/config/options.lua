@@ -10,7 +10,8 @@ opt.expandtab = true
 opt.smartindent = true
 
 -- Line wrapping
-opt.wrap = false
+opt.wrap = true
+opt.linebreak = true
 
 -- Search
 opt.ignorecase = true

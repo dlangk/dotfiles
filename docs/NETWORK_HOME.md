@@ -92,7 +92,7 @@ Direct TB4 port has 40 Gbps headroom — no bottleneck.
 ## Network Topology
 
 ```
-🌐 Bahnhof Fiber (1000/1000 Mbps)
+🌐 Bahnhof Fiber (10G/10G)
     │
     │  fiber optic
     ▼

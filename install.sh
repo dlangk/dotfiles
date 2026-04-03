@@ -26,7 +26,7 @@ fi
 
 # Install Homebrew packages
 echo "Installing CLI tools..."
-brew install python@3.13 uv node go gh git-lfs tree cmake make ffmpeg graphviz imagemagick slackdump jupyterlab ipython nginx certbot neovim starship zoxide fzf zsh-autosuggestions tmux tailscale stockfish btop just coreutils eza
+brew install python@3.13 uv node go gh git-lfs tree cmake make ffmpeg graphviz imagemagick slackdump jupyterlab ipython mosh nginx certbot neovim starship zoxide fzf zsh-autosuggestions tmux tailscale stockfish btop just coreutils eza
 
 # Pin python3 to 3.13 (jupyterlab may install newer Python as dependency)
 ln -sf /opt/homebrew/opt/python@3.13/bin/python3.13 /opt/homebrew/bin/python3
@@ -44,6 +44,7 @@ brew install --cask \
     whatsapp \
     slack \
     google-chrome \
+    karabiner-elements \
     spotify \
     1password \
     logi-options-plus \
@@ -82,7 +83,7 @@ brew install --cask \
 # - Things 3             — Mac App Store
 # - Headspace            — Mac App Store
 # - X (Twitter)          — Mac App Store
-# - Stockfish            — Mac App Store
+# - Stockfish (GUI)      — Mac App Store (engine installed via brew)
 # - ON1 Photo RAW        — https://www.on1.com
 # - EVO (audio interface) — https://evo.audio
 # - FUJIFILM X Acquire   — https://fujifilm-x.com
@@ -94,6 +95,7 @@ brew install --cask \
 echo "Installing Python CLI tools..."
 uv tool install ruff
 uv tool install huggingface_hub
+uv tool install aider-install && aider-install
 
 # Install Rust
 if command -v rustc &> /dev/null; then
@@ -103,6 +105,10 @@ else
     echo "Installing Rust..."
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 fi
+
+# Install Go tools
+echo "Installing Go tools..."
+go install github.com/dlangk/ask-anthropic@latest
 
 # Set up Anthropic API key
 if [[ -f ~/.anthropic_api_key ]]; then
@@ -166,21 +172,21 @@ mkdir -p ~/.config
 
 # Create symlinks
 echo "Creating symlinks..."
-ln -sf "$DOTFILES/zshrc" ~/.zshrc
-ln -sf "$DOTFILES/gitconfig" ~/.gitconfig
-ln -sf "$DOTFILES/starship.toml" ~/.config/starship.toml
-ln -sf "$DOTFILES/ghostty" ~/.config/ghostty
-ln -sf "$DOTFILES/nvim" ~/.config/nvim
+ln -sf "$DOTFILES/configs/zshrc" ~/.zshrc
+ln -sf "$DOTFILES/configs/gitconfig" ~/.gitconfig
+ln -sf "$DOTFILES/configs/starship.toml" ~/.config/starship.toml
+ln -sf "$DOTFILES/configs/ghostty" ~/.config/ghostty
+ln -sf "$DOTFILES/configs/nvim" ~/.config/nvim
 mkdir -p ~/.ssh
-ln -sf "$DOTFILES/ssh_config" ~/.ssh/config
+ln -sf "$DOTFILES/configs/ssh_config" ~/.ssh/config
 chmod 600 ~/.ssh/config
 mkdir -p ~/.claude
-ln -sf "$DOTFILES/claude/CLAUDE.md" ~/.claude/CLAUDE.md
-ln -sf "$DOTFILES/claude/settings.json" ~/.claude/settings.json
-ln -sf "$DOTFILES/claude/commands" ~/.claude/commands
-ln -sf "$DOTFILES/claude/notify.py" ~/.claude/notify.py
+ln -sf "$DOTFILES/configs/claude/CLAUDE.md" ~/.claude/CLAUDE.md
+ln -sf "$DOTFILES/configs/claude/settings.json" ~/.claude/settings.json
+ln -sf "$DOTFILES/configs/claude/notify.py" ~/.claude/notify.py
 mkdir -p "$HOME/Library/Application Support/Code/User"
-ln -sf "$DOTFILES/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+ln -sf "$DOTFILES/configs/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+ln -sf "$DOTFILES/configs/karabiner" ~/.config/karabiner
 
 # Set up fzf keybindings
 if [[ -f "$(brew --prefix)/opt/fzf/install" ]]; then

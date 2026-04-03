@@ -1,5 +1,5 @@
 #!/bin/bash
-# Install script for dl-content-host (GCP e2-micro, Debian 12)
+# Install script for dl-content-host (GCP e2-small, Debian 12)
 # Hosts langkilde.se — nginx reverse proxy, certbot TLS, yatzy app
 #
 # Recreates the machine from scratch on a fresh Debian 12 instance.

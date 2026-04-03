@@ -12,7 +12,7 @@ cd ~/dotfiles
 ./install.sh
 
 # 3. Complete manual steps
-# Open SETUP_CHECKLIST.md or ask Claude: "guide me through the setup of my computer"
+# Open docs/SETUP_CHECKLIST.md or ask Claude: "guide me through the setup of my computer"
 ```
 
 ## What Gets Installed
@@ -81,7 +81,6 @@ cd ~/dotfiles
 |-----|---------|
 | Claude Desktop | AI chat |
 | Chrome | Browser |
-| Clocker | Menu bar timezone tracker |
 | Slack | Work chat |
 | Notion | Notes |
 | WhatsApp | Messaging |
@@ -92,8 +91,6 @@ cd ~/dotfiles
 | 1Password | Password manager |
 | Mullvad VPN | Privacy |
 | Google Drive | Cloud storage |
-| Xnapper | Screenshots |
-| Stats | System monitor |
 | Grammarly | Writing assistant |
 | Logi Options+ | Logitech hardware |
 | KeepingYouAwake | Prevent sleep |
@@ -105,7 +102,14 @@ cd ~/dotfiles
 | Superhuman | Email |
 | Tella | Screen recording |
 | VLC | Media player |
-| Webex | Video calls |
+| Audacity | Audio editor |
+| Reaper | Digital audio workstation |
+| Wireshark | Network protocol analyzer |
+| Typefully | Twitter/X publishing |
+| Godot | Game engine |
+| Wispr Flow | Voice-to-text |
+| OpenMTP | Android file transfer |
+| Claude Code | AI coding agent (CLI) |
 | Adobe Creative Cloud | Lightroom |
 
 ### Manual Downloads / App Store
@@ -114,7 +118,6 @@ cd ~/dotfiles
 | Things 3 | Task management (App Store) |
 | Amazon Kindle | E-reader (App Store) |
 | Headspace | Meditation (App Store) |
-| iA Writer | Writing app (App Store) |
 | X (Twitter) | Social media (App Store) |
 | EVO Control | Audient audio interface ([Audient](https://audient.com/products/audio-interfaces/evo/evo-control/)) |
 | FUJIFILM X Acquire | Camera tethering ([Fujifilm](https://fujifilm-x.com/global/support/download/software/)) |
@@ -123,33 +126,41 @@ cd ~/dotfiles
 ## Files
 ```
 ~/dotfiles/
-├── install.sh          # Automated setup script
-├── check.sh            # Verify system state
-├── update.sh           # Update everything
-├── SETUP_CHECKLIST.md  # Manual steps after install
-├── README.md           # This file
-├── CLAUDE.md           # Instructions for Claude
-├── zshrc               → ~/.zshrc
-├── gitconfig           → ~/.gitconfig
-├── starship.toml       → ~/.config/starship.toml
-├── ghostty/config      → ~/.config/ghostty/config
-├── nvim/               → ~/.config/nvim/
-├── vscode/             → ~/Library/Application Support/Code/User/
-├── karabiner/          → ~/.config/karabiner/
-├── claude/             → ~/.claude/
-├── ssh_config          → ~/.ssh/config
-├── SERVERS.md          # Remote server documentation
-├── M1_MAC.md           # MacBook quirks, security, VPN config
-├── NETWORK_HOME.md     # Home network topology, benchmarks, ISP
-└── servers/
-    ├── dl-content-host/
-    │   ├── setup.sh                  # Idempotent server setup
-    │   ├── nginx.conf                # Nginx config for langkilde.se
-    │   ├── entrypoint.sh             # Nginx Docker entrypoint
-    │   ├── docker-compose.nginx.yml  # Nginx + Certbot
-    │   └── docker-compose.yatzy.yml  # Yatzy frontend + backend
-    └── dl-coder/
-        └── setup.sh                  # Idempotent server setup
+├── install.sh              # Automated setup script
+├── check.sh                # Verify system state
+├── README.md               # This file
+├── CLAUDE.md               # Instructions for Claude
+├── .gitignore
+├── configs/                # All symlinked config files
+│   ├── zshrc               → ~/.zshrc
+│   ├── gitconfig           → ~/.gitconfig
+│   ├── ssh_config          → ~/.ssh/config
+│   ├── starship.toml       → ~/.config/starship.toml
+│   ├── ghostty/config      → ~/.config/ghostty/config
+│   ├── karabiner/          → ~/.config/karabiner/
+│   ├── nvim/               → ~/.config/nvim/
+│   ├── vscode/settings.json → ~/Library/.../settings.json
+│   └── claude/             → ~/.claude/ (individual files)
+├── docs/                   # Documentation and reference data
+│   ├── SETUP_CHECKLIST.md
+│   ├── SERVERS.md
+│   ├── M1_MAC.md
+│   ├── NETWORK_HOME.md
+│   ├── LOCAL_LLM.md
+│   ├── device-names.txt
+│   └── usb-devices.txt
+├── servers/
+│   ├── dl-content-host/
+│   │   ├── install.sh                 # Disaster recovery install script
+│   │   ├── nginx.conf                 # Nginx config for langkilde.se
+│   │   ├── entrypoint.sh             # Nginx Docker entrypoint
+│   │   ├── docker-compose.nginx.yml  # Nginx + Certbot
+│   │   └── docker-compose.yatzy.yml  # Yatzy frontend + backend
+│   └── dl-coder/
+│       └── install.sh                 # Disaster recovery install script
+├── scripts/                # Utility scripts
+│   ├── network-benchmark.sh
+│   └── oui-lookup.sh
 ```
 
 ## Key Aliases
@@ -179,17 +190,11 @@ cd ~/dotfiles
 git add -A && git commit -m "Update config" && git push
 ```
 
-## Updating
+## Maintenance
 ```bash
-./update.sh --check # Update everything and verify (recommended)
-./update.sh         # Update only
-./check.sh          # Verify system state only
+# Use the /maintain skill in Claude Code:
+/maintain mac update      # Update Mac (Homebrew, Claude Code, plugins, caches)
+/maintain cloud update    # Update remote servers
+/maintain all             # Diagnose + update everything
+./check.sh               # Verify system state only
 ```
-
-The update script handles:
-- Homebrew formulae and casks
-- Claude Code
-- Google Cloud SDK
-- Neovim plugins
-- Docker cleanup
-- Cache cleanup (npm, uv)

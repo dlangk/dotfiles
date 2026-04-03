@@ -73,7 +73,8 @@ Development / coding server — powerful machine for remote work.
 - Python 3.12.3, Rust 1.94.0
 - Claude Code (`~/.claude/` present)
 - zsh with oh-my-zsh
-- No Docker, Nginx, Node, Go, or Java
+- Node.js 22 (installed for Claude Code)
+- No Docker, Nginx, Go, or Java
 
 ### Disk layout
 ```
