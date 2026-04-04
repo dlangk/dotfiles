@@ -45,6 +45,14 @@ When asked to guide through setup:
 
 All files are symlinked to their target locations. Edit files here, not at the target.
 
+## Reference Docs
+
+Before answering questions about hardware, network, or connected devices, read the relevant doc:
+- `docs/M1_MAC.md` — Mac specs, battery, network interfaces, security, VPN config
+- `docs/NETWORK_HOME.md` — network topology, desk wiring, connected devices, benchmarks
+- `docs/SERVERS.md` — remote servers (dl-coder, dl-content-host)
+- `docs/LOCAL_LLM.md` — local LLM setup
+
 ## Current Stack
 
 - **Terminal:** Ghostty with Catppuccin Mocha theme
