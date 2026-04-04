@@ -26,7 +26,7 @@ Hosts langkilde.se — personal website and side projects.
 - **Crontab**: `git pull` every minute in `~/langkilde/`
 
 ### Installed tools
-- Python 3.11.2, Node v18.20.4
+- Python 3.11.2, Node.js 22
 - Docker, Nginx, Certbot
 - No Go, Rust, or Java
 
