@@ -8,18 +8,18 @@
 - **Coverage:** 4000 sqft (1-pack), 8000 sqft (2-pack)
 - **Price:** ~$700 (1-pack) / ~$1300 (2-pack) USD — check inet.se for SEK pricing
 - **Why:** Would replace Orbi RBR850 mesh + provide native 10G backhaul between nodes
-- **Consideration:** ZyXEL EE5301-00 (delayed in mail) has WiFi 7 built-in — evaluate
+- **Consideration:** ZyXEL EE5301-00 (scheduled install 2026-04-16) has WiFi 7 built-in — evaluate
   whether Orbi is still needed before buying
 - **Source:** [ASUS ZenWiFi BQ16 Pro](https://www.asus.com/networking-iot-servers/whole-home-mesh-wifi-system/zenwifi-wifi-systems/asus-zenwifi-bq16-pro/)
 
 ---
 
-## Upcoming Upgrade (EE5301 delayed in mail)
+## Upcoming Upgrade (scheduled 2026-04-16)
 
 ### New Hardware
-- **Router:** ZyXEL EE5301-00 — delayed in mail (replaces ZyXEL EX3600-T0 + Bahnhof media converter)
+- **Router:** ZyXEL EE5301-00 — scheduled install 2026-04-16 (replaces ZyXEL EX3600-T0 + Bahnhof media converter)
 - **Mac adapter:** Kalea USB-C 10G (TB3) — **active** (en11, direct to Mac TB4, negotiating 1G against old router)
-- **ISP plan:** Bahnhof 10G/10G — **active** (ISP side switched, bottlenecked by old router until EE5301 arrives)
+- **ISP plan:** Bahnhof 10G/10G — **active** (ISP side switched, bottlenecked by old router until EE5301 install)
 
 ### New Topology
 ```
@@ -291,7 +291,7 @@ due to Apple's NFS client implementation. AFP is deprecated. Stick with SMB v3.
 | Component | Max Speed | Notes |
 |-----------|-----------|-------|
 | Bahnhof fiber | 10 Gbps | Upgraded 2026-03-29 |
-| Media converter + EX3600-T0 | 1 Gbps | **Current bottleneck** — both replaced by EE5301 (delayed in mail, ships together) |
+| Media converter + EX3600-T0 | 1 Gbps | **Current bottleneck** — both replaced by EE5301 (scheduled install 2026-04-16) |
 | Orbi AX6000 | 2.5G WAN, 1G LAN | LAN ports cap at gigabit |
 | Belkin INC019 | 1 Gbps (shared PD) | Performs at line speed |
 | Belkin INC006 dock | 1 Gbps (USB NIC) | 914 Mbps upload confirmed |
