@@ -33,14 +33,14 @@ else
 fi
 
 # Check for outdated
-OUTDATED=$(brew outdated 2>/dev/null | wc -l | tr -d ' ')
+OUTDATED=$(brew outdated --quiet 2>/dev/null | wc -l | tr -d ' ')
 if [[ $OUTDATED -eq 0 ]]; then
     ok "All formulae up to date"
 else
     warn "$OUTDATED outdated formula(e) - run 'brew upgrade'"
 fi
 
-OUTDATED_CASKS=$(brew outdated --cask 2>/dev/null | wc -l | tr -d ' ')
+OUTDATED_CASKS=$(brew outdated --cask --quiet 2>/dev/null | wc -l | tr -d ' ')
 if [[ $OUTDATED_CASKS -eq 0 ]]; then
     ok "All casks up to date"
 else
@@ -125,6 +125,25 @@ check_symlink "$DOTFILES/configs/claude/notify.py" "$HOME/.claude/notify.py"
 check_symlink "$DOTFILES/configs/ssh_config" "$HOME/.ssh/config"
 check_symlink "$DOTFILES/configs/karabiner" "$HOME/.config/karabiner"
 check_symlink "$DOTFILES/configs/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+
+# Check ssh config.local (machine-specific host IPs, not in repo)
+if [[ -f "$HOME/.ssh/config.local" ]]; then
+    ok "~/.ssh/config.local exists"
+else
+    warn "~/.ssh/config.local missing - create with HostName entries for dl-content-host and dl-coder"
+fi
+
+echo ""
+
+# --- Key Tools ---
+echo "Checking key tools..."
+for tool in nvim go gh starship cargo rustc nmap mtr iperf3 jq doggo stylua prettier black; do
+    if command -v "$tool" &> /dev/null; then
+        ok "$tool installed"
+    else
+        fail "$tool not installed - run install.sh"
+    fi
+done
 
 echo ""
 

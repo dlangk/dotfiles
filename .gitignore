@@ -2,3 +2,16 @@
 .claude/
 .aider*
 .DS_Store
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.venv/
+*.egg-info/
+
+# Editor swap files
+*.swp
+*.swo

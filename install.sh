@@ -28,6 +28,7 @@ fi
 echo "Installing CLI tools..."
 brew install python@3.13 uv node go gh git-lfs tree cmake make ffmpeg graphviz imagemagick slackdump jupyterlab ipython mosh nginx certbot neovim starship zoxide fzf zsh-autosuggestions tmux tailscale stockfish btop just coreutils eza
 brew install nmap mtr iperf3 jq doggo
+brew install stylua prettier clang-format  # Neovim formatter dependencies
 
 # Pin python3 to 3.13 (jupyterlab may install newer Python as dependency)
 ln -sf /opt/homebrew/opt/python@3.13/bin/python3.13 /opt/homebrew/bin/python3
@@ -96,6 +97,7 @@ brew install --cask \
 # Install Python CLI tools
 echo "Installing Python CLI tools..."
 uv tool install ruff
+uv tool install black  # Neovim Python formatter
 uv tool install huggingface_hub
 uv tool install aider-install && aider-install
 

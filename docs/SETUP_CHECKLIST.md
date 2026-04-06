@@ -22,6 +22,8 @@ Run `./install.sh` first, then complete these manual steps.
 - [ ] **Google Cloud** - `gcloud auth login`
 - [ ] **Superhuman** - Sign in with email account
 - [ ] **Adobe Creative Cloud** - Sign in, then install Lightroom
+- [ ] **Raycast** - Sign in with Raycast account (Pro features, AI)
+- [ ] **Obsidian** - Sign in with Obsidian account (if using Obsidian Sync)
 
 ## App Store Apps
 
