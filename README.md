@@ -47,6 +47,11 @@ cd ~/dotfiles
 |------|---------|
 | GNU coreutils | Modern ls with extended colors, script compatibility |
 | eza | Modern ls replacement with git integration & tree view |
+| nmap | Port scanning and host discovery |
+| mtr | Live traceroute with latency stats |
+| iperf3 | Network bandwidth benchmarking |
+| jq | JSON parsing in the terminal |
+| doggo | DNS lookup client |
 
 ### Media & Documents
 | Tool | Purpose |
