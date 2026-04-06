@@ -32,14 +32,22 @@ Hosts langkilde.se — personal website and side projects.
 
 ### Home directory
 ```
-~/daniel.langkilde/
-├── langkilde/              # Website (auto-pulled via cron)
-├── nginx-langkilde-se/     # Nginx config
-├── yatzy/                  # Yatzy game project
-├── yatzy-data/
-├── yatzy-treatise/
+~/
+├── langkilde/              # Website git repo (auto-pulled via cron every minute)
+├── nginx-langkilde-se/     # Nginx + certbot setup (own git repo)
+│   ├── docker-compose.yml
+│   ├── nginx.conf
+│   ├── entrypoint.sh
+│   ├── certs/              # Let's Encrypt certs (certbot-managed)
+│   └── webroot/            # ACME challenge dir
+├── yatzy/                  # Yatzy app (own git repo)
+│   ├── docker-compose.yml
+│   ├── frontend/
+│   └── backend/
+├── yatzy-data/             # Persistent yatzy data (oracle.bin)
+├── yatzy-treatise/         # Static content served at /yatzy/
 ├── daniel-daily/
-└── .cloudflare/
+└── .cloudflare             # Cloudflare credentials file
 ```
 
 ### Notes
