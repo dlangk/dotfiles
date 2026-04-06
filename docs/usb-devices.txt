@@ -1,3 +1,4 @@
 # USB vendor:product → friendly name
 # Format: <vendorId>:<productId> <friendly name>
 1133:50504 MX Master 3S (Bolt receiver)
+10473:2441 Hollyland Lark M2 (charging case)

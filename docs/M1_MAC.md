@@ -3,9 +3,39 @@
 Machine-specific quirks, security config, and notes for Daniel's primary machine.
 
 - **Model:** MacBook Pro 14" (2021), M1 Max, 64GB RAM, 2TB SSD
-- **macOS:** Sequoia
+- **macOS:** 26.4
 - **Terminal:** Ghostty
 - **Shell:** zsh
+
+---
+
+## Mobile Devices
+
+| Device | Model | OS |
+|--------|-------|----|
+| DL iPhone | iPhone 15 Pro Max | iOS 26.3.1 |
+| DL iPad Pro | iPad Pro 11" 4th gen (M2, 2022), 256GB, Wi-Fi | iPadOS 26.2.1 |
+
+---
+
+## Peripherals
+
+| Peripheral | Model | Notes |
+|------------|-------|-------|
+| Keyboard | Apple Magic Keyboard (wireless) | Form factor matches laptop keyboard exactly — critical for typing speed. Mechanical keyboards tested and rejected for this reason. |
+| Mouse | Logitech MX 3S | |
+
+---
+
+## Cables
+
+| Cable | Qty | Notes |
+|-------|-----|-------|
+| Apple 240W USB-C Charge Cable (2m) | 2 | White, braided, USB 2.0 data |
+| Apple 60W USB-C Charge Cable (1m) | 2 | White, braided, USB 2.0 data |
+| Apple MagSafe 3 Cable | 1 | |
+| Apple Thunderbolt 4 Pro Cable (3m) | 1 | Black braided, 40 Gbps, 100W — Studio Display to Belkin dock |
+| Apple Thunderbolt 4 Pro Cable (1.8m) | 1 | Black braided, 40 Gbps, 100W — Mac to Belkin dock |
 
 ---
 
@@ -19,9 +49,8 @@ Machine-specific quirks, security config, and notes for Daniel's primary machine
 
 ### DNS
 - macOS DNS is **per-interface**, no global setting
-- All interfaces set to Cloudflare primary (`1.1.1.1`) + Bahnhof fallback (`213.80.101.3`)
-- Reason: Bahnhof DNS has DNSSEC validation issues with `.ai` TLD (SERVFAIL on claude.ai, 2026-03-31)
-- When EE5301 router arrives, set DNS there instead and revert interfaces to DHCP
+- All interfaces set to DHCP (Bahnhof DNS, 0ms latency)
+- Bahnhof had DNSSEC issues with `.ai` TLD (2026-03-31), resolved 2026-04-05 — reverted to DHCP
 
 ### Battery
 - **841 cycles, 77% max capacity, Service Recommended** (as of 2026-03-29)

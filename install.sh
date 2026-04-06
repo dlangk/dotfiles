@@ -76,7 +76,8 @@ brew install --cask \
     claude-code \
     godot \
     wispr-flow \
-    openmtp
+    openmtp \
+    obsidian
 
 # Install manually (not available on Homebrew):
 # - Amazon Kindle        — https://www.amazon.com/kindle-dbs/fd/kcp

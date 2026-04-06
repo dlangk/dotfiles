@@ -13,8 +13,12 @@
       "Bash(cargo:*)",
       "Bash(npm:*)",
       "Bash(node:*)",
-      "Bash(make:*)"
-    ]
+      "Bash(make:*)",
+      "Bash(brew list:*)",
+      "Bash(/Users/langkilde/dotfiles/check.sh:*)",
+      "Bash(brew info:*)"
+    ],
+    "defaultMode": "default"
   },
   "hooks": {
     "SessionStart": [
@@ -48,5 +52,6 @@
   },
   "effortLevel": "medium",
   "skipDangerousModePermissionPrompt": true,
+  "showCompanion": false,
   "model": "sonnet"
 }
