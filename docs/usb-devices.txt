@@ -2,3 +2,5 @@
 # Format: <vendorId>:<productId> <friendly name>
 1133:50504 MX Master 3S (Bolt receiver)
 10473:2441 Hollyland Lark M2 (charging case)
+3034:33107 Belkin Pro TB4 Dock — Gigabit Ethernet (Realtek RTL8153)
+1507:1892 Belkin Pro TB4 Dock — Card Reader (Genesys Logic)

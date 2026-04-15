@@ -3,6 +3,7 @@
 Machine-specific quirks, security config, and notes for Daniel's primary machine.
 
 - **Model:** MacBook Pro 14" (2021), M1 Max, 64GB RAM, 2TB SSD
+- **Purchased:** 2021-10-28
 - **macOS:** 26.4
 - **Terminal:** Ghostty
 - **Shell:** zsh
