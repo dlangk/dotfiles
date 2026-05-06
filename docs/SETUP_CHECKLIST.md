@@ -68,6 +68,36 @@ These must be installed from the App Store (not Homebrew):
 - [ ] **FUJIFILM X Acquire** - Download from [Fujifilm](https://fujifilm-x.com/global/support/download/software/) for camera tethering
 - [ ] **FUJIFILM X Webcam 2** - Download from [Fujifilm](https://fujifilm-x.com/global/support/download/software/) for webcam mode
 
+## Claude State
+
+Restore skills and project memory so Claude Code works fully on day one:
+
+```bash
+git clone git@github.com:dlangk/claude-skills.git ~/.claude/skills
+git clone git@github.com:dlangk/claude-projects.git ~/.claude/projects
+```
+
+Also AirDrop `~/.claude/keybindings.json` from the old machine.
+
+## Dev Folders
+
+See `docs/DEV_MAP.md` for the full folder structure and a paste-ready clone script.
+The script clones all repos to the correct locations and sets up `~/.claude/skills` and `~/.claude/projects`.
+
+Local-only dirs (no remote — must be copied manually from old machine):
+- `~/dev/data-extraction/pdf2text`
+- `~/dev/data-extraction/transcription`
+- `~/dev/learning/machine-learning`
+- `~/dev/personal-tools/claude-sessions`
+- `~/dev/personal-tools/domain-check`
+- `~/dev/personal-tools/gif-maker`
+- `~/dev/personal-tools/hacking`
+- `~/dev/personal-tools/langkilde-knowledge`
+- `~/dev/personal-tools/langkilde-rolodex`
+- `~/dev/personal-tools/network-sniffer`
+- `~/dev/random/pareto`
+- `~/kognic/board-materials`
+
 ## Verification
 
 - [ ] Open Ghostty - confirm font and theme work
@@ -75,3 +105,4 @@ These must be installed from the App Store (not Homebrew):
 - [ ] Run `cc` - confirm Claude Code works
 - [ ] Run `z` - confirm zoxide works
 - [ ] Press `Ctrl+R` - confirm fzf history works
+- [ ] Run `/power` in Claude Code - confirm skills loaded
