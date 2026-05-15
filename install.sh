@@ -34,6 +34,9 @@ brew install stylua prettier clang-format  # Neovim formatter dependencies
 ln -sf /opt/homebrew/opt/python@3.13/bin/python3.13 /opt/homebrew/bin/python3
 ln -sf /opt/homebrew/opt/python@3.13/bin/pip3.13 /opt/homebrew/bin/pip3
 
+# Python packages (system-wide, needed for CLI tools like gsutil)
+uv pip install --system --break-system-packages crcmod
+
 # Install applications
 echo "Installing applications..."
 brew install --cask \
@@ -110,6 +113,10 @@ else
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 fi
 
+# Install Node.js tools
+echo "Installing Node.js tools..."
+npm install -g codeburn
+
 # Install Go tools
 echo "Installing Go tools..."
 go install github.com/dlangk/ask-anthropic@latest
@@ -150,6 +157,9 @@ fi
 echo "Setting macOS preferences..."
 defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
+# Re-enable font smoothing (disabled by default since Mojave). Text on the
+# Studio Display looks thin/fuzzy without it. Requires logout to take effect.
+defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
 
 # macOS security hardening
 echo "Hardening macOS security..."
