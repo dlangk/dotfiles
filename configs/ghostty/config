@@ -35,6 +35,9 @@ bold-is-bright = false
 # Quick actions
 confirm-close-surface = false
 
+# Bell - silence the audio beep
+bell-features = no-audio
+
 # Pane navigation (Miessler setup)
 keybind = ctrl+h=goto_split:left
 keybind = ctrl+j=goto_split:bottom
