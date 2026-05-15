@@ -78,7 +78,6 @@ brew install --cask \
     typefully \
     adobe-creative-cloud \
     qlmarkdown \
-    claude-code \
     godot \
     wispr-flow \
     openmtp \
@@ -116,6 +115,14 @@ fi
 # Install Node.js tools
 echo "Installing Node.js tools..."
 npm install -g codeburn
+
+# Install Claude Code (native installer, not Homebrew)
+if [[ ! -x "$HOME/.local/bin/claude" ]]; then
+    echo "Installing Claude Code..."
+    curl -fsSL https://claude.ai/install.sh | bash
+else
+    echo "Claude Code already installed"
+fi
 
 # Install Go tools
 echo "Installing Go tools..."
