@@ -161,6 +161,24 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 15
 # Studio Display looks thin/fuzzy without it. Requires logout to take effect.
 defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
 
+# Dock
+defaults write com.apple.dock orientation -string left
+defaults write com.apple.dock tilesize -int 28
+defaults write com.apple.dock mineffect -string scale
+defaults write com.apple.dock minimize-to-application -bool true
+defaults write com.apple.dock launchanim -bool false
+defaults write com.apple.dock show-recents -bool false
+
+# Finder
+defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
+defaults write com.apple.finder FXPreferredViewStyle -string Nlsv
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Apply Dock and Finder changes immediately
+killall Dock 2>/dev/null || true
+killall Finder 2>/dev/null || true
+
 # macOS security hardening
 echo "Hardening macOS security..."
 sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
