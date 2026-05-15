@@ -16,6 +16,14 @@ echo "=== Dotfiles Setup ==="
 echo "Logging to: $LOG_FILE"
 echo "Started:    $(date)"
 
+# Prompt for sudo once up front, then refresh the timestamp in the background
+# so later sudo commands (firewall, launchctl, etc.) don't pause the script.
+echo "Requesting sudo (used later for firewall/security hardening)..."
+sudo -v
+while true; do sudo -n true; sleep 50; kill -0 "$$" 2>/dev/null || exit; done 2>/dev/null &
+SUDO_KEEPALIVE_PID=$!
+trap 'kill $SUDO_KEEPALIVE_PID 2>/dev/null || true' EXIT
+
 # Install Xcode Command Line Tools
 if ! xcode-select -p &> /dev/null; then
     echo "Installing Xcode Command Line Tools..."
