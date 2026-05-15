@@ -1,9 +1,20 @@
 #!/bin/bash
-set -e
+set -eo pipefail
 
 DOTFILES="$HOME/dotfiles"
+LOG_FILE="$DOTFILES/install.log"
+
+# Mirror all output (stdout + stderr) to a log file so failures can be inspected
+# after the run. Each invocation overwrites the previous log.
+: > "$LOG_FILE"
+exec > >(tee -a "$LOG_FILE") 2>&1
+
+# Report which command and line failed, and where to look for context.
+trap 'rc=$?; echo ""; echo "=== install.sh FAILED ==="; echo "  exit code: $rc"; echo "  line:      $LINENO"; echo "  command:   $BASH_COMMAND"; echo "  full log:  $LOG_FILE"; exit $rc' ERR
 
 echo "=== Dotfiles Setup ==="
+echo "Logging to: $LOG_FILE"
+echo "Started:    $(date)"
 
 # Install Xcode Command Line Tools
 if ! xcode-select -p &> /dev/null; then
@@ -235,6 +246,8 @@ fi
 
 echo ""
 echo "=== Setup Complete ==="
+echo "Finished: $(date)"
+echo "Log:      $LOG_FILE"
 echo ""
 echo "Manual steps remaining:"
 echo "  1. Restart your terminal (or run: source ~/.zshrc)"
