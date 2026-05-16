@@ -41,8 +41,8 @@ Folder structure with git remotes. Dirs marked **[local]** have no remote — rs
 │   ├── hacking               [local — no remote, copy manually]
 │   ├── healthData            https://github.com/dlangk/healthData
 │   ├── langkilde-corpus      https://github.com/dlangk/langkilde-corpus.git
-│   ├── langkilde-knowledge   [local — no remote, copy manually]
-│   ├── langkilde-rolodex     [local — no remote, copy manually]
+│   ├── langkilde-knowledge   https://github.com/dlangk/langkilde-knowledge.git  (branch: scaffold)
+│   ├── langkilde-rolodex     https://github.com/dlangk/langkilde-rolodex.git
 │   ├── langkilde-style-pipeline  https://github.com/dlangk/langkilde-style-pipeline.git
 │   ├── network-sniffer       [local — no remote, copy manually]
 │   ├── personal-finances     https://github.com/dlangk/personal-finances.git
@@ -114,6 +114,9 @@ git clone git@github.com:dlangk/exodus.git ~/dev/games/exodus
 git clone https://github.com/dlangk/expense-management.git ~/dev/personal-tools/expense-management
 git clone https://github.com/dlangk/healthData ~/dev/personal-tools/healthData
 git clone https://github.com/dlangk/langkilde-corpus.git ~/dev/personal-tools/langkilde-corpus
+git clone https://github.com/dlangk/langkilde-knowledge.git ~/dev/personal-tools/langkilde-knowledge
+git -C ~/dev/personal-tools/langkilde-knowledge checkout scaffold
+git clone https://github.com/dlangk/langkilde-rolodex.git ~/dev/personal-tools/langkilde-rolodex
 git clone https://github.com/dlangk/langkilde-style-pipeline.git ~/dev/personal-tools/langkilde-style-pipeline
 git clone https://github.com/dlangk/personal-finances.git ~/dev/personal-tools/personal-finances
 git clone https://github.com/dlangk/prompts.git ~/dev/personal-tools/prompts
