@@ -36,7 +36,7 @@ After making code changes:
 3. Check for type errors (pyright, tsc, etc.)
 
 ## Context
-- Main machine: MacBook M1 Max (Apple Silicon)
+- Main machine: MacBook Pro 14" M5 Max, 128GB (Apple Silicon)
 - Terminal: Ghostty
 - Editor: Neovim, VS Code
 - Dotfiles: ~/dotfiles (symlinked configs)

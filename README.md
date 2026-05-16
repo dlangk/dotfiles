@@ -149,7 +149,7 @@ cd ~/dotfiles
 ├── docs/                   # Documentation and reference data
 │   ├── SETUP_CHECKLIST.md
 │   ├── SERVERS.md
-│   ├── M1_MAC.md
+│   ├── MAC.md
 │   ├── NETWORK_HOME.md
 │   ├── LOCAL_LLM.md
 │   ├── device-names.txt

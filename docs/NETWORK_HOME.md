@@ -32,7 +32,7 @@ Bahnhof fiber → SFP+ (WAN, Bahnhof-supplied module + cable)
 
 ### Desk Wiring
 ```
-MacBook Pro 14" M1 Max
+MacBook Pro 14" M5 Max
 ├── [LEFT]  TB4 #1 ── Belkin INC006 Dock [⚡🖥 upstream → Mac] (96W charging)
 │                     ├── [⚡ downstream] ───── Apple Studio Display (27")
 │                     │                         └── USB-C ── Litra Beam (power)

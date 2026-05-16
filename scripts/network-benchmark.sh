@@ -116,19 +116,30 @@ run_internet() {
         echo -n "Download $i/$RUNS... "
         local bytes_sec=$(curl -o /dev/null -w "%{speed_download}" \
             "http://$SPEEDTEST_SERVER/download?size=$DOWNLOAD_SIZE" 2>/dev/null)
+        : "${bytes_sec:=0}"
         local mbps=$(python3 -c "print(f'{$bytes_sec * 8 / 1_000_000:.0f}')")
         dl_results+=("$mbps")
         echo "${mbps} Mbit/s"
     done
 
-    # Upload
+    # Upload. curl's --data-binary @- buffers the entire stream in memory, so
+    # cap the upload payload at 500MB regardless of link speed. 500MB at 1
+    # GB/s = 0.5s of transfer — long enough to saturate even a 10G uplink,
+    # and well within curl's memory budget.
+    local UL_CAP_MB=500
+    local UL_RUN_MB=$UL_MB
+    if (( UL_RUN_MB > UL_CAP_MB )); then UL_RUN_MB=$UL_CAP_MB; fi
+
     local ul_results=()
     for i in $(seq 1 $RUNS); do
-        echo -n "Upload $i/$RUNS... "
-        local bytes_sec=$(dd if=/dev/zero bs=1M count=$UL_MB 2>/dev/null | \
+        echo -n "Upload $i/$RUNS (${UL_RUN_MB}MB)... "
+        local bytes_sec=$(dd if=/dev/zero bs=1M count=$UL_RUN_MB 2>/dev/null | \
             curl -X POST -H "Content-Type: application/octet-stream" \
             --data-binary @- -w "%{speed_upload}" \
             -o /dev/null "http://$SPEEDTEST_SERVER/upload" 2>/dev/null)
+        # Default to 0 if curl produced no speed (e.g. server error, OOM)
+        # so the python parsing below doesn't choke on an empty expression.
+        : "${bytes_sec:=0}"
         local mbps=$(python3 -c "print(f'{$bytes_sec * 8 / 1_000_000:.0f}')")
         ul_results+=("$mbps")
         echo "${mbps} Mbit/s"
@@ -247,7 +258,7 @@ run_nas() {
 #   3. Parallelism: tests both auto-tuned and aggressive (16p x 4t) to find optimum
 #   4. Multi-file test: simulates real workload (many video files, not one blob)
 #   5. TCP buffers: checks macOS defaults and warns if too small for 10G BDP
-#   6. Local SSD: M1 Max does 5-7 GB/s, not a bottleneck for 10G (~1.2 GB/s)
+#   6. Local SSD: M5 Max ~7 GB/s, not a bottleneck for 10G (~1.2 GB/s)
 
 run_gcs() {
     if ! command -v gcloud &> /dev/null; then

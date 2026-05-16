@@ -1,12 +1,16 @@
-# MacBook Pro 14" M1 Max
+# MacBook Pro 14" M5 Max
 
 Machine-specific quirks, security config, and notes for Daniel's primary machine.
 
-- **Model:** MacBook Pro 14" (2021), M1 Max, 64GB RAM, 2TB SSD
-- **Purchased:** 2021-10-28
-- **macOS:** 26.4
+- **Model:** MacBook Pro 14" (2026), M5 Max, 128GB RAM, 2TB SSD
+- **Model identifier:** Mac17,7
+- **Chip:** Apple M5 Max — 18 cores (6 Super + 12 Performance)
+- **Serial:** D5JXNP76DF
+- **macOS:** 26.5 (build 25F71)
 - **Terminal:** Ghostty
 - **Shell:** zsh
+
+Replaced the previous MacBook Pro 14" M1 Max (2021, 64GB) in May 2026.
 
 ---
 
@@ -50,20 +54,20 @@ Machine-specific quirks, security config, and notes for Daniel's primary machine
 
 ### DNS
 - macOS DNS is **per-interface**, no global setting
-- All interfaces set to DHCP (Bahnhof DNS, 0ms latency)
+- All interfaces set to DHCP (router-supplied at home)
 - Bahnhof had DNSSEC issues with `.ai` TLD (2026-03-31), resolved 2026-04-05 — reverted to DHCP
 
 ### Battery
-- **841 cycles, 77% max capacity, Service Recommended** (as of 2026-03-29)
-- Schedule battery replacement
+- **4 cycles, 100% max capacity** (as of 2026-05-16, brand new machine)
 
 ### Network Interfaces
 | Interface | Device | Notes |
 |-----------|--------|-------|
 | en0 | Wi-Fi | Also used for iPhone hotspot |
-| en11 | Kalea 10G USB-C (TB4) | Direct to right TB4 port, currently negotiates 1G |
-| en10 | Belkin INC006 dock ethernet | USB GbE NIC inside dock, unused for internet |
-| en22 | USB 2.5G adapter | Previous adapter, replaced by Kalea |
+| en8 | Kalea 10G USB-C (TB4 via dock) | Negotiates 10Gbase-T full-duplex on M5 (was 1G on M1) |
+| en7 | Belkin dock ethernet | USB GbE NIC inside dock, unused for internet |
+
+Interface numbering differs from the M1 machine — `en8` is the 10G adapter here (was `en11` on M1). Update scripts that hardcode interface names.
 
 ---
 

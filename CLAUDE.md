@@ -30,7 +30,7 @@ When asked to guide through setup:
 ├── docs/                   # Documentation and reference data
 │   ├── SETUP_CHECKLIST.md
 │   ├── SERVERS.md
-│   ├── M1_MAC.md
+│   ├── MAC.md
 │   ├── NETWORK_HOME.md
 │   ├── LOCAL_LLM.md
 │   ├── device-names.txt
@@ -48,7 +48,7 @@ All files are symlinked to their target locations. Edit files here, not at the t
 ## Reference Docs
 
 Before answering questions about hardware, network, or connected devices, read the relevant doc:
-- `docs/M1_MAC.md` — Mac specs, battery, network interfaces, security, VPN config
+- `docs/MAC.md` — Mac specs (M5 Max 128GB), battery, network interfaces, security, VPN config
 - `docs/NETWORK_HOME.md` — network topology, desk wiring, connected devices, benchmarks
 - `docs/SERVERS.md` — remote servers (dl-coder, dl-content-host)
 - `docs/LOCAL_LLM.md` — local LLM setup

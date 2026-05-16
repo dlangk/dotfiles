@@ -1,12 +1,12 @@
 # Local LLM Setup
 
-MacBook Pro M1 Max, 64GB unified memory. ~54GB usable for model weights after macOS overhead.
+MacBook Pro M5 Max, 128GB unified memory. ~110GB usable for model weights after macOS overhead.
 
 ## Tools
 
 - **LM Studio** — primary inference UI, supports both GGUF and MLX backends
 - **MLX backend preferred** — native Apple Silicon, faster decode on long generation tasks
-- Note: Ollama uses GGUF/llama.cpp only. On M1, GGUF and MLX perform similarly (MLX wins on long output, GGUF wins on prefill). On M4+, MLX pulls ahead significantly.
+- Note: Ollama uses GGUF/llama.cpp only. On M5, MLX is significantly faster than GGUF for both prefill and decode — prefer MLX backends.
 
 ## Models
 
@@ -34,19 +34,19 @@ Using 8-bit. Top SWE-bench Verified score (72.4%) among models that fit this har
 
 ## Memory Budget
 
-| Config | Total | Headroom |
+| Config | Total | Headroom (of ~110GB usable) |
 |--------|-------|----------|
-| One model at 8-bit | ~28-30 GB | ~24-26 GB for OS + KV cache |
-| Both at 4-bit | ~32 GB | ~22 GB |
-| Both at 8-bit | ~58 GB | Tight — run one at a time |
+| One model at 8-bit | ~28-30 GB | ~80 GB for OS + KV cache |
+| Both at 8-bit | ~58 GB | ~52 GB |
+| Single large MoE 8-bit (Qwen3-Coder-Next 80B-A3B at 8-bit ≈ 85 GB) | ~85 GB | ~25 GB |
 
-Run one model at a time for best performance at 8-bit.
+128 GB of unified memory means both coding + general models can stay loaded simultaneously at 8-bit, and larger MoE models (80B-class) are now viable.
 
 ## Models Considered & Rejected
 
 | Model | Why not |
 |-------|---------|
-| Qwen3-Coder-Next 80B-A3B | 44.8 GB at 4-bit, tight fit, limited context headroom |
+| Qwen3-Coder-Next 80B-A3B | Now fits comfortably on 128GB — re-evaluate as a coding model |
 | GLM-4.7-Flash 31B-A3B | Lower SWE-bench (59.2%) than Qwen 3.5 27B (72.4%) |
 | Qwen 2.5 Coder 32B | Older gen, 28.7% SWE-bench, weaker at agentic tasks |
 | Devstral Small 2 24B | Strong (68% SWE-bench) but Qwen 3.5 27B still beats it |
