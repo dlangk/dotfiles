@@ -16,12 +16,9 @@ Run `./install.sh` first, then complete these manual steps.
 - [ ] **Signal** - Link to phone
 - [ ] **Zoom** - Sign in with account
 - [ ] **Microsoft Teams** - Sign in with work account
-- [ ] **Mullvad VPN** - Enter account number
-- [ ] **Google Drive** - Sign in with Google account
-- [ ] **Postman** - Sign in with account
+- [ ] **NordVPN** - Sign in with account
 - [ ] **Google Cloud** - `gcloud auth login`
 - [ ] **Superhuman** - Sign in with email account
-- [ ] **Adobe Creative Cloud** - Sign in, then install Lightroom
 - [ ] **Raycast** - Sign in with Raycast account (Pro features, AI)
 - [ ] **Obsidian** - Sign in with Obsidian account (if using Obsidian Sync)
 
@@ -76,8 +73,6 @@ Restore skills and project memory so Claude Code works fully on day one:
 git clone git@github.com:dlangk/claude-skills.git ~/.claude/skills
 git clone git@github.com:dlangk/claude-projects.git ~/.claude/projects
 ```
-
-Also AirDrop `~/.claude/keybindings.json` from the old machine.
 
 ## Dev Folders
 

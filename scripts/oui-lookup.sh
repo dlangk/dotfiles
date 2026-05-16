@@ -49,9 +49,11 @@ oui_ensure_fresh() {
 # Look up a MAC prefix (e.g., "48:ed:e6" or "48:ED:E6")
 # Returns: vendor name or "unknown"
 oui_lookup() {
-    local mac_prefix="$1"
-    # Normalize: uppercase, remove colons/dashes
-    local normalized=$(echo "$mac_prefix" | tr '[:lower:]' '[:upper:]' | tr -d ':' | tr -d '-' | head -c 6)
+    local raw="$1"
+    # Normalize: pad each octet to 2 digits (macOS `arp` strips leading zeros), then keep first 3 octets only.
+    local padded=$(echo "$raw" | awk -F'[:-]' '{n=(NF>3?3:NF); for(i=1;i<=n;i++)printf "%02s%s",$i,(i<n?":":"")}')
+    local mac_prefix=$(echo "$padded" | tr '[:upper:]' '[:lower:]')
+    local normalized=$(echo "$padded" | tr '[:lower:]' '[:upper:]' | tr -d ':' | tr -d '-' | head -c 6)
 
     # 1. Check local cache (mac-vendors.txt)
     if [[ -f "$MAC_VENDORS_FILE" ]]; then

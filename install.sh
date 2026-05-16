@@ -46,15 +46,16 @@ fi
 # Install Homebrew packages
 echo "Installing CLI tools..."
 brew install python@3.13 uv node go gh git-lfs tree cmake make ffmpeg graphviz imagemagick slackdump jupyterlab ipython mosh nginx certbot neovim starship zoxide fzf zsh-autosuggestions tmux tailscale stockfish btop just coreutils eza
-brew install nmap mtr iperf3 jq doggo
+brew install nmap mtr iperf3 jq doggo corelocationcli
 brew install stylua prettier clang-format  # Neovim formatter dependencies
 
 # Pin python3 to 3.13 (jupyterlab may install newer Python as dependency)
 ln -sf /opt/homebrew/opt/python@3.13/bin/python3.13 /opt/homebrew/bin/python3
 ln -sf /opt/homebrew/opt/python@3.13/bin/pip3.13 /opt/homebrew/bin/pip3
 
-# Python packages (system-wide, needed for CLI tools like gsutil)
-uv pip install --system --break-system-packages crcmod
+# Python packages (system-wide, needed for CLI tools like gsutil which uses
+# /usr/bin/python3). Requires sudo to write to /Library/Python/*/site-packages.
+sudo uv pip install --system --break-system-packages crcmod
 
 # Install applications
 echo "Installing applications..."
@@ -73,14 +74,12 @@ brew install --cask \
     1password \
     logi-options-plus \
     grammarly-desktop \
-    postman \
     raycast \
     zoom \
     signal \
     mullvad-vpn \
     little-snitch \
     nordvpn \
-    google-drive \
     google-cloud-sdk \
     docker \
     basictex \
@@ -95,7 +94,6 @@ brew install --cask \
     reaper \
     wireshark-app \
     typefully \
-    adobe-creative-cloud \
     qlmarkdown \
     godot \
     wispr-flow \
@@ -116,6 +114,10 @@ brew install --cask \
 # - REAPER license       — https://www.reaper.fm (app via brew, license manual)
 
 # Install Python CLI tools
+# uv tool installs to ~/.local/bin; put it on PATH for the rest of this script
+# so tools (and tools-that-call-other-tools, like aider-install) work without
+# requiring the user to source their shell rc first.
+export PATH="$HOME/.local/bin:$PATH"
 echo "Installing Python CLI tools..."
 uv tool install ruff
 uv tool install black  # Neovim Python formatter
@@ -187,6 +189,23 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 15
 # Studio Display looks thin/fuzzy without it. Requires logout to take effect.
 defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
 
+# Input source switching: Shift+Cmd+Space (next). Previous-source binding disabled.
+# Cocoa modifier flags: shift=131072, ctrl=262144, cmd=1048576. Space key = 49.
+# Hotkey IDs: 60 = previous input source, 61 = next input source.
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 61 \
+  "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>32</integer><integer>49</integer><integer>1179648</integer></array><key>type</key><string>standard</string></dict></dict>"
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 \
+  "<dict><key>enabled</key><false/><key>value</key><dict><key>parameters</key><array><integer>32</integer><integer>49</integer><integer>262144</integer></array><key>type</key><string>standard</string></dict></dict>"
+
+# Free Cmd+Space for Raycast by disabling Spotlight's hotkey (ID 64).
+# After install, set Raycast's global hotkey to Cmd+Space in its onboarding.
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 \
+  "<dict><key>enabled</key><false/></dict>"
+
+# Add Swedish input source must be done manually:
+#   System Settings > Keyboard > Input Sources > Edit > + > Swedish > Swedish.
+# Scripting AppleEnabledInputSources is unreliable across macOS versions.
+
 # Dock
 defaults write com.apple.dock orientation -string left
 defaults write com.apple.dock tilesize -int 28
@@ -211,6 +230,13 @@ sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on
 sudo launchctl bootout system /System/Library/LaunchDaemons/com.apple.smbd.plist 2>/dev/null || true
 sudo defaults write /Library/Preferences/com.apple.controlcenter.plist AirplayRecieverEnabled -bool false
+
+# Tailscale daemon
+# The `tailscale` brew formula is CLI-only; it ships a launchd plist but
+# does not auto-start. Without this, `tailscale up` fails with
+# "failed to connect to local Tailscale service".
+echo "Starting Tailscale daemon..."
+sudo brew services start tailscale
 
 # Mullvad VPN configuration
 # Requires Mullvad to be installed and logged in first

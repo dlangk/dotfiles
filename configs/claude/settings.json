@@ -21,17 +21,6 @@
     "defaultMode": "default"
   },
   "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/setup-path.sh"
-          }
-        ]
-      }
-    ],
     "Notification": [
       {
         "matcher": "",

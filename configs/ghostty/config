@@ -32,6 +32,9 @@ mouse-hide-while-typing = true
 # Performance
 bold-is-bright = false
 
+# Bell — disable audio entirely (no ding on illegal actions)
+bell-features = no-audio,no-system
+
 # Quick actions
 confirm-close-surface = false
 

@@ -15,8 +15,6 @@ git clone git@github.com:dlangk/claude-skills.git ~/.claude/skills
 git clone git@github.com:dlangk/claude-projects.git ~/.claude/projects
 ```
 
-Also copy `~/.claude/keybindings.json` from the old machine (AirDrop or scp).
-
 ## ~/dev
 
 Folder structure with git remotes. Dirs marked **[local]** have no remote — rsync or copy manually.
