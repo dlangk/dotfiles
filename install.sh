@@ -202,6 +202,12 @@ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 \
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 \
   "<dict><key>enabled</key><false/></dict>"
 
+# Cycle windows of the active app with Cmd+§ (hotkey ID 27).
+# Default is Cmd+` which is unreachable on Swedish ISO layouts; § is the
+# key left of 1 (virtual keycode 10, character 167).
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 27 \
+  "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>167</integer><integer>10</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict></dict>"
+
 # Add Swedish input source must be done manually:
 #   System Settings > Keyboard > Input Sources > Edit > + > Swedish > Swedish.
 # Scripting AppleEnabledInputSources is unreliable across macOS versions.

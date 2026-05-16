@@ -23,7 +23,7 @@ Folder structure with git remotes. Dirs marked **[local]** have no remote — rs
 ~/dev/
 ├── data-extraction/
 │   ├── linkedin-summarizer   git@github.com:dlangk/linkedin-summarizer.git
-│   ├── podScanner            https://github.com/dlangk/podScanner
+│   ├── podScanner            git@github.com:dlangk/podScanner.git
 │   ├── pdf2text              [local — no remote, copy manually]
 │   ├── slack-summarizer      git@github.com:dlangk/slack-summarizer.git
 │   └── transcription         [local — no remote, copy manually]
@@ -36,26 +36,26 @@ Folder structure with git remotes. Dirs marked **[local]** have no remote — rs
 ├── personal-tools/
 │   ├── claude-sessions       [local — no remote, copy manually]
 │   ├── domain-check          [local — no remote, copy manually]
-│   ├── expense-management    https://github.com/dlangk/expense-management.git
+│   ├── expense-management    git@github.com:dlangk/expense-management.git
 │   ├── gif-maker             [local — no remote, copy manually]
 │   ├── hacking               [local — no remote, copy manually]
-│   ├── healthData            https://github.com/dlangk/healthData
-│   ├── langkilde-corpus      https://github.com/dlangk/langkilde-corpus.git
-│   ├── langkilde-knowledge   https://github.com/dlangk/langkilde-knowledge.git  (branch: scaffold)
-│   ├── langkilde-rolodex     https://github.com/dlangk/langkilde-rolodex.git
-│   ├── langkilde-style-pipeline  https://github.com/dlangk/langkilde-style-pipeline.git
+│   ├── healthData            git@github.com:dlangk/healthData.git
+│   ├── langkilde-corpus      git@github.com:dlangk/langkilde-corpus.git
+│   ├── langkilde-knowledge   git@github.com:dlangk/langkilde-knowledge.git  (branch: scaffold)
+│   ├── langkilde-rolodex     git@github.com:dlangk/langkilde-rolodex.git
+│   ├── langkilde-style-pipeline  git@github.com:dlangk/langkilde-style-pipeline.git
 │   ├── network-sniffer       [local — no remote, copy manually]
-│   ├── personal-finances     https://github.com/dlangk/personal-finances.git
-│   ├── prompts               https://github.com/dlangk/prompts.git
-│   └── x-admin               https://github.com/dlangk/x-admin.git
-├── photos/                   https://github.com/dlangk/photos.git
+│   ├── personal-finances     git@github.com:dlangk/personal-finances.git
+│   ├── prompts               git@github.com:dlangk/prompts.git
+│   └── x-admin               git@github.com:dlangk/x-admin.git
+├── photos/                   git@github.com:dlangk/photos.git
 ├── public/
-│   ├── langkilde             https://github.com/dlangk/langkilde
-│   ├── nginx-langkilde-se    https://github.com/dlangk/nginx-langkilde-se
-│   └── yatzy                 https://github.com/dlangk/yatzy
+│   ├── langkilde             git@github.com:dlangk/langkilde.git
+│   ├── nginx-langkilde-se    git@github.com:dlangk/nginx-langkilde-se.git
+│   └── yatzy                 git@github.com:dlangk/yatzy.git
 └── random/
     ├── pareto                [local — no remote, copy manually]
-    └── planets               https://github.com/dlangk/planets-animation.git
+    └── planets               git@github.com:dlangk/planets-animation.git
 ```
 
 ## ~/kognic
@@ -64,13 +64,17 @@ All have remotes. Clone into `~/kognic/`.
 
 ```
 ~/kognic/
-├── ai-survey                 https://github.com/kognic-internal/ai-survey.git
+├── ai-survey                 git@github.com:kognic-internal/ai-survey.git
 ├── board-materials           [not a git repo — documents folder, copy manually]
-├── kognic-foundation         https://github.com/kognic-internal/kognic-foundation
-├── management                https://github.com/dlangk/kognic-management.git
-├── marketing-presentations   https://github.com/annotell/marketing-presentations/
-├── strategic-survey          https://github.com/kognic-internal/strategic-survey
-└── VLA-strategic-decisions   https://github.com/kognic-internal/VLA-strategic-decisions
+├── kognic-foundation         git@github.com:kognic-internal/kognic-foundation.git
+├── management                git@github.com:dlangk/kognic-management.git
+├── marketing-presentations   git@github.com:annotell/marketing-presentations.git
+├── strategic-survey          git@github.com:kognic-internal/strategic-survey.git
+└── VLA-strategic-decisions   git@github.com:kognic-internal/VLA-strategic-decisions.git
+
+Note: `kognic-internal` and `annotell` enforce SAML SSO. After uploading
+your SSH key to GitHub, click "Configure SSO" next to the key and
+authorize it for both orgs, otherwise clones will fail.
 ```
 
 ## ~/dotfiles
@@ -101,7 +105,7 @@ mkdir -p ~/kognic
 
 # dev/data-extraction
 git clone git@github.com:dlangk/linkedin-summarizer.git ~/dev/data-extraction/linkedin-summarizer
-git clone https://github.com/dlangk/podScanner ~/dev/data-extraction/podScanner
+git clone git@github.com:dlangk/podScanner.git ~/dev/data-extraction/podScanner
 git clone git@github.com:dlangk/slack-summarizer.git ~/dev/data-extraction/slack-summarizer
 
 # dev/deployed-tools
@@ -111,35 +115,35 @@ git clone git@github.com:dlangk/daniel-daily.git ~/dev/deployed-tools/daniel-dai
 git clone git@github.com:dlangk/exodus.git ~/dev/games/exodus
 
 # dev/personal-tools
-git clone https://github.com/dlangk/expense-management.git ~/dev/personal-tools/expense-management
-git clone https://github.com/dlangk/healthData ~/dev/personal-tools/healthData
-git clone https://github.com/dlangk/langkilde-corpus.git ~/dev/personal-tools/langkilde-corpus
-git clone https://github.com/dlangk/langkilde-knowledge.git ~/dev/personal-tools/langkilde-knowledge
+git clone git@github.com:dlangk/expense-management.git ~/dev/personal-tools/expense-management
+git clone git@github.com:dlangk/healthData.git ~/dev/personal-tools/healthData
+git clone git@github.com:dlangk/langkilde-corpus.git ~/dev/personal-tools/langkilde-corpus
+git clone git@github.com:dlangk/langkilde-knowledge.git ~/dev/personal-tools/langkilde-knowledge
 git -C ~/dev/personal-tools/langkilde-knowledge checkout scaffold
-git clone https://github.com/dlangk/langkilde-rolodex.git ~/dev/personal-tools/langkilde-rolodex
-git clone https://github.com/dlangk/langkilde-style-pipeline.git ~/dev/personal-tools/langkilde-style-pipeline
-git clone https://github.com/dlangk/personal-finances.git ~/dev/personal-tools/personal-finances
-git clone https://github.com/dlangk/prompts.git ~/dev/personal-tools/prompts
-git clone https://github.com/dlangk/x-admin.git ~/dev/personal-tools/x-admin
+git clone git@github.com:dlangk/langkilde-rolodex.git ~/dev/personal-tools/langkilde-rolodex
+git clone git@github.com:dlangk/langkilde-style-pipeline.git ~/dev/personal-tools/langkilde-style-pipeline
+git clone git@github.com:dlangk/personal-finances.git ~/dev/personal-tools/personal-finances
+git clone git@github.com:dlangk/prompts.git ~/dev/personal-tools/prompts
+git clone git@github.com:dlangk/x-admin.git ~/dev/personal-tools/x-admin
 
 # dev/photos
-git clone https://github.com/dlangk/photos.git ~/dev/photos
+git clone git@github.com:dlangk/photos.git ~/dev/photos
 
 # dev/public
-git clone https://github.com/dlangk/langkilde ~/dev/public/langkilde
-git clone https://github.com/dlangk/nginx-langkilde-se ~/dev/public/nginx-langkilde-se
-git clone https://github.com/dlangk/yatzy ~/dev/public/yatzy
+git clone git@github.com:dlangk/langkilde.git ~/dev/public/langkilde
+git clone git@github.com:dlangk/nginx-langkilde-se.git ~/dev/public/nginx-langkilde-se
+git clone git@github.com:dlangk/yatzy.git ~/dev/public/yatzy
 
 # dev/random
-git clone https://github.com/dlangk/planets-animation.git ~/dev/random/planets
+git clone git@github.com:dlangk/planets-animation.git ~/dev/random/planets
 
-# kognic
-git clone https://github.com/kognic-internal/ai-survey.git ~/kognic/ai-survey
-git clone https://github.com/kognic-internal/kognic-foundation ~/kognic/kognic-foundation
-git clone https://github.com/dlangk/kognic-management.git ~/kognic/management
-git clone https://github.com/annotell/marketing-presentations/ ~/kognic/marketing-presentations
-git clone https://github.com/kognic-internal/strategic-survey ~/kognic/strategic-survey
-git clone https://github.com/kognic-internal/VLA-strategic-decisions ~/kognic/VLA-strategic-decisions
+# kognic (requires SAML SSO authorization for kognic-internal + annotell)
+git clone git@github.com:kognic-internal/ai-survey.git ~/kognic/ai-survey
+git clone git@github.com:kognic-internal/kognic-foundation.git ~/kognic/kognic-foundation
+git clone git@github.com:dlangk/kognic-management.git ~/kognic/management
+git clone git@github.com:annotell/marketing-presentations.git ~/kognic/marketing-presentations
+git clone git@github.com:kognic-internal/strategic-survey.git ~/kognic/strategic-survey
+git clone git@github.com:kognic-internal/VLA-strategic-decisions.git ~/kognic/VLA-strategic-decisions
 
 # Claude state
 git clone git@github.com:dlangk/claude-skills.git ~/.claude/skills
