@@ -60,7 +60,10 @@ These must be installed from the App Store (not Homebrew):
 
 ## Hardware Setup
 
-- [ ] **Logitech Options+** - Pair mouse, camera, light
+- [ ] **Logitech Options+** - Pair mouse, camera, light. **Then configure MX Master 3S buttons** (not synced from cloud reliably — see README.md):
+    - Gesture Button → **Window Navigation**
+    - Top Button → **Show/Hide Desktop**
+    - Thumb Wheel → **Zoom In/Out**
 - [ ] **EVO Control** - Download from [Audient](https://audient.com/products/audio-interfaces/evo/evo-control/) for audio interface
 - [ ] **FUJIFILM X Acquire** - Download from [Fujifilm](https://fujifilm-x.com/global/support/download/software/) for camera tethering
 - [ ] **FUJIFILM X Webcam 2** - Download from [Fujifilm](https://fujifilm-x.com/global/support/download/software/) for webcam mode

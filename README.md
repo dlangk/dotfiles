@@ -128,6 +128,16 @@ cd ~/dotfiles
 | FUJIFILM X Acquire | Camera tethering ([Fujifilm](https://fujifilm-x.com/global/support/download/software/)) |
 | FUJIFILM X Webcam 2 | Webcam mode ([Fujifilm](https://fujifilm-x.com/global/support/download/software/)) |
 
+### Hardware Configuration
+
+After signing in to Logi Options+, the MX Master 3S button assignments do not always sync from the cloud. Configure them manually:
+
+| Control | Action |
+|---------|--------|
+| Gesture Button (thumb) | Window Navigation |
+| Top Button | Show/Hide Desktop |
+| Thumb Wheel | Zoom In/Out |
+
 ## Files
 ```
 ~/dotfiles/
