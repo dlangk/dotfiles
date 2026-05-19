@@ -207,9 +207,11 @@ git add -A && git commit -m "Update config" && git push
 
 ## Maintenance
 ```bash
-# Use the /maintain skill in Claude Code:
-/maintain mac update      # Update Mac (Homebrew, Claude Code, plugins, caches)
-/maintain cloud update    # Update remote servers
-/maintain all             # Diagnose + update everything
+# Use the /mac and /cloud skills in Claude Code:
+/mac update              # Update Mac (Homebrew, Claude Code, plugins, caches)
+/cloud update            # Update remote servers (dl-content-host + dl-coder)
+/mac status              # Quick health check (read-only)
+/cloud status            # Quick health check of servers
+/mac audit               # Deep security audit (12 phases)
 ./check.sh               # Verify system state only
 ```

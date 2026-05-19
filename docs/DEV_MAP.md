@@ -8,7 +8,7 @@ Run `./install.sh` and work through `SETUP_CHECKLIST.md` first, then use this to
 These two repos must be cloned into the exact paths below — Claude Code reads them from there.
 
 ```bash
-# Custom skills (powers /power, /maintain, /net, /mac-health-check, etc.)
+# Custom skills (powers /mac, /cloud, /network, /corpus, /repo, /rolodex)
 git clone git@github.com:dlangk/claude-skills.git ~/.claude/skills
 
 # Project memories (context Claude has built up per project)

@@ -84,7 +84,7 @@ Before answering questions about hardware, network, or connected devices, read t
 - **Add nvim plugin:** Create new file in configs/nvim/lua/plugins/ returning plugin spec
 - **Add new config file:** Create in configs/, add symlink to install.sh
 - **Install new tool:** Add to install.sh, update README.md if needed
-- **Update tools:** Use `/maintain mac update` (or `all`, `cloud`, etc.)
+- **Update tools:** Use `/mac update` or `/cloud update`
 
 ## Verification
 

@@ -103,4 +103,4 @@ Local-only dirs (no remote — must be copied manually from old machine):
 - [ ] Run `cc` - confirm Claude Code works
 - [ ] Run `z` - confirm zoxide works
 - [ ] Press `Ctrl+R` - confirm fzf history works
-- [ ] Run `/power` in Claude Code - confirm skills loaded
+- [ ] Run `/mac power` in Claude Code - confirm skills loaded
