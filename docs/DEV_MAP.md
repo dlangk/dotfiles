@@ -26,7 +26,7 @@ Folder structure with git remotes. Dirs marked **[local]** have no remote — rs
 │   ├── podScanner            git@github.com:dlangk/podScanner.git
 │   ├── pdf2text              [local — no remote, copy manually]
 │   ├── slack-summarizer      git@github.com:dlangk/slack-summarizer.git
-│   └── transcription         [local — no remote, copy manually]
+│   └── transcription         https://github.com/dlangk/transcription.git
 ├── deployed-tools/
 │   └── daniel-daily          git@github.com:dlangk/daniel-daily.git
 ├── games/
@@ -107,6 +107,7 @@ mkdir -p ~/kognic
 git clone git@github.com:dlangk/linkedin-summarizer.git ~/dev/data-extraction/linkedin-summarizer
 git clone git@github.com:dlangk/podScanner.git ~/dev/data-extraction/podScanner
 git clone git@github.com:dlangk/slack-summarizer.git ~/dev/data-extraction/slack-summarizer
+git clone https://github.com/dlangk/transcription.git ~/dev/data-extraction/transcription
 
 # dev/deployed-tools
 git clone git@github.com:dlangk/daniel-daily.git ~/dev/deployed-tools/daniel-daily
