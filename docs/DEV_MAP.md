@@ -70,6 +70,7 @@ All have remotes. Clone into `~/kognic/`.
 ├── management                git@github.com:dlangk/kognic-management.git
 ├── marketing-presentations   git@github.com:annotell/marketing-presentations.git
 ├── strategic-survey          git@github.com:kognic-internal/strategic-survey.git
+├── the-kognic-way            git@github.com:kognic-internal/the-kognic-way.git
 └── VLA-strategic-decisions   git@github.com:kognic-internal/VLA-strategic-decisions.git
 
 Note: `kognic-internal` and `annotell` enforce SAML SSO. After uploading
@@ -144,6 +145,7 @@ git clone git@github.com:kognic-internal/kognic-foundation.git ~/kognic/kognic-f
 git clone git@github.com:dlangk/kognic-management.git ~/kognic/management
 git clone git@github.com:annotell/marketing-presentations.git ~/kognic/marketing-presentations
 git clone git@github.com:kognic-internal/strategic-survey.git ~/kognic/strategic-survey
+git clone git@github.com:kognic-internal/the-kognic-way.git ~/kognic/the-kognic-way
 git clone git@github.com:kognic-internal/VLA-strategic-decisions.git ~/kognic/VLA-strategic-decisions
 
 # Claude state
