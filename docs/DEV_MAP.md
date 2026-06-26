@@ -24,7 +24,7 @@ Folder structure with git remotes. Dirs marked **[local]** have no remote — rs
 ├── data-extraction/
 │   ├── linkedin-summarizer   git@github.com:dlangk/linkedin-summarizer.git
 │   ├── podScanner            git@github.com:dlangk/podScanner.git
-│   ├── pdf2text              [local — no remote, copy manually]
+│   ├── pdf2text              https://github.com/dlangk/pdf2text.git
 │   ├── slack-summarizer      git@github.com:dlangk/slack-summarizer.git
 │   └── transcription         https://github.com/dlangk/transcription.git
 ├── deployed-tools/
@@ -32,7 +32,8 @@ Folder structure with git remotes. Dirs marked **[local]** have no remote — rs
 ├── games/
 │   └── exodus                git@github.com:dlangk/exodus.git
 ├── learning/
-│   └── machine-learning      [local — no remote, copy manually]
+│   ├── machine-learning      [local — no remote, copy manually]
+│   └── sics                  [local — no remote, copy manually]
 ├── personal-tools/
 │   ├── claude-sessions       [local — no remote, copy manually]
 │   ├── domain-check          [local — no remote, copy manually]
@@ -107,6 +108,7 @@ mkdir -p ~/kognic
 # dev/data-extraction
 git clone git@github.com:dlangk/linkedin-summarizer.git ~/dev/data-extraction/linkedin-summarizer
 git clone git@github.com:dlangk/podScanner.git ~/dev/data-extraction/podScanner
+git clone https://github.com/dlangk/pdf2text.git ~/dev/data-extraction/pdf2text
 git clone git@github.com:dlangk/slack-summarizer.git ~/dev/data-extraction/slack-summarizer
 git clone https://github.com/dlangk/transcription.git ~/dev/data-extraction/transcription
 
