@@ -98,7 +98,8 @@ brew install --cask \
     godot \
     wispr-flow \
     openmtp \
-    obsidian
+    obsidian \
+    mochi
 
 # Install manually (not available on Homebrew):
 # - Amazon Kindle        — https://www.amazon.com/kindle-dbs/fd/kcp
