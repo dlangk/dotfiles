@@ -155,7 +155,14 @@ mullvad status
 - Apps using plain HTTP internally
 - Traffic from apps in split tunneling (Ghostty/terminal)
 
-### NordVPN (backup for China travel)
+### NordVPN (actively used — preferred, and China travel)
 
-Mullvad is blocked in China. NordVPN has obfuscated servers that work behind the Great Firewall.
-Keep both installed — use Mullvad everywhere except China, use NordVPN in China.
+NordVPN is wanted and trusted. Daniel runs both Mullvad and NordVPN by choice; NordVPN is
+currently the preferred client (best UX/performance tried so far) and also the only option
+for China — Mullvad is blocked behind the Great Firewall, NordVPN's obfuscated servers work.
+
+**Expected, safe artifacts** (do not flag these in a `/mac audit`):
+- `com.nordvpn.macos.helper` — privileged helper daemon (`/Library/LaunchDaemons/`)
+- `com.nordvpn.macos.Shield.systemextension` — Threat Protection network content filter
+- `NordVPN Threat Protection` root CA in the System keychain — self-issued cert that
+  TLS-inspects traffic for the Threat Protection feature. Opted-in, not a compromise.
