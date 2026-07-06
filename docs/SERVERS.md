@@ -1,6 +1,6 @@
 # Remote Server
 
-## dl-content-host (Google Cloud)
+## dl-server (Google Cloud)
 
 | Property | Value |
 |----------|-------|
@@ -11,7 +11,7 @@
 | **OS** | Debian 12 (bookworm) |
 | **Memory** | 2 GB |
 | **Disk** | 30 GB (38% used) |
-| **SSH** | `ssh dl-content-host` |
+| **SSH** | `ssh dl-server` |
 | **User** | daniel.langkilde (sudo NOPASSWD) |
 
 ### Purpose

@@ -130,7 +130,7 @@ check_symlink "$DOTFILES/configs/vscode/settings.json" "$HOME/Library/Applicatio
 if [[ -f "$HOME/.ssh/config.local" ]]; then
     ok "~/.ssh/config.local exists"
 else
-    warn "~/.ssh/config.local missing - create with HostName entry for dl-content-host"
+    warn "~/.ssh/config.local missing - create with HostName entry for dl-server"
 fi
 
 echo ""

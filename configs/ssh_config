@@ -1,10 +1,10 @@
 # Host IPs live in ~/.ssh/config.local (not in this repo)
 # Format:
-#   Host dl-content-host
+#   Host dl-server
 #       HostName <ip>
 Include ~/.ssh/config.local
 
-Host dl-content-host
+Host dl-server
     User daniel.langkilde
     IdentityFile ~/.ssh/id_ed25519
     IdentitiesOnly yes

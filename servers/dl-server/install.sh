@@ -1,12 +1,12 @@
 #!/bin/bash
-# Install script for dl-content-host (GCP e2-small, Debian 12)
+# Install script for dl-server (GCP e2-small, Debian 12)
 # Hosts langkilde.se — nginx reverse proxy, certbot TLS, yatzy app
 #
 # Recreates the machine from scratch on a fresh Debian 12 instance.
-# Usage: ssh dl-content-host 'bash -s' < servers/dl-content-host/install.sh
+# Usage: ssh dl-server 'bash -s' < servers/dl-server/install.sh
 set -e
 
-echo "=== dl-content-host install ==="
+echo "=== dl-server install ==="
 
 # --- System packages ---
 echo "Installing packages..."

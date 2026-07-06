@@ -48,7 +48,7 @@ These must be installed from the App Store (not Homebrew):
 
 - [ ] **Server IPs** - Create `~/.ssh/config.local`:
   ```
-  Host dl-content-host
+  Host dl-server
       HostName <ip>
   ```
 

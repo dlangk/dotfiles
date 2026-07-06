@@ -36,7 +36,7 @@ When asked to guide through setup:
 │   ├── device-names.txt
 │   └── usb-devices.txt
 ├── servers/                # Server install scripts
-│   └── dl-content-host/
+│   └── dl-server/
 ├── scripts/                # Utility scripts
 │   ├── network-benchmark.sh
 │   └── oui-lookup.sh
@@ -49,7 +49,7 @@ All files are symlinked to their target locations. Edit files here, not at the t
 Before answering questions about hardware, network, or connected devices, read the relevant doc:
 - `docs/MAC.md` — Mac specs (M5 Max 128GB), battery, network interfaces, security, VPN config
 - `docs/NETWORK_HOME.md` — network topology, desk wiring, connected devices, benchmarks
-- `docs/SERVERS.md` — remote server (dl-content-host)
+- `docs/SERVERS.md` — remote server (dl-server)
 - `docs/LOCAL_LLM.md` — local LLM setup
 
 ## Current Stack
