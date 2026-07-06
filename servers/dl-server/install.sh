@@ -17,7 +17,28 @@ sudo apt-get install -y \
     fail2ban ufw unattended-upgrades \
     socat tcpdump net-tools tree \
     python3 python3-certbot-nginx \
+    sysstat \
     npm
+
+# --- Swap file (2GB) ---
+# e2-small has only 1.9GB RAM and no swap by default; a swap file prevents
+# transient memory spikes (batch jobs) from triggering the OOM killer.
+echo "Configuring swap..."
+if ! sudo swapon --show | grep -q /swapfile; then
+    sudo fallocate -l 2G /swapfile 2>/dev/null || sudo dd if=/dev/zero of=/swapfile bs=1M count=2048 status=none
+    sudo chmod 600 /swapfile
+    sudo mkswap /swapfile > /dev/null
+    sudo swapon /swapfile
+fi
+grep -q '^/swapfile' /etc/fstab || echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab > /dev/null
+# Prefer RAM; only swap under real pressure
+echo 'vm.swappiness=10' | sudo tee /etc/sysctl.d/99-swappiness.conf > /dev/null
+sudo sysctl -w vm.swappiness=10 > /dev/null
+
+# --- sysstat (historical load/mem collection) ---
+echo "Enabling sysstat..."
+sudo sed -i 's/^ENABLED=.*/ENABLED="true"/' /etc/default/sysstat
+sudo systemctl enable --now sysstat > /dev/null 2>&1 || true
 
 # --- Docker ---
 echo "Installing Docker..."
