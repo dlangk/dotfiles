@@ -2,17 +2,10 @@
 # Format:
 #   Host dl-content-host
 #       HostName <ip>
-#   Host dl-coder
-#       HostName <ip>
 Include ~/.ssh/config.local
 
 Host dl-content-host
     User daniel.langkilde
-    IdentityFile ~/.ssh/id_ed25519
-    IdentitiesOnly yes
-
-Host dl-coder
-    User daniel
     IdentityFile ~/.ssh/id_ed25519
     IdentitiesOnly yes
 

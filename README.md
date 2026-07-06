@@ -165,14 +165,12 @@ After signing in to Logi Options+, the MX Master 3S button assignments do not al
 │   ├── device-names.txt
 │   └── usb-devices.txt
 ├── servers/
-│   ├── dl-content-host/
-│   │   ├── install.sh                 # Disaster recovery install script
-│   │   ├── nginx.conf                 # Nginx config for langkilde.se
-│   │   ├── entrypoint.sh             # Nginx Docker entrypoint
-│   │   ├── docker-compose.nginx.yml  # Nginx + Certbot
-│   │   └── docker-compose.yatzy.yml  # Yatzy frontend + backend
-│   └── dl-coder/
-│       └── install.sh                 # Disaster recovery install script
+│   └── dl-content-host/
+│       ├── install.sh                 # Disaster recovery install script
+│       ├── nginx.conf                 # Nginx config for langkilde.se
+│       ├── entrypoint.sh             # Nginx Docker entrypoint
+│       ├── docker-compose.nginx.yml  # Nginx + Certbot
+│       └── docker-compose.yatzy.yml  # Yatzy frontend + backend
 ├── scripts/                # Utility scripts
 │   ├── network-benchmark.sh
 │   └── oui-lookup.sh
@@ -209,7 +207,7 @@ git add -A && git commit -m "Update config" && git push
 ```bash
 # Use the /mac and /cloud skills in Claude Code:
 /mac update              # Update Mac (Homebrew, Claude Code, plugins, caches)
-/cloud update            # Update remote servers (dl-content-host + dl-coder)
+/cloud update            # Update remote server (dl-content-host)
 /mac status              # Quick health check (read-only)
 /cloud status            # Quick health check of servers
 /mac audit               # Deep security audit (12 phases)

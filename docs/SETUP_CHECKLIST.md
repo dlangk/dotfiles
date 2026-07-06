@@ -50,12 +50,6 @@ These must be installed from the App Store (not Homebrew):
   ```
   Host dl-content-host
       HostName <ip>
-  Host dl-coder
-      HostName <ip>
-  ```
-- [ ] **mosh alias** - Create `~/.zshrc.local`:
-  ```bash
-  alias mosh-coder="mosh daniel@<dl-coder-ip> -- tmux attach -t main"
   ```
 
 ## Hardware Setup
