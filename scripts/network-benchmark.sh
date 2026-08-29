@@ -104,9 +104,9 @@ run_internet() {
 
     # Warmup (discard — avoids TCP slow start skewing first run)
     echo -n "Warmup (${WARMUP_MB}MB)... "
-    curl -o /dev/null -s "http://$SPEEDTEST_SERVER/download?size=$((WARMUP_MB * 1000000))" 2>/dev/null
+    curl -L -o /dev/null -s "http://$SPEEDTEST_SERVER/download?size=$((WARMUP_MB * 1000000))" 2>/dev/null
     dd if=/dev/zero bs=1M count=$WARMUP_MB 2>/dev/null | \
-        curl -X POST -H "Content-Type: application/octet-stream" \
+        curl -L -X POST -H "Content-Type: application/octet-stream" \
         --data-binary @- -o /dev/null "http://$SPEEDTEST_SERVER/upload" 2>/dev/null
     echo "done"
 
@@ -114,7 +114,8 @@ run_internet() {
     local dl_results=()
     for i in $(seq 1 $RUNS); do
         echo -n "Download $i/$RUNS... "
-        local bytes_sec=$(curl -o /dev/null -w "%{speed_download}" \
+        # -L: Bahnhof's server 307-redirects http:8080 to its https Ookla host
+        local bytes_sec=$(curl -L -o /dev/null -w "%{speed_download}" \
             "http://$SPEEDTEST_SERVER/download?size=$DOWNLOAD_SIZE" 2>/dev/null)
         : "${bytes_sec:=0}"
         local mbps=$(python3 -c "print(f'{$bytes_sec * 8 / 1_000_000:.0f}')")
@@ -134,7 +135,7 @@ run_internet() {
     for i in $(seq 1 $RUNS); do
         echo -n "Upload $i/$RUNS (${UL_RUN_MB}MB)... "
         local bytes_sec=$(dd if=/dev/zero bs=1M count=$UL_RUN_MB 2>/dev/null | \
-            curl -X POST -H "Content-Type: application/octet-stream" \
+            curl -L -X POST -H "Content-Type: application/octet-stream" \
             --data-binary @- -w "%{speed_upload}" \
             -o /dev/null "http://$SPEEDTEST_SERVER/upload" 2>/dev/null)
         # Default to 0 if curl produced no speed (e.g. server error, OOM)
