@@ -26,7 +26,8 @@ When asked to guide through setup:
 │   ├── karabiner/          → ~/.config/karabiner/
 │   ├── nvim/               → ~/.config/nvim/
 │   ├── vscode/settings.json → ~/Library/.../settings.json
-│   └── claude/             → ~/.claude/ (individual files)
+│   ├── claude/             → ~/.claude/ (individual files)
+│   └── claude/commands/    → ~/.claude/commands/ (global slash commands, e.g. /expand)
 ├── docs/                   # Documentation and reference data
 │   ├── SETUP_CHECKLIST.md
 │   ├── SERVERS.md

@@ -155,13 +155,15 @@ After signing in to Logi Options+, the MX Master 3S button assignments do not al
 │   ├── karabiner/          → ~/.config/karabiner/
 │   ├── nvim/               → ~/.config/nvim/
 │   ├── vscode/settings.json → ~/Library/.../settings.json
-│   └── claude/             → ~/.claude/ (individual files)
+│   ├── claude/             → ~/.claude/ (individual files)
+│   └── claude/commands/    → ~/.claude/commands/ (global slash commands, e.g. /expand)
 ├── docs/                   # Documentation and reference data
 │   ├── SETUP_CHECKLIST.md
 │   ├── SERVERS.md
 │   ├── MAC.md
 │   ├── NETWORK_HOME.md
 │   ├── LOCAL_LLM.md
+│   ├── MOBILE_ACCESS.md
 │   ├── device-names.txt
 │   └── usb-devices.txt
 ├── servers/

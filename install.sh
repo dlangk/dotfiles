@@ -275,6 +275,7 @@ mkdir -p ~/.claude
 ln -sf "$DOTFILES/configs/claude/CLAUDE.md" ~/.claude/CLAUDE.md
 ln -sf "$DOTFILES/configs/claude/settings.json" ~/.claude/settings.json
 ln -sf "$DOTFILES/configs/claude/notify.py" ~/.claude/notify.py
+ln -sfn "$DOTFILES/configs/claude/commands" ~/.claude/commands
 mkdir -p "$HOME/Library/Application Support/Code/User"
 ln -sf "$DOTFILES/configs/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
 ln -sf "$DOTFILES/configs/karabiner" ~/.config/karabiner
