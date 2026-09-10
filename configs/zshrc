@@ -69,6 +69,9 @@ unsetopt HIST_BEEP
 unsetopt LIST_BEEP
 
 ## Claude Code -------------------------------------------------
+# Claude Code must run on the claude.ai login, not the API key, or the
+# organisation's MCP connectors (Kognic API Docs etc.) are never loaded.
+alias claude='env -u ANTHROPIC_API_KEY claude'
 # cc: Skip permission prompts for faster iteration (use in trusted repos)
 # cl: Standard claude with permission prompts
 # ask: Quick CLI queries via Anthropic API (go install github.com/dlangk/ask-anthropic@latest)
