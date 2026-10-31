@@ -8,20 +8,24 @@
 - **Coverage:** 4000 sqft (1-pack), 8000 sqft (2-pack)
 - **Price:** ~$700 (1-pack) / ~$1300 (2-pack) USD — check inet.se for SEK pricing
 - **Why:** Would replace Orbi RBR850 mesh + provide native 10G backhaul between nodes
-- **Consideration:** ZyXEL EE5301-00 (scheduled install 2026-04-23) has WiFi 7 built-in — evaluate
+- **Consideration:** ZyXEL EE5301-00 (installed April 2026) has WiFi 7 built-in — evaluate
   whether Orbi is still needed before buying
 - **Source:** [ASUS ZenWiFi BQ16 Pro](https://www.asus.com/networking-iot-servers/whole-home-mesh-wifi-system/zenwifi-wifi-systems/asus-zenwifi-bq16-pro/)
 
 ---
 
-## Upcoming Upgrade (scheduled 2026-04-23)
+## Current Setup (EE5301 installed April 2026)
 
-### New Hardware
-- **Router:** ZyXEL EE5301-00 — scheduled install 2026-04-23 (replaces ZyXEL EX3600-T0 + Bahnhof media converter)
-- **Mac adapter:** Kalea USB-C 10G (TB3) — **active** (en11, direct to Mac TB4, negotiating 1G against old router)
-- **ISP plan:** Bahnhof 10G/10G — **active** (ISP side switched, bottlenecked by old router until EE5301 install)
+### Hardware
+- **Router:** ZyXEL EE5301-00 — installed April 2026 (replaced ZyXEL EX3600-T0 + Bahnhof media converter)
+- **Mac adapter:** Kalea USB-C 10G — Aquantia AQC113 NIC in an IOCREST Thunderbolt 3 enclosure.
+  **Active** as en8, direct to Mac TB4, negotiating 10Gbase-T full-duplex with flow control.
+  Thunderbolt link runs at 20 Gb/s (TB3 device) and the NIC sits on PCIe Gen3 x2 (~15.7 Gbit/s),
+  both comfortably above what 10GbE needs.
+- **ISP plan:** Bahnhof 10G/10G — **active**, measured 8.9 down / 8.3 up Gbit/s payload throughput
+  (~9.4 Gbit/s on the wire). See Speed Test Results.
 
-### New Topology
+### Topology
 ```
 Bahnhof fiber → SFP+ (WAN, Bahnhof-supplied module + cable)
                 ZyXEL EE5301-00
@@ -81,7 +85,8 @@ Direct TB4 port has 40 Gbps headroom — no bottleneck.
 - ISP-locked firmware (Bahnhof controls updates via TR-069/USP)
 - Known issue: auto WiFi channel selection causes dropouts — set 2.4GHz to manual channel (1, 6, or 11)
 - NAS still 1GbE — NAS transfer speeds unchanged
-- Run network-benchmark.sh after install to establish 10G baseline (bump payload to 1GB+)
+- 10G baseline established 2026-10-31 (see Speed Test Results). A single TCP stream caps at
+  ~4.7 Gbit/s on the Mac, so `network-benchmark.sh` uses 8 parallel streams on 10G links
 
 ---
 
@@ -94,40 +99,27 @@ Direct TB4 port has 40 Gbps headroom — no bottleneck.
 ```
 🌐 Bahnhof Fiber (10G/10G)
     │
-    │  fiber optic
+    │  fiber → SFP+ (Bahnhof-supplied module)
     ▼
 ┌──────────────────────┐
-│ Bahnhof Media        │  Fiber ONT (media converter)
-│ Converter            │  TX/RX labels, no model number
-│                      │  1 Gbps ethernet output
-│                      │  ⚠ Known auto-negotiation issues
-│                      │    with some 2.5G routers
-└──────────┬───────────┘
-           │  ethernet
-           ▼
-┌──────────────────────┐
-│ ZyXEL EX3600-T0      │  ISP-provided gateway/router
-│ AX6000 Gigabit       │  WiFi 6, all ports gigabit
-│ Gateway              │  Adds ~6ms latency
-│                      │  Reduces upload by ~29%
-└──┬───────────────┬───┘
-   │               │
-   │  ethernet     │  ethernet
-   ▼               ▼
-┌────────────┐  ┌──────────────┐
-│ Orbi       │  │ Workstation  │
-│ AX6000     │  │ (see below)  │
-│ (RBK852)   │  └──────────────┘
-│ WAN: 2.5G  │
-│ LAN: 1G    │
-│ WiFi 6     │
-│ 5GHz 80MHz │
-│ Link: 907  │
-│  Mbps      │
-└────────────┘
-    │  WiFi 6
+│ ZyXEL EE5301-00      │  ISP-provided gateway/router (replaced ONT + EX3600-T0)
+│ 10G Gateway          │  WiFi 7 built-in, 10GbE + 1GbE LAN ports
+│                      │  Adds ~7ms latency (0.9ms first hop)
+│                      │  Passes ~9.4 Gbit/s NAT'd — not a bottleneck
+└──┬──────┬────────┬───┘
+   │ 1G   │ 1G     │ 10G (CAT6)
+   ▼      ▼        ▼
+┌────────┐ ┌──────┐ ┌─────────────────────────┐
+│ Orbi   │ │ NAS  │ │ Kalea 10G USB-C adapter │
+│ AX6000 │ │DS223 │ │ → MBP right TB4 port    │
+│(RBK852)│ │ 1GbE │ │ en8, 10Gbase-T          │
+│WAN 2.5G│ └──────┘ └─────────────────────────┘
+│LAN 1G  │
+│WiFi 6  │
+└────────┘
+    │  WiFi 6 (10.0.0.0/24, Orbi is its own router/DNS at 10.0.0.1)
     ▼
-📱 Wireless devices
+📱 Wireless devices (the Mac's Wi-Fi also lands here; wired en8 wins the default route)
 ```
 
 ## Workstation Connection Options
@@ -152,6 +144,14 @@ Direct TB4 port has 40 Gbps headroom — no bottleneck.
 - Via Orbi AX6000 mesh
 - 802.11ax, 5GHz, 80MHz channel, link rate 907 Mbps
 
+### Option D: Kalea 10G USB-C adapter — current
+- Aquantia AQC113 10GbE NIC in an IOCREST Thunderbolt 3 enclosure, plugged straight into
+  the Mac's right TB4 port (not via the dock — see "Why Kalea goes direct" above)
+- Detected as: en8 (`Thunderbolt Ethernet Slot 1`), `media: 10Gbase-T <full-duplex,flow-control>`
+- Thunderbolt link 20 Gb/s, PCIe Gen3 x2 — both above 10GbE line rate
+- Measured 8.9/8.3 Gbit/s with 8 streams; a single TCP stream caps at ~4.7 Gbit/s (Mac-side limit)
+- Check with: `system_profiler SPPCIDataType | grep -A10 0x1d6a` (expect `Link Speed: 8.0 GT/s`, `Link Width: x2`)
+
 ### Thunderbolt Dock Port Guide (INC006)
 - **Laptop + flash icon** = TB4 upstream to Mac (use this one)
 - **Flash only** = TB4 downstream (daisy-chaining devices)
@@ -161,7 +161,8 @@ Direct TB4 port has 40 Gbps headroom — no bottleneck.
 - Cat 5e or Cat 6: no difference at gigabit speeds
 - Cat 5 (not 5e): only specifies 100 Mbps but usually works at gigabit short runs
 - Cable category only matters above 1 Gbps (2.5G, 5G, 10G)
-- None of the current hardware exceeds gigabit, so cable type is irrelevant
+- The Mac ↔ EE5301 run is 10GBASE-T over CAT6 (fine up to ~55m; Cat 6a for longer).
+  Everything else (Orbi, NAS) is still gigabit, so cable type is irrelevant there
 
 ## Benchmark Methodology
 
@@ -171,17 +172,31 @@ Replaces `speedtest-cli` (Python, single-threaded, known to underreport upload).
 
 **Method:**
 - **Latency:** `ping -c 20 8.8.8.8` (ICMP round-trip)
-- **Download:** `curl` GET from Bahnhof Gothenburg speedtest server, 100MB per run
-- **Upload:** `curl` POST to same server, 100MB per run (dd → pipe → curl)
-- **Warmup:** 10MB down + 10MB up before measured runs (avoids TCP slow start)
-- **Runs:** 5 per KPI, report min/avg/max
+- **Download:** `curl` GET from Bahnhof Gothenburg speedtest server. Payload scales with
+  link speed (100MB at 1G, 500MB at 2.5G, 1GB at 5G, 4GB at 10G) and is split across
+  parallel streams (1 at ≤1G, 2 at 2.5G, 4 at 5G, 8 at 10G). Reported speed is total
+  bytes moved / wall time across all streams, timed from one Python process.
+- **Upload:** `curl` POST to same server (dd → pipe → curl), same stream split. Capped at
+  500MB per stream / 2GB total because curl buffers the request body in memory.
+- **Warmup:** single-stream down + up before measured runs, scaled with payload
+  (10MB at 1G, 200MB at 10G) — avoids TCP slow start skewing the first run
+- **Runs:** 5 per KPI by default (`/network test` uses 3), report min/avg/max
+- **Streams:** `STREAMS=auto` (default, scales as above) or `STREAMS=1` to measure what a
+  single scp/curl connection will see
 
 **Why this method:**
 - `curl` is native C — no Python interpreter overhead
 - 100MB payloads (was 50MB) reduce variance from connection setup
 - Warmup eliminates cold-start penalty on first run
-- Download is rock solid (±1 Mbit/s). Upload still has some server-side
-  variance (~760-920 Mbit/s) but this is genuine network behavior, not tooling.
+- Download is rock solid (±1 Mbit/s at 1G, ±2% at 10G). Upload has some server-side
+  variance but this is genuine network behavior, not tooling.
+- Parallel streams: one TCP connection tops out around 4.7 Gbit/s on the M5 Max at
+  MTU 1500. RTT to the Bahnhof server is ~1ms, so the 4MB macOS socket buffers are
+  not the limit (BDP is tiny); it is per-core packet processing in one curl + one
+  kernel receive path, plus whatever per-connection cap the server applies. 4 streams
+  reach ~9.1 Gbit/s on the wire, 8 streams ~9.4 Gbit/s — effectively 10GbE line rate.
+- Reported numbers count HTTP payload only. Interface byte counters run ~4-6% higher
+  (TCP/IP/TLS framing), so 8.9 Gbit/s payload ≈ 9.4 Gbit/s on the wire.
 
 **Lesson learned:** `speedtest-cli` (Python) reported ~650-700 Mbps upload
 where the real speed was 850-920 Mbps. Never trust speedtest-cli for upload.
@@ -203,7 +218,30 @@ where the real speed was 850-920 Mbps. Never trust speedtest-cli for upload.
 | TB4 dock via ZyXEL | 921 avg | 857 avg | 8.2 ms | curl | 2026-03-26 |
 | TB4 dock direct to converter | 921 avg | 857 avg | 8.2 ms | curl | 2026-03-26 |
 | USB 2.5G adapter via ZyXEL | 845 avg | 912 avg | 8.6 ms | curl | 2026-03-29 |
-| **Kalea 10G (direct TB4) via ZyXEL** | **904 avg** | **916 avg** | **8.2 ms** | **curl** | **2026-03-30** |
+| Kalea 10G (direct TB4) via EX3600 (1G) | 904 avg | 916 avg | 8.2 ms | curl | 2026-03-30 |
+| Kalea 10G via EE5301, 1 stream | 4690 avg | 3394 avg | 8.1 ms | curl ×1, 2GB | 2026-10-31 |
+| **Kalea 10G via EE5301, 8 streams** | **8855 avg** | **8290 avg** | **8.2 ms** | **curl ×8, 4GB** | **2026-10-31** |
+
+### 10G Baseline: Kalea 10G → EE5301 (curl, 8 streams, 4GB down / 2GB up, 3 runs + warmup)
+
+| KPI | Min | Avg | Max |
+|-----|-----|-----|-----|
+| Download | 8659 | 8855 | 8959 Mbit/s |
+| Upload | 8211 | 8290 | 8397 Mbit/s |
+| Ping (8.8.8.8) | 8.1 | 8.2 | 8.3 ms |
+
+Payload throughput; interface counters showed ~9.4 Gbit/s on the wire. First hop (router)
+0.9 ms, RTT to the Bahnhof speedtest server ~1 ms, zero input/output errors on en8.
+
+### Single-Stream Reference: same path, `STREAMS=1` (curl, 2GB down / 500MB up, 3 runs)
+
+| KPI | Min | Avg | Max |
+|-----|-----|-----|-----|
+| Download | 4654 | 4690 | 4714 Mbit/s |
+| Upload | 3351 | 3394 | 3421 Mbit/s |
+
+This is what a single scp, curl or browser connection gets. Multi-connection workloads
+(gcloud parallel composite uploads, SMB multichannel, browsers) see the full rate.
 
 ### WiFi (Orbi AX6000) → ZyXEL (curl, 5 runs + warmup)
 
@@ -216,7 +254,7 @@ where the real speed was 850-920 Mbps. Never trust speedtest-cli for upload.
 WiFi is ~65% of wired speed with more variance. The extra hop through the
 Orbi mesh adds ~8ms latency on top of the ZyXEL's ~8ms.
 
-### Final Baseline: TB4 Dock → ZyXEL (curl, 5 runs + warmup)
+### Gigabit Baseline (pre-EE5301): TB4 Dock → EX3600 (curl, 5 runs + warmup)
 
 | KPI | Min | Avg | Max |
 |-----|-----|-----|-----|
@@ -224,7 +262,7 @@ Orbi mesh adds ~8ms latency on top of the ZyXEL's ~8ms.
 | Upload | 763 | 857 | 920 Mbit/s |
 | Ping | 8.0 | 8.2 | 8.6 ms |
 
-### Final Baseline: TB4 Dock → Direct to Converter (curl, 5 runs + warmup)
+### Gigabit Baseline (pre-EE5301): TB4 Dock → Direct to Converter (curl, 5 runs + warmup)
 
 | KPI | Min | Avg | Max |
 |-----|-----|-----|-----|
@@ -255,9 +293,18 @@ INC019 direct to converter:
 
 ## Analysis
 
+### Single-Stream Ceiling at 10G (2026-10-31)
+The first 10G benchmark reported 4717 Mbit/s and looked like a link problem. It was not:
+one curl stream hit ~4.7-5.0 Gbit/s, 4 parallel streams 9.1 Gbit/s, 8 streams 9.4 Gbit/s
+(wire). Ruled out: adapter PCIe link (Gen3 x2, 15.7 Gbit/s), Thunderbolt link (20 Gb/s),
+interface errors (none), router NAT (passes 9.4 Gbit/s). The ceiling is per TCP
+connection on the Mac — single-core packet processing at MTU 1500, ~400k packets/s.
+Jumbo frames would raise it but the ISP path won't carry them end to end.
+
 ### ZyXEL Router Impact
-With accurate measurement (curl), the router does NOT cap throughput.
-It adds ~6ms latency (ping 2.6ms direct vs 8.2ms through router).
+With accurate measurement (curl), neither ZyXEL (EX3600 at 1G, EE5301 at 10G) caps
+throughput. The EX3600 added ~6ms latency (ping 2.6ms direct vs 8.2ms through router);
+the EE5301 is the same ~8.2ms to 8.8.8.8 with 0.9ms to the first hop.
 Earlier speedtest-cli results exaggerated the upload difference.
 
 ### INC019 vs TB4 Dock
@@ -290,12 +337,15 @@ due to Apple's NFS client implementation. AFP is deprecated. Stick with SMB v3.
 
 | Component | Max Speed | Notes |
 |-----------|-----------|-------|
-| Bahnhof fiber | 10 Gbps | Upgraded 2026-03-29 |
-| Media converter + EX3600-T0 | 1 Gbps | **Current bottleneck** — both replaced by EE5301 (scheduled install 2026-04-23) |
-| Orbi AX6000 | 2.5G WAN, 1G LAN | LAN ports cap at gigabit |
-| Belkin INC019 | 1 Gbps (shared PD) | Performs at line speed |
-| Belkin INC006 dock | 1 Gbps (USB NIC) | 914 Mbps upload confirmed |
-| Ethernet cables | 1 Gbps (Cat 5e/6) | Not a bottleneck |
+| Bahnhof fiber | 10 Gbps | Upgraded 2026-03-29; measured 8.9/8.3 Gbit/s payload |
+| ZyXEL EE5301-00 | 10 Gbps | Installed April 2026; passes ~9.4 Gbit/s NAT'd — not a bottleneck |
+| Kalea 10G adapter | 10 Gbps | AQC113, PCIe Gen3 x2 over TB3 (20 Gb/s link) — line rate |
+| Single TCP stream (Mac) | ~4.7 Gbit/s | **Per-connection ceiling** — needs parallel streams to fill the link |
+| Orbi AX6000 | 2.5G WAN, 1G LAN | LAN ports cap at gigabit; Wi-Fi clients ~600 Mbit/s |
+| Synology DS223 | 1 Gbps | NAS still on 1GbE |
+| Belkin INC019 | 1 Gbps (shared PD) | Performs at line speed (retired from the desk) |
+| Belkin INC006 dock | 1 Gbps (USB NIC) | 914 Mbps upload confirmed; unused for routing |
+| Ethernet cables | CAT6 to Mac (10G), Cat 5e/6 elsewhere | Not a bottleneck |
 
 ## NAS
 
