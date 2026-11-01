@@ -207,7 +207,7 @@ git add -A && git commit -m "Update config" && git push
 
 ## Maintenance
 ```bash
-# Use the /mac and /cloud skills in Claude Code:
+# Claude Code skills live in configs/claude/skills/ (symlinked into ~/.claude/skills/):
 /mac update              # Update Mac (Homebrew, Claude Code, plugins, caches)
 /cloud update            # Update remote server (dl-server)
 /mac status              # Quick health check (read-only)

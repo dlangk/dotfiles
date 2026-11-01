@@ -27,7 +27,8 @@ When asked to guide through setup:
 │   ├── nvim/               → ~/.config/nvim/
 │   ├── vscode/settings.json → ~/Library/.../settings.json
 │   ├── claude/             → ~/.claude/ (individual files)
-│   └── claude/commands/    → ~/.claude/commands/ (global slash commands, e.g. /expand)
+│   ├── claude/commands/    → ~/.claude/commands/ (global slash commands, e.g. /expand)
+│   └── claude/skills/      → ~/.claude/skills/<name>/ (one symlink per skill; synced/ stays local)
 ├── docs/                   # Documentation and reference data
 │   ├── SETUP_CHECKLIST.md
 │   ├── SERVERS.md
@@ -83,6 +84,7 @@ Before answering questions about hardware, network, or connected devices, read t
 - **Change theme colors:** Update configs/ghostty/config, configs/starship.toml, and nvim colorscheme for consistency
 - **Add nvim plugin:** Create new file in configs/nvim/lua/plugins/ returning plugin spec
 - **Add new config file:** Create in configs/, add symlink to install.sh
+- **Add Claude skill:** Create configs/claude/skills/<name>/SKILL.md (follow configs/claude/skills/CONVENTIONS.md), re-run install.sh to symlink it
 - **Install new tool:** Add to install.sh, update README.md if needed
 - **Update tools:** Use `/mac update` or `/cloud update`
 

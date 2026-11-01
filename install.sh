@@ -276,6 +276,13 @@ ln -sf "$DOTFILES/configs/claude/CLAUDE.md" ~/.claude/CLAUDE.md
 ln -sf "$DOTFILES/configs/claude/settings.json" ~/.claude/settings.json
 ln -sf "$DOTFILES/configs/claude/notify.py" ~/.claude/notify.py
 ln -sfn "$DOTFILES/configs/claude/commands" ~/.claude/commands
+# Skills: ~/.claude/skills stays a real directory (Claude Code writes synced/ into it);
+# each skill dir is symlinked individually so the repo owns the content.
+mkdir -p ~/.claude/skills
+ln -sfn "$DOTFILES/configs/claude/skills/CONVENTIONS.md" ~/.claude/skills/CONVENTIONS.md
+for skill in "$DOTFILES"/configs/claude/skills/*/; do
+    ln -sfn "${skill%/}" ~/.claude/skills/"$(basename "$skill")"
+done
 mkdir -p "$HOME/Library/Application Support/Code/User"
 ln -sf "$DOTFILES/configs/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
 ln -sf "$DOTFILES/configs/karabiner" ~/.config/karabiner

@@ -122,6 +122,11 @@ check_symlink "$DOTFILES/configs/nvim" "$HOME/.config/nvim"
 check_symlink "$DOTFILES/configs/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 check_symlink "$DOTFILES/configs/claude/settings.json" "$HOME/.claude/settings.json"
 check_symlink "$DOTFILES/configs/claude/notify.py" "$HOME/.claude/notify.py"
+check_symlink "$DOTFILES/configs/claude/commands" "$HOME/.claude/commands"
+check_symlink "$DOTFILES/configs/claude/skills/CONVENTIONS.md" "$HOME/.claude/skills/CONVENTIONS.md"
+for skill in "$DOTFILES"/configs/claude/skills/*/; do
+    check_symlink "${skill%/}" "$HOME/.claude/skills/$(basename "$skill")"
+done
 check_symlink "$DOTFILES/configs/ssh_config" "$HOME/.ssh/config"
 check_symlink "$DOTFILES/configs/karabiner" "$HOME/.config/karabiner"
 check_symlink "$DOTFILES/configs/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
