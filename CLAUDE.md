@@ -52,7 +52,7 @@ Before answering questions about hardware, network, or connected devices, read t
 - `docs/MAC.md` — Mac specs (M5 Max 128GB), battery, network interfaces, security, VPN config
 - `docs/NETWORK_HOME.md` — network topology, desk wiring, connected devices, benchmarks
 - `docs/SERVERS.md` — remote server (dl-server)
-- `docs/LOCAL_LLM.md` — local LLM setup
+- `docs/LOCAL_LLM.md` — local LLM setup and model lineup (research weights live in ~/dev/learning/transformers)
 
 ## Current Stack
 
