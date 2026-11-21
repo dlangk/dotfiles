@@ -56,8 +56,8 @@ Before answering questions about hardware, network, or connected devices, read t
 
 ## Current Stack
 
-- **Terminal:** Ghostty with Catppuccin Mocha theme
-- **Prompt:** Starship with Catppuccin Powerline preset
+- **Terminal:** Ghostty with custom Kognic theme (`configs/ghostty/themes/kognic`, relaxed Kognic brand palette)
+- **Prompt:** Starship with Catppuccin Powerline preset, recolored via the `kognic` palette (Neovim: catppuccin with Kognic `color_overrides`)
 - **Font:** JetBrainsMono Nerd Font Mono
 - **Shell:** zsh with zoxide, fzf, zsh-autosuggestions
 - **Editor:** Neovim (primary), VS Code, Sublime Text

@@ -1,0 +1,26 @@
+# Kognic (relaxed) — softened from ~/kognic/deck-builder/design-system/tokens/colors.css
+# Brand hues purple #826cff, green #60df5a, coral #ff7a5c, lifted and desaturated
+# to Catppuccin-like contrast. Yellow/magenta/cyan are derived (not in the Kognic DS).
+background = #17172c
+foreground = #cfd2e6
+cursor-color = #a99cf5
+cursor-text = #17172c
+selection-background = #34306a
+selection-foreground = #e6e8f2
+
+palette = 0=#2a2650
+palette = 1=#f2937e
+palette = 2=#8ed98a
+palette = 3=#f0cf8e
+palette = 4=#a99cf5
+palette = 5=#cba4f0
+palette = 6=#8fd3ec
+palette = 7=#c4cbe0
+palette = 8=#6c6c8c
+palette = 9=#f7a896
+palette = 10=#a8e5a4
+palette = 11=#f5dcaa
+palette = 12=#bdb3f7
+palette = 13=#d8d2f7
+palette = 14=#aedff0
+palette = 15=#e6e8f2

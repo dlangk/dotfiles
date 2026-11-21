@@ -19,7 +19,7 @@ $python\
 [](green)"""
 
 
-palette = 'catppuccin_mocha'
+palette = 'kognic'
 
 [os]
 disabled = false
@@ -269,3 +269,32 @@ surface0 = "#363a4f"
 base = "#24273a"
 mantle = "#1e2030"
 crust = "#181926"
+
+# Kognic (relaxed) — same keys as catppuccin so the powerline segments work unchanged.
+[palettes.kognic]
+rosewater = "#f7c6bb"
+flamingo = "#f7a896"
+pink = "#d8d2f7"
+mauve = "#cba4f0"
+red = "#f2937e"
+maroon = "#f7a896"
+peach = "#f7a896"
+yellow = "#f0cf8e"
+green = "#8ed98a"
+teal = "#8fd3ec"
+sky = "#8fd3ec"
+sapphire = "#aedff0"
+blue = "#a99cf5"
+lavender = "#bdb3f7"
+text = "#cfd2e6"
+subtext1 = "#c0c4da"
+subtext0 = "#b0b4cc"
+overlay2 = "#9c9cb8"
+overlay1 = "#8484a2"
+overlay0 = "#6c6c8c"
+surface2 = "#4b4b6b"
+surface1 = "#34306a"
+surface0 = "#252246"
+base = "#17172c"
+mantle = "#131326"
+crust = "#0f0f20"
